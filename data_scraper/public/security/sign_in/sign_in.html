@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Office Hours</title>
+    <link rel="stylesheet" href="/static/security/sign_in/sign_in.css">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script type="module" src="/static/security/sign_in/sign_in.js" crossorigin="anonymous" defer></script>
+
+  </head>
+  <body>
+    <div id="stage">
+      <div id="input_window">
+        
+        <form action="" method="post" id="sign_in" autocomplete="on">
+          <h1>sign-in</h1>
+
+          <input class="input" type="text" id="username" name="username"
+                 placeholder="Enter username" autocomplete="username" required />
+
+          <input class="input" type="password" id="password" name="password"
+                 placeholder="Enter password" autocomplete="current-password" required />
+
+          <div id="buttons">
+            
+            <button class="button" id="sign-up" type="button">sign-up</button>
+
+            <p id="error"></p>
+
+            <button type="submit" class="button" id="send_button">Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>

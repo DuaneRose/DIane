@@ -1,0 +1,103 @@
+<!doctype html>
+    <html>
+      <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Office Hours</title>
+        <link rel="stylesheet" href="/static/settings/systemP/system_prompt.css">
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        <script type="module" src="/static/settings/systemP/system_prompt.js" defer></script>
+      </head>
+      <body>
+        <section id="menu">
+          <div id = "top">
+            <hr>
+          <div id="options">
+            <h1>System Prompt &rarr; </h1>
+            <div id="modes">
+              <p class="mode_select" data-mode="default" id="default">
+                Default
+              </p>
+              <p class="mode_select" data-mode="direct" id="direct">
+                Direct
+              </p>
+              <p class="mode_select" data-mode="guided" id="guided">
+                Guided
+              </p>
+              <p class="mode_select" data-mode="custom" id="custom">
+                Custom
+              </p>
+            </div>
+          </div>
+          <hr>
+          </div>
+          <div id="content">
+            <h2>What a “system instruction” is</h2>
+            <p>A system instruction (a.k.a. system prompt) is the top-level rulebook that tells the model who it is, what to prioritize, what tools and sources to use, how to format answers, and what boundaries to respect. It sits above user messages and shapes every response—deciding when to answer directly, when to cite sources, when to ask a clarifying question, and when to refuse.</p>
+            <h2>Summaries of the three pre-set instructions</h2>
+            <h3>
+              1) Default / Helpful-first TA/Tutor
+            </h3>
+            <p>
+              1. Mission: be a helpful, accurate course TA; answer logistics directly, guide on concepts efficiently (no rabbit holes). <br><br>
+
+              2. Sources: course materials first via RAG; if insufficient, add reputable external references.<br><br>
+
+              3. Behavior: direct answers for dates/policies; concise explanations + 1–2 next steps for learning tasks; at most one clarifying question; cite course doc/section and link externals when used.<br><br>
+
+              4. Output: answer → key details → sources → (optional) next step; use course timezone; note updates if relevant.<br><br>
+            </p>
+            <h3>2) Direct Mode</h3>
+            <p>
+              1. Mission: give the complete answer immediately when allowed; logistics are fully answered; solutions provided if policy permits.<br><br>
+
+              2. Sources: RAG first; supplement with high-quality external references when needed; always cite what you used.<br><br>
+
+              3. Behavior: no rabbit holes; at most one clarifying question if essential; present final result first, then a compact justification; for code, give a minimal runnable example.<br><br>
+
+              4. Output: direct answer/result → brief steps/assumptions → sources → (optional) next steps.
+            </p>
+            <h3>3) Guided Mode</h3>
+            <p>
+              1. Mission: still helpful-first, but teach through concise hints; logistics remain direct.<br><br>
+
+              2. Guided Hint Protocol: state goal → strategy bullets → Hint 1 (concept) → Hint 2 (strategy) → Hint 3 (procedural step) → quick check/next step; stop after ~3 hints or provide the concise solution if allowed.<br><br>
+
+              3. Sources: RAG first; add reputable external refs if needed; cite doc/section names.<br><br>
+
+              4. Output: goal/short answer → outline/steps → “another hint / worked example / final answer (if permitted)” → sources.
+            </p>
+            <h3>4) Custom instruction (reserved)</h3>
+            <p>
+              Purpose: a course- or deployment-specific override layer (e.g., institution policies, grading scale variants, tool versions, naming conventions, privacy constraints, or temporary rules like “Project 2 solutions must not be revealed”).<br><br>
+
+              Good uses:
+              <ul>
+                <li>Hard constraints (“Never disclose solutions for active quizzes; provide rubric-aligned feedback only.”)</li>
+                <li>Environment facts (timezone overrides, LMS links, required citation style).</li>
+                <li>Tooling/version pins (e.g., “Use Python 3.10; NumPy 1.26 syntax”).</li>
+              </ul>
+              
+              Placement: evaluated after the base mode but with higher precedence on conflicts (so your custom rules win).</p>
+              <h2>
+                Overview of the whole instruction set
+              </h2>
+              <p>
+                Shared backbone: All modes prefer course corpus via RAG, then external sources as needed; avoid hallucinating course facts; keep tone concise, warm, and professional; protect privacy; respect academic-integrity constraints. <br><br>
+
+                Mode differences:
+                <ul>
+                  <li>Direct prioritizes speed and completeness.</li>
+                  <li>Guided prioritizes learning via short, structured hints.</li>
+                  <li>Default balances both: direct for logistics, efficient guidance for concepts.</li>
+                </ul>
+                Answer shape: consistent, scannable structure (direct answer → key details/steps → sources → optional next action).<br><br>
+
+                Interaction guardrail: at most one clarifying question; otherwise make a best-effort answer with stated assumptions—prevents rabbit holes.<br>
+
+                Citations: course doc/section names when internal; 1–3 links when external; use course timezone for dates.
+              </p>
+          </div>
+        </section>
+      </body>
+    </html>

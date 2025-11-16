@@ -1,0 +1,39 @@
+<!doctype html>
+    <html>
+      <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Office Hours</title>
+        <link rel="stylesheet" href="/static/settings/files/files.css">
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        <script type="module" src="/static/settings/files/files.js" defer></script>
+      </head>
+      <body>
+        <section id="menu">
+          <hr>
+          <div id="options">
+            <h1>Files &rarr; </h1>
+            <p id="description">
+                Here is a spot where you can see what files have been uploaded for your course. You can also upload new files here. The LLM will read them and use them to help answer student questions.
+            </p>
+            
+          </div>
+          <hr>
+            <section class="uploader">
+              <form id="upload-form">
+                <input id="file-input" type="file" accept="application/pdf" hidden />
+                <div id="dropzone" tabindex="0" aria-label="Upload a PDF">
+                  <p><strong>Drag & drop</strong> a PDF here</p>
+                  <button type="button" id="browse-btn">Choose a file</button>
+                </div>
+
+                <div id="file-info" aria-live="polite"></div>
+
+                <button id="submit-btn" type="submit" disabled>Upload PDF</button>
+              </form>
+            </section>
+            <div id="books">
+            </div>
+        </section>
+      </body>
+    </html>

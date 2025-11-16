@@ -1,0 +1,74 @@
+html, body {
+    margin: 0;
+    padding: 0;
+}
+body{
+    background-color: rgb(19, 20, 36);
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 1.5%;
+    align-items: center;
+    height: 97vh;
+}#stage{
+    background-color: rgba(43, 53, 65, 0.829);
+    height: 97%;
+    width: 97%;
+    padding: 1.5%;
+    align-items: center;
+}#input_window{
+    background-color: rgba(43, 53, 65, 0.829);
+    height: 98.2%;
+    width: 100%;
+    top: 0%;
+    left: 0%;
+    padding-top: 0.5%;
+    align-items: center;
+    position: relative;
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+}.input{
+    background-color: rgb(75, 86, 95);
+    text-align: center;
+    width: 50%;
+    height: 10%;
+    margin: 0;
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.5em;
+    color: white;
+}.button{
+    width: 5em;
+    height: 3em;
+    background-color: rgb(19, 20, 36);
+    color: white;
+    right: 0;
+    border: none;
+    font-size: 1.2em;
+    float: center;
+    user-select: none;
+}.button:hover{
+    background-color: rgb(255, 255, 255);
+    color: rgb(43, 53, 65);
+    cursor: pointer;
+}h1{
+    color: white;
+}form{
+    width: 70%;
+    height: 70%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1em;
+}#buttons{
+    width: 50%;
+    display: flex;
+    justify-content: space-between;
+}#send_button{
+    float: right;
+}#error{
+    color: rgb(237, 118, 118);
+    font-size: 1.2em;
+    margin: 0;
+}

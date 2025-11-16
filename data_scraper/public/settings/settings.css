@@ -1,0 +1,75 @@
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html, body { height: 100%; margin: 0; }
+
+body {
+    min-height: 100vh;
+    display: flex;
+    gap: 0%;                 
+    padding: 1.5%;
+    background: rgb(19,20,36);
+    color: white;
+}#menu{
+    flex: 0 0 19%;     
+    padding: 1.5%;
+    border: 3px solid rgba(43,53,65,.827);
+    background: rgb(75,86,95);
+    border-right: 1.5px solid rgb(255, 255, 255);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}#menu_bar{
+    background-color: rgb(43, 53, 65);
+    height: 87%;
+    width: 100%;
+    padding: 7.5%;
+    padding-top: 1%;
+    flex: 1 ;
+}#window{
+    flex: 1 1 0%;               
+    min-width: 0;               
+    padding: 1.5%;
+    border: 3px solid rgba(43,53,65,.827);
+    background: rgb(75,86,95);
+    border-left: 1.5px solid rgb(255, 255, 255);
+}#back_button{
+    background-color: rgb(43, 53, 65);
+    color: white;
+    border: none;
+    font-size: 1.2em;
+    user-select: none;
+    width: 100%;
+    height: 2em;
+    margin-bottom: 1%;
+    cursor: pointer;
+}#back_button:hover{
+    transition: all 0.5s ease;
+    background-color: white;
+    color:  rgb(43, 53, 65);
+}h1{
+    text-align: center;
+}section{
+    border: 5px solid rgba(43, 53, 65, 0.827);
+    background-color: rgb(75, 86, 95);
+    height: 100%;
+    margin: 0%;
+    align-items: center;
+}.menu_button{
+    background-color: rgb(43, 53, 65);
+    color: white;
+    border: none;
+    font-size: 1.2em;
+    user-select: none;
+    width: 100%;
+    height: 2em;
+    margin-bottom: 1%;
+    cursor: pointer;
+}.menu_button:hover{
+    transition: all 0.5s ease;
+    background-color: white;
+    color:  rgb(43, 53, 65);
+}hr{
+    width: 100%;
+}

@@ -1,0 +1,62 @@
+body{
+    background-color: rgb(43, 53, 65);
+    color: white;
+    height: 97vh;
+    max-height: 97vh;
+}.uploader { 
+    max-width: 520px; 
+    margin: 24px auto; 
+    font-family: system-ui, Arial; 
+    color: #fff; }
+#dropzone {
+  border: 2px dashed #8892a6; 
+  border-radius: 12px; 
+  padding: 28px; text-align: center;
+  background: #2b3541; 
+  outline: none; 
+  cursor: pointer;
+}#dropzone.hover {
+    border-color: #cbd5e1;
+    background: #3a4757; 
+}#dropzone:focus { 
+    box-shadow: 0 0 0 3px #4f46e5; 
+}#browse-btn { 
+    margin-top: 12px; 
+    padding: 8px 12px; 
+    border: 0; 
+    border-radius: 8px; 
+    background: #4b5563; 
+    color: #fff; 
+}#file-info { margin: 
+    12px 0; 
+    font-size: 0.95rem;
+}#submit-btn { 
+    padding: 10px 14px; 
+    border: 0; 
+    border-radius: 8px; 
+    background: #0ea5e9; 
+    color: #fff; 
+}#submit-btn[disabled] { 
+    opacity: 0.6; 
+    cursor: not-allowed; 
+}h1{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}#top{
+    position: sticky;
+    top: 0;
+    background-color: rgb(43, 53, 65);
+}#options{
+    display: flex;
+}#description{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25em;
+    flex: 1;
+    text-align: center;
+    margin: 1em;
+}#books{
+    background-color: rgb(58, 71, 87);
+}

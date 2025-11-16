@@ -1,0 +1,26 @@
+<DOCTYPE html>
+    <html>
+      <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Office Hours</title>
+        <link rel="stylesheet" href="/static/chat_page/chat.css">
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        <script type="module" src="/static/chat_page/chat.js" defer></script>
+      </head>
+      <body>
+        <div id = stage>
+          <button id="settings" name="settings">settings</button>
+          <button id="sign-out" name="sign-out">sign-out</button>
+          <div id="chat_window">
+            <div id="message_window">
+            </div>
+            <form action="" method="get" id="input">
+              <input type="text" id="user_input" name="user_input" placeholder="Ask a question..." autocomplete="off">
+              <button type="submit" id="send_button">Send</button>
+            </form>
+          </div>
+        </div>
+      </body>
+    </html>
+    
