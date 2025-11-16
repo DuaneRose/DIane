@@ -20,7 +20,7 @@ class CustomInstruction(BaseModel):
 @app.post("/set_custom_instruction")
 async def set_custom_instruction(payload: CustomInstruction):
   try:
-    write_custom_instruction(payload.instructions)  # your save logic
+    write_custom_instruction(payload.instructions)
     return {"status": f"Custom instruction updated for {payload.name or 'default'}"}
   except Exception as e:
     raise HTTPException(status_code=500, detail=str(e))
