@@ -28,6 +28,7 @@ async function sign_in(){
     
 
     if (response.ok) {
+        sessionStorage.setItem('user_id', result.user_id);
         window.location.href = "/api/chat";
     } else {
         error_message.innerText = result.message || "An error occurred during sign up.";

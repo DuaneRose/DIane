@@ -273,8 +273,9 @@ app.get('/lti_config.xml', async (req, res) => {
   }
 });
 
-app.post('/api/query', async (req, res) => {
+app.post('/api/query/:user_id', async (req, res) => {
   const { query } = req.body;
+  const { user_id } = req.params;
   console.log(`💬 Processing query: "${query}"`);
 
   try {
@@ -288,7 +289,6 @@ app.post('/api/query', async (req, res) => {
       .replace(/\*(.*?)\*/g, '<em>$1</em>')
       .replace(/`([^`]+)`/g, '<code>$1</code>');
 
-    const user_id = sessionStorage.getItem('user_id');
     const logs = await fs.readFile(path.join(__dirname, `../data_base/conversation/${user_id}.json`), 'utf8');
     const chat_logs = JSON.parse(logs);
     
@@ -520,10 +520,9 @@ app.post('/api/security/sign_in', async (req, res) => {
     const user = users.find(user => user.username === username && user.password === password);
     
     if (user) {
-      user_id = setData.find_id(username, users);
+      const user_id = setData.find_id(username, users);
       console.log(`✅ User signed in: ${username}`);
-      sessionStorage.setItem('user_id', user_id);
-      return res.status(200).json({ message: 'Sign in successful.' });
+      return res.status(200).json({ message: 'Sign in successful.', user_id: user_id });
     } else {
       console.log(`⚠️  Sign-in failed for username: ${username}`);
       return res.status(401).json({ message: 'Invalid username or password.' });
@@ -534,8 +533,9 @@ app.post('/api/security/sign_in', async (req, res) => {
   }
 });
 
-app.get("/api/chat/get_logs", async (req, res) =>{
-  const user_id = sessionStorage.getItem('user_id');
+app.get("/api/chat/get_logs/:user_id", async (req, res) =>{
+  const { user_id } = req.params;
+  console.log(`Fetching chat logs for user ID: ${user_id}`);
   const logs = await fs.readFile(path.join(__dirname, `../data_base/conversation/${user_id}.json`), 'utf8');
   const chat_logs = JSON.parse(logs);
 

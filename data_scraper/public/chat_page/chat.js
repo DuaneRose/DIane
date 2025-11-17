@@ -15,7 +15,8 @@ document.addEventListener("DOMContentLoaded", async (e) =>{
 
     console.log("here")
     //get all chats and load them in.
-    const logs = await fetch("chat/get_logs")
+    const user_id = sessionStorage.getItem('user_id');
+    const logs = await fetch(`/api/chat/get_logs/${encodeURIComponent(user_id)}`);
     const info = await logs.json()
     const chat_logs = info.logs
 
@@ -141,7 +142,8 @@ async function response(message){
 async function send_message(message){
     console.log('sending');
     try{
-        const response = await fetch("/api/query", {
+        const user_id = sessionStorage.getItem('user_id');
+        const response = await fetch(`/api/query/${encodeURIComponent(user_id)}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
