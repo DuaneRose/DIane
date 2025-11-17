@@ -24,7 +24,6 @@ let ID = 163398;
 const CONSUMER_KEY = 'key123';
 const CONSUMER_SECRET = 'secret123';
 const { Provider } = pkg;
-let user_id = "5X0iK%RL";
 
 app.set('trust proxy', true);
 app.use(express.urlencoded({ extended: false }));
@@ -141,7 +140,6 @@ app.get('/', async (req, res) => {
 });
 
 app.get('/api/sign_in', async (req, res) => {
-  user_id = ""
   res.sendFile(path.join(__dirname, 'public', 'security','sign_in', 'sign_in.html'));
 });
 
@@ -290,10 +288,11 @@ app.post('/api/query', async (req, res) => {
       .replace(/\*(.*?)\*/g, '<em>$1</em>')
       .replace(/`([^`]+)`/g, '<code>$1</code>');
 
+    const user_id = sessionStorage.getItem('user_id');
     const logs = await fs.readFile(path.join(__dirname, `../data_base/conversation/${user_id}.json`), 'utf8');
     const chat_logs = JSON.parse(logs);
     
-    chat_logs.push({ question: query, answer: formatted });
+    chat_logs.push({ question: query, answer: formatted, timestamp: new Date().toISOString() });
     await fs.writeFile(path.join(__dirname, `../data_base/conversation/${user_id}.json`), JSON.stringify(chat_logs, null, 2));
 
     console.log('✅ Query processed and saved');
@@ -502,6 +501,7 @@ app.post('/api/security/sign_up', async (req, res) => {
     await fs.writeFile(path.join(__dirname, `../data_base/conversation/${ID}.json`), JSON.stringify([], null, 2));
     await fs.writeFile(path.join(__dirname, '../data_base/users.json'), JSON.stringify(users, null, 2));
 
+    sessionStorage.setItem('user_id', ID);
     console.log('✅ User registered successfully');
     res.status(201).json({ message: 'User registered successfully.' });
   } catch (error) {
@@ -522,6 +522,7 @@ app.post('/api/security/sign_in', async (req, res) => {
     if (user) {
       user_id = setData.find_id(username, users);
       console.log(`✅ User signed in: ${username}`);
+      sessionStorage.setItem('user_id', user_id);
       return res.status(200).json({ message: 'Sign in successful.' });
     } else {
       console.log(`⚠️  Sign-in failed for username: ${username}`);
@@ -534,6 +535,7 @@ app.post('/api/security/sign_in', async (req, res) => {
 });
 
 app.get("/api/chat/get_logs", async (req, res) =>{
+  const user_id = sessionStorage.getItem('user_id');
   const logs = await fs.readFile(path.join(__dirname, `../data_base/conversation/${user_id}.json`), 'utf8');
   const chat_logs = JSON.parse(logs);
 
