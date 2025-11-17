@@ -1,55 +1,9 @@
-const name_input = document.getElementById("username");
-const pass_input = document.getElementById("password");
-const confirm_pass_input = document.getElementById("password_double");
+const join = document.getElementById("join");
+const create = document.getElementById("create");
 
-const submit_button = document.getElementById("send_button");
+
 const sign_in = document.getElementById("sign-in");
-const error_message = document.getElementById("error");
 
-submit_button.addEventListener("click", async (e) => {
-    e.preventDefault();
-    await sign_up()
-});
-
-async function sign_up(){
-    error_message.innerText = "";
-
-    const name = name_input.value;
-    const pass = pass_input.value;
-    const confirm_pass = confirm_pass_input.value;
-
-    if (name.length < 5) {
-        error_message.innerText = "Username must be at least 5 characters long.";
-        return;
-    }
-
-    if (pass.length < 6) {
-        error_message.innerText = "Password must be at least 6 characters long.";
-        return;
-    }
-
-    if (pass !== confirm_pass) {
-        error_message.innerText = "Passwords do not match.";
-        return;
-    }
-
-    const response = await fetch("/api/security/sign_up", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ username: name, password: pass })
-    });
-
-    const result = await response.json();
-    
-
-    if (response.ok) {
-        window.location.href = "/api/sign_in";
-    } else {
-        error_message.innerText = result.message || "An error occurred during sign up.";
-    }
-}
 
 document.addEventListener('keydown', async function (event) {
     if (event.key === 'Enter') {
@@ -61,4 +15,14 @@ document.addEventListener('keydown', async function (event) {
 sign_in.addEventListener("click", (e) => {
     e.preventDefault();
     window.location.href = "/api/sign_in";
+});
+
+join.addEventListener("click", async (e) => {
+    e.preventDefault();
+    window.location.href = "/api/join";
+});
+
+create.addEventListener("click", async (e) => {
+    e.preventDefault();
+    window.location.href = "/api/create";
 });

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Office Hours</title>
+    <link rel="stylesheet" href="/static/security/sign_up/join/join.css" />
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script type="module" src="/static/security/sign_up/join/join.js"></script>
+  </head>
+  <body>
+    <div id="stage">
+      <div id="input_window">
+        <form action="" method="post" id="input">
+          <h1>sign-up</h1>
+
+          <input class="input" type="text" id="username" name="username"
+                 placeholder="create username" autocomplete="username"
+                 enterkeyhint="send" />
+
+          <input class="input" type="password" id="password" name="password"
+                 placeholder="create password" autocomplete="new-password"
+                 enterkeyhint="send" />
+
+          <input class="input" type="password" id="password_double"
+                 placeholder="confirm password" autocomplete="new-password"
+                 enterkeyhint="send" />
+
+          <input class="input" type="tex" id="join_code" name="join_code"
+                 placeholder="Enter Join Code" enterkeyhint="send" />
+
+          <div id="buttons">
+            <button class="button" id="back" type="button" name="back">back</button>
+            <p id="error"></p>
+            <button class="button" id="send_button" type="submit">Send</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>

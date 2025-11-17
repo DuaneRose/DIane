@@ -48,10 +48,6 @@ body{
     font-size: 1.2em;
     float: center;
     user-select: none;
-}.input:hover{
-    background-color: rgb(255, 255, 255);
-    color: rgb(43, 53, 65);
-    cursor: pointer;
 }.button:hover{
     background-color: rgb(255, 255, 255);
     color: rgb(43, 53, 65);
