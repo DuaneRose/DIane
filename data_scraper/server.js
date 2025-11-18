@@ -501,9 +501,8 @@ app.post('/api/security/sign_up', async (req, res) => {
     await fs.writeFile(path.join(__dirname, `../data_base/conversation/${ID}.json`), JSON.stringify([], null, 2));
     await fs.writeFile(path.join(__dirname, '../data_base/users.json'), JSON.stringify(users, null, 2));
 
-    sessionStorage.setItem('user_id', ID);
     console.log('✅ User registered successfully');
-    res.status(201).json({ message: 'User registered successfully.' });
+    res.status(201).json({ message: 'User registered successfully.', user_id: ID });
   } catch (error) {
     console.error('❌ Error during sign up:', error);
     res.status(500).json({ message: 'Internal server error.' });
