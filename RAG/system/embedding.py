@@ -4,10 +4,10 @@ import json
 from pathlib import Path
 import numpy as np
 
-def embed(chunks, file_name, folder, ID, verifier, genai_id, page_num = -1):
+def embed(chunks, file_name, folder, ID, verifier, genai_id,folder_name, page_num = -1):
     print("embedding the chunks")
 
-    vector_path = Path("/Users","duanegennaro","dIAne","data_base","vector_space.json")
+    vector_path = Path("/Users","duanegennaro","dIAne","data_base",folder_name ,"vector_space.json")
     with open(vector_path, "r") as vectors:
         vector_space = json.load(vectors)
 

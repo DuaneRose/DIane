@@ -13,15 +13,15 @@ import { re } from 'mathjs';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname  = path.dirname(__filename);
 
-const db = path.join(__dirname, '../../data_base/db.json');
+
 const policy = path.join(__dirname, '../../data_base/academic_honesty.txt');
 const token = '10082~rvBhVXGEuCrMnmL9YDBeCVLLPwUKvLrYMewtLtwFyWzN4nufWXFVQFmJWYQ9JRvP';
 const canvas = 'https://sdsu.instructure.com/api/v1/courses/'
 let fileURL = [];
 
-export async function run(ID){
+export async function run(ID, file_name){
     try {
-        await create_db(ID);
+        await create_db(ID, file_name);
         console.log('Both operations completed successfully');
     } catch (error) {
         console.error('Error in run:', error);
@@ -29,10 +29,11 @@ export async function run(ID){
     console.log("double checking that we have all the files");
     await check_folders(ID);
     console.log("pulling files");
-    await pull_files();
+    await pull_files(file_name);
 }
 
-async function create_db(courseID){
+async function create_db(courseID, file_name){
+    const db = path.join(__dirname, `../../data_base/${file_name}/db.json`);
     const data = {
         "assignments": await assignments(courseID),
         "modules": await modules(courseID),
@@ -224,7 +225,7 @@ async function check_folders(courseID){
     }
 }
 
-async function pull_files(){
+async function pull_files(file_name){
     console.log(fileURL.length);
     let num = 1;
     for (const apiUrl of fileURL) {
@@ -246,13 +247,14 @@ async function pull_files(){
                     throw new Error(`Expected binary but got ${ct}`);
                 }
             
-                const target = path.join(__dirname, '../../data_base/canvas_data', apiUrl[1]);
+                const target = path.join(__dirname, `../../data_base/${file_name}/canvas_data`, apiUrl[1]);
                 await fs.writeFile(target, fileRes.data);
                 console.log(`${num}.) ✅  Saved ${apiUrl[1]}`);
     
-                await axios.post('http://localhost:4600/api/embed', {
+                await axios.post('http://localhost:4500/api/embed', {
                     name: apiUrl[1],
                     raw_link: apiUrl[0],
+                    folder_name: file_name
                 })
                 console.log(`✅  Embedded ${apiUrl[1]}`);
     
@@ -264,7 +266,8 @@ async function pull_files(){
     }
 }
 
-async function change_honesty_policy(policy){
+async function change_honesty_policy(policy, file_name){
+    const db = path.join(__dirname, `../../data_base/${file_name}/db.json`);
     console.log("changing honesty policy:\n");
     const data = await fs.readFile(db, 'utf8');
     const parsedData = JSON.parse(data);
@@ -277,21 +280,24 @@ async function get_default_honesty_policy(){
     return data;
 }
 
-async function Honesty_policy(){
+async function Honesty_policy(file_name){
+    const db = path.join(__dirname, `../../data_base/${file_name}/db.json`);
     const data = await fs.readFile(db, 'utf8');
     const parsed_data = JSON.parse(data);
     const data_policy = parsed_data.academic_honesty_policy;
     return data_policy;
 }
 
-async function change_syllabus(syllabus){
+async function change_syllabus(syllabus, file_name){
+    const db = path.join(__dirname, `../../data_base/${file_name}/db.json`);
     const data = await fs.readFile(db, 'utf8');
     const parsedData = JSON.parse(data);
     parsedData.syllabus = syllabus;
     await fs.writeFile(db, JSON.stringify(parsedData, null, 2));
 }
 
-async function syllabus(){
+async function syllabus(file_name){
+    const db = path.join(__dirname, `../../data_base/${file_name}/db.json`);
     const data = await fs.readFile(db, 'utf8');
     const parsed_data = JSON.parse(data);
     const syllabus = parsed_data.syllabus;
@@ -332,7 +338,7 @@ function ID_generator (size=8){
     const caps = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
     const lower = "abcdefghijklmnopqrstuvwxyz"
     const num = "1234567890"
-    const unique = "!@#$%&*+~?"
+    const unique = "!@#$&*+~?<>.,;:{}[]()-_=|"
 
     const chars = caps + lower + num + unique
     const max = chars.length
@@ -355,7 +361,7 @@ function find_id(username, array){
     return "N/A"
 }
 
-async function initialize_class(canvas_ID) {
+async function initialize_class(canvas_ID, user_ID) {
     const {data} = await axios.get(`${canvas}${canvas_ID}`,
         {
             headers: {'Authorization': `Bearer ${token}`}
@@ -365,12 +371,16 @@ async function initialize_class(canvas_ID) {
     const class_name = data.name;
     
     const code = ID_generator(10);
-    const name = await create_class(class_name, code);
-
+    const name = await create_class(class_name, code, user_ID);
+    await fill_class(name, canvas_ID);
     return name;
 }
 
-async function create_class(class_name, Class_code){
+async function fill_class(class_name, Class_code){
+    await run(Class_code, class_name);
+}
+
+async function create_class(class_name, Class_code, user_ID){
     const name = `${class_name.replace(/\s+/g, "_").toLowerCase()}-${Class_code}`
     const folder_name = path.join(
         __dirname,
@@ -410,4 +420,19 @@ async function create_class(class_name, Class_code){
     return name;
 }
 
-export default {run, erase_data, change_honesty_policy, Honesty_policy, change_syllabus, syllabus, ID_generator, find_id,get_default_honesty_policy,initialize_class};
+async function validate_canvas_code(code){
+    try{
+        const {data} = await axios.get(`${canvas}${code}`,
+            {
+                headers: {'Authorization': `Bearer ${token}`}
+            }
+        );
+        console.log("valid canvas code for course:", data.name);
+        return true;
+    }catch(error) {
+        console.error('Error validating canvas code:', code);
+        return false;
+    }
+}
+
+export default {run, erase_data, change_honesty_policy, Honesty_policy, change_syllabus, syllabus, ID_generator, find_id,get_default_honesty_policy,initialize_class, validate_canvas_code};

@@ -200,12 +200,13 @@ app.post('/api/embed', async (req, res) =>{
   const raw_link = req.body.raw_link;
   const ID = raw_link.substr(raw_link.indexOf("files/") + 6, (raw_link.indexOf("/download") - (raw_link.indexOf("files/") + 6)));
   const verifier = raw_link.substr(raw_link.indexOf("verifier=") + 9);
+  const folder_name = req.body.folder_name;
 
   console.log(`Embedding Canvas file: ${file}`);
   res.json({ message: `File ${file} is being embedded`, status: 'success' });
   
   try {
-    await fetch(`http://localhost:4600/embed/${file}/canvas_data/${ID}/${verifier}`);
+    await fetch(`http://localhost:4600/embed/${file}/canvas_data/${ID}/${verifier}/${folder_name}`);
     console.log(`✅ File embedded: ${file}`);
   } catch (error) {
     console.error('❌ Error embedding file:', error);
@@ -496,9 +497,10 @@ app.post('/api/security/sign_up', async (req, res) => {
 
     console.log(`Registering new user: ${username}`);
     const ID = setData.ID_generator(8);
+    const conversation = path.join(__dirname, `../data_base/${folder_name}/conversations/${ID}.json`);
     users.push({ username, password, 'ID': ID, user_type, folder_name});
 
-    await fs.writeFile(path.join(__dirname, `../data_base/conversation/${ID}.json`), JSON.stringify([], null, 2));
+    await fs.writeFile(conversation, JSON.stringify([], null, 2));
     await fs.writeFile(path.join(__dirname, '../data_base/users.json'), JSON.stringify(users, null, 2));
 
     console.log('✅ User registered successfully');
@@ -612,6 +614,14 @@ app.post('/api/create_class', async (req, res) => {
     console.error('❌ Error creating class:', err);
     res.status(500).json({ error: 'Failed to create class' });
   }
+});
+
+app.get('/api/valid_canvas_code/:canvas_code', async (req, res) => {
+  var code = req.params.canvas_code;
+  code = code.replace('code=', '');
+  console.log(`Validating Canvas code: ${code}`);
+  const isValid = await setData.validate_canvas_code(code);
+  res.json({ valid: isValid });
 });
 
 app.listen(PORT, () => {

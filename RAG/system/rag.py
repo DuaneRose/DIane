@@ -26,7 +26,7 @@ def chunker(text):
     return chunks
 
 # Function to get embeddings from the PDF file and save them to a JSON file
-def get_embedding(file_name, folder, ID, verifier):
+def get_embedding(file_name, folder, ID, verifier, folder_name):
     print("getting embeddings for " + file_name)
 
     if folder != "text_books":
@@ -35,11 +35,11 @@ def get_embedding(file_name, folder, ID, verifier):
         text = routing(file_name, folder, genai_id)
         if text != "File type not implemented":
             chunks = chunker(text)
-            embed(chunks, file_name, folder, ID, verifier, genai_id)
+            embed(chunks, file_name, folder, ID, verifier, genai_id, folder_name)
         else:
             print("File type not implemented: " + file_name)
     else:
-        book = PdfReader("/Users/duanegennaro/dIAne/data_base/text_books/" + file_name)
+        book = PdfReader("/Users/duanegennaro/dIAne/data_base/" + folder_name + "/text_books/" + file_name)
         num_pages = len(book.pages)
         for i in range(num_pages):
             print("processing page ", i)

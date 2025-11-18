@@ -39,10 +39,10 @@ async def set_mode_endpoint(mode: str):
 async def ping(message: str):
     return query(message)
 
-@app.get("/embed/{file_name}/{folder}/{ID}/{verifier}")
-async def embed(file_name: str,folder: str, ID: int, verifier: str):
+@app.get("/embed/{file_name}/{folder}/{ID}/{verifier}/{folder_name}")
+async def embed(file_name: str,folder: str, ID: int, verifier: str, folder_name: str):
     print("got file name to back end: ", file_name, " folder:", folder)
-    get_embedding(file_name, folder, ID, verifier)
+    get_embedding(file_name, folder, ID, verifier, folder_name)
     return {"status": "Embedding started for file", "file_name": file_name}
 
 @app.get("/reset")

@@ -35,7 +35,14 @@ async function sign_up(){
         return;
     }
 
-    //STILL NEEDS VALIDATION FOR CANVAS CODE
+    const validate_res = await fetch(`/api/valid_canvas_code/code=${code}`);
+    const validate_data = await validate_res.json();
+    console.log(validate_data.valid)
+    if (!validate_res.ok || !validate_data.valid) {
+        error_message.innerText = "Invalid Canvas class code.";
+        return;
+    }
+
     const res = await fetch("/api/create_class",{
         method: "POST",
         headers: {
