@@ -38,7 +38,7 @@ async function sign_up(){
         headers: {
             "Content-Type": "application/json"
         },
-        body: JSON.stringify({ username: name, password: pass })
+        body: JSON.stringify({ username: name, password: pass, user_type: "student"})
     });
 
     const result = await response.json();

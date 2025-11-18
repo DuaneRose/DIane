@@ -4,6 +4,9 @@ import axios from 'axios';
 import { fileURLToPath } from 'url';
 import { htmlToText } from 'html-to-text';
 import isEqual from 'lodash.isequal';
+import { re } from 'mathjs';
+// import { create } from 'lodash';
+// import { re } from 'mathjs';
 // import { error } from 'console';
 // import { get } from 'lodash';
 
@@ -323,7 +326,7 @@ function erase_data(){
     fileURL.length = 0;
 }
 
-function ID_generator (){
+function ID_generator (size=8){
     let ID = ""
 
     const caps = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
@@ -334,7 +337,7 @@ function ID_generator (){
     const chars = caps + lower + num + unique
     const max = chars.length
 
-    for(let i = 0; i < 8; i ++){
+    for(let i = 0; i < size; i ++){
         const x = Math.floor(Math.random() * max)
 
         ID += chars.charAt(x)
@@ -346,10 +349,65 @@ function ID_generator (){
 function find_id(username, array){
     for(const users of array){
         if (users.username === username){
-            return users.ID
+            return [users.ID, users.folder_name, users.user_type];
         }
     }
     return "N/A"
 }
 
-export default {run, erase_data, change_honesty_policy, Honesty_policy, change_syllabus, syllabus, ID_generator, find_id,get_default_honesty_policy};
+async function initialize_class(canvas_ID) {
+    const {data} = await axios.get(`${canvas}${canvas_ID}`,
+        {
+            headers: {'Authorization': `Bearer ${token}`}
+        }
+    );
+
+    const class_name = data.name;
+    
+    const code = ID_generator(10);
+    const name = await create_class(class_name, code);
+
+    return name;
+}
+
+async function create_class(class_name, Class_code){
+    const name = `${class_name.replace(/\s+/g, "_").toLowerCase()}-${Class_code}`
+    const folder_name = path.join(
+        __dirname,
+        "../../data_base",
+        name
+      );
+    const canvas_data_folder = path.join(folder_name, "canvas_data");
+    const conversation_folder = path.join(folder_name, "conversations");
+    const signatures_folder = path.join(folder_name, "signatures");
+    const text_books_folder = path.join(folder_name, "text_books");
+    const db = path.join(folder_name, "db.json");
+    const vector_space = path.join(folder_name, "vector_space.json");
+    const users = path.join(folder_name, "users.json");
+    const initialize = [];
+    const jsonInit = JSON.stringify(initialize, null, 2);
+    const empty_obj = {};
+    const objInit = JSON.stringify(empty_obj, null, 2);
+
+    try {
+        await fs.mkdir(folder_name, { recursive: true });
+        console.log('Folder created successfully!');
+        await fs.mkdir(canvas_data_folder, { recursive: true });
+        await fs.mkdir(conversation_folder, { recursive: true });
+        await fs.mkdir(signatures_folder, { recursive: true });
+        await fs.mkdir(text_books_folder, { recursive: true });
+        await fs.writeFile(db, objInit);
+        await fs.writeFile(vector_space, jsonInit);
+        await fs.writeFile(users, jsonInit);
+      } catch (err) {
+        if (err.code === 'EEXIST') {
+          console.log('Folder already exists.');
+        } else {
+          console.error('Error creating folder:', err);
+        }
+      }
+
+    return name;
+}
+
+export default {run, erase_data, change_honesty_policy, Honesty_policy, change_syllabus, syllabus, ID_generator, find_id,get_default_honesty_policy,initialize_class};

@@ -1,6 +1,7 @@
 const name_input = document.getElementById("username");
 const pass_input = document.getElementById("password");
 const confirm_pass_input = document.getElementById("password_double");
+const canvas_code_input = document.getElementById("class_code");
 
 const submit_button = document.getElementById("send_button");
 const back = document.getElementById("back");
@@ -17,6 +18,7 @@ async function sign_up(){
     const name = name_input.value;
     const pass = pass_input.value;
     const confirm_pass = confirm_pass_input.value;
+    const code = canvas_code_input.value;
 
     if (name.length < 5) {
         error_message.innerText = "Username must be at least 5 characters long.";
@@ -33,12 +35,24 @@ async function sign_up(){
         return;
     }
 
+    //STILL NEEDS VALIDATION FOR CANVAS CODE
+    const res = await fetch("/api/create_class",{
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ canvas_code: code })
+    })
+
+    const folder_name = await res.json()
+    console.log(folder_name)
+
     const response = await fetch("/api/security/sign_up", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
         },
-        body: JSON.stringify({ username: name, password: pass })
+        body: JSON.stringify({ username: name, password: pass, user_type: "adimin", folder_name: folder_name.folder_name})
     });
 
     const result = await response.json();

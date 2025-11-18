@@ -483,7 +483,7 @@ app.post('/api/upload_file', upload.single('file'), async (req, res) => {
 });
 
 app.post('/api/security/sign_up', async (req, res) => {
-  const { username, password } = req.body;
+  const { username, password, user_type, folder_name } = req.body;
 
   try {
     const usersData = await fs.readFile(path.join(__dirname, '../data_base/users.json'), 'utf8');
@@ -495,8 +495,8 @@ app.post('/api/security/sign_up', async (req, res) => {
     }
 
     console.log(`Registering new user: ${username}`);
-    const ID = setData.ID_generator();
-    users.push({ username, password, 'ID': ID});
+    const ID = setData.ID_generator(8);
+    users.push({ username, password, 'ID': ID, user_type, folder_name});
 
     await fs.writeFile(path.join(__dirname, `../data_base/conversation/${ID}.json`), JSON.stringify([], null, 2));
     await fs.writeFile(path.join(__dirname, '../data_base/users.json'), JSON.stringify(users, null, 2));
@@ -519,9 +519,9 @@ app.post('/api/security/sign_in', async (req, res) => {
     const user = users.find(user => user.username === username && user.password === password);
     
     if (user) {
-      const user_id = setData.find_id(username, users);
+      const data = setData.find_id(username, users);
       console.log(`✅ User signed in: ${username}`);
-      return res.status(200).json({ message: 'Sign in successful.', user_id: user_id });
+      return res.status(200).json({ message: 'Sign in successful.', user_id: data[0], folder_name: data[1], user_type: data[2] });
     } else {
       console.log(`⚠️  Sign-in failed for username: ${username}`);
       return res.status(401).json({ message: 'Invalid username or password.' });
@@ -601,6 +601,18 @@ try {
   });
 }
 })
+
+app.post('/api/create_class', async (req, res) => {
+  const { canvas_code } = req.body;
+  try {
+    const name = await setData.initialize_class(canvas_code);
+    console.log('✅ Class created successfully');
+    res.json({ folder_name: name });
+  } catch (err) {
+    console.error('❌ Error creating class:', err);
+    res.status(500).json({ error: 'Failed to create class' });
+  }
+});
 
 app.listen(PORT, () => {
   console.log(`\nServer running on port ${PORT}`);

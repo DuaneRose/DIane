@@ -1,3 +1,5 @@
+// import session = require("express-session");
+
 const name_input = document.getElementById("username");
 const pass_input = document.getElementById("password");
 
@@ -29,6 +31,8 @@ async function sign_in(){
 
     if (response.ok) {
         sessionStorage.setItem('user_id', result.user_id);
+        sessionStorage.setItem('folder_name', result.folder_name);
+        sessionStorage.setItem('user_type', result.user_type);
         window.location.href = "/api/chat";
     } else {
         error_message.innerText = result.message || "An error occurred during sign up.";
