@@ -11,10 +11,11 @@ import { fileURLToPath } from 'url';
 import setData from './script/setData.js';
 import fs from 'fs/promises';
 import multer from 'multer';
+import { re } from "mathjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const db = path.join(__dirname, '../data_base/db.json');
+//const db = path.join(__dirname, '../data_base/db.json');
 const UPLOAD_DIR_BOOKS = path.join(__dirname, '../data_base/text_books');
 const UPLOAD_DIR_FILES = path.join(__dirname, '../data_base/canvas_data');
 
@@ -364,21 +365,25 @@ app.post('/api/set_mode', async (req, res) => {
   }
 });
 
-app.get('/api/get_syllabus', async (req, res) =>{
+app.get('/api/get_syllabus/:folder_name', async (req, res) =>{
+  const folder_name = req.params.folder_name;
+  const db = path.join(__dirname, `../data_base/${folder_name}/db.json`);
+  console.log(`Fetching syllabus for folder: ${db}`);
   const data = await fs.readFile(db, 'utf8');
   if(data === '{"data": "empty"}'){
     res.json({message: "no class enrolled in"});
   } else {
-    const syllabus = await setData.syllabus();
+    const syllabus = await setData.syllabus(folder_name);
     res.json({message: syllabus});
   }
 });
 
 app.post('/api/set_syllabus', async (req, res) =>{
-  const { syllabus } = req.body || {};
+  const { syllabus, folder_name } = req.body || {};
+  console.log(`✏️  Setting syllabus for folder: ${req.body.folder_name}`);
   console.log('Updating syllabus');
   try {
-    await setData.change_syllabus(syllabus);
+    await setData.change_syllabus(syllabus, folder_name);
     console.log('✅ Syllabus updated');
     res.json({ message: 'Syllabus updated successfully' });
   } catch (err) {

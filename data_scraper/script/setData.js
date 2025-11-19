@@ -288,16 +288,16 @@ async function Honesty_policy(file_name){
     return data_policy;
 }
 
-async function change_syllabus(syllabus, file_name){
-    const db = path.join(__dirname, `../../data_base/${file_name}/db.json`);
+async function change_syllabus(syllabus, folder_name){
+    const db = path.join(__dirname, `../../data_base/${folder_name}/db.json`);
     const data = await fs.readFile(db, 'utf8');
     const parsedData = JSON.parse(data);
     parsedData.syllabus = syllabus;
     await fs.writeFile(db, JSON.stringify(parsedData, null, 2));
 }
 
-async function syllabus(file_name){
-    const db = path.join(__dirname, `../../data_base/${file_name}/db.json`);
+async function syllabus(folder_name){
+    const db = path.join(__dirname, `../../data_base/${folder_name}/db.json`);
     const data = await fs.readFile(db, 'utf8');
     const parsed_data = JSON.parse(data);
     const syllabus = parsed_data.syllabus;
