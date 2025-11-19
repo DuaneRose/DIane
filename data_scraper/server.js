@@ -555,37 +555,40 @@ app.get("/api/chat/get_logs/:folder_name/:user_id", async (req, res) =>{
   });
 });
 
-app.get("/api/book_list", async (req, res) =>{
-  const folder = path.join(__dirname, '../data_base/text_books');
-const list = [];
+app.get("/api/book_list/:folder_name", async (req, res) =>{
+  const folder_name = req.params.folder_name;
+  const folder = path.join(__dirname, `../data_base/${folder_name}/text_books`);
+  console.log(folder)
+  const list = [];
 
-console.log('Fetching book list from:', folder);
+  console.log('Fetching book list from:', folder);
 
-try {
-  const files = await fs.readdir(folder);
-  
-  files.forEach(file => {
-    console.log(' - Found file:', file);
-    list.push(file);
-  });
-  
-  console.log('✅ Book list fetched:', list);
-  
-  res.json({
-    books: list,
-    status: 'success'
-  });
-} catch (err) {
-  console.error('❌ Error reading directory:', err);
-  res.status(500).json({
-    error: 'Failed to read directory',
-    status: 'error'
-  });
-}
+  try {
+    const files = await fs.readdir(folder);
+    
+    files.forEach(file => {
+      console.log(' - Found file:', file);
+      list.push(file);
+    });
+    
+    console.log('✅ Book list fetched:', list);
+    
+    res.json({
+      books: list,
+      status: 'success'
+    });
+  } catch (err) {
+    console.error('❌ Error reading directory:', err);
+    res.status(500).json({
+      error: 'Failed to read directory',
+      status: 'error'
+    });
+  }
 })
 
-app.get("/api/file_list", async (req, res) =>{
-  const folder = path.join(__dirname, '../data_base/canvas_data');
+app.get("/api/file_list/:folder_name", async (req, res) =>{
+  const folder_name = req.params.folder_name;
+  const folder = path.join(__dirname, `../data_base/${folder_name}/canvas_data`);
 const list = [];
 
 console.log('Fetching files list from:', folder);

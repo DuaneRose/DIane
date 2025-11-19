@@ -98,6 +98,7 @@ h1 {
   border-radius: 10px;
   transition: all .25s ease;
   box-shadow: 0 4px 12px rgba(0,0,0,.2);
+  padding: 0.5em;
 }
 
 #back_button:hover,

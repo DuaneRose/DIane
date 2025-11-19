@@ -37,7 +37,9 @@ function setFile(file) {
 async function show_books(){
   console.log('Fetching existing book list...');
   const lib = document.getElementById('books');
-  const res = await fetch('/api/book_list')
+  const folder_name = sessionStorage.getItem('folder_name');
+  console.log(`Using folder name: ${folder_name}`);
+  const res = await fetch(`/api/book_list/${encodeURIComponent(folder_name)}`);
   const data = await res.json();
   data.books.forEach(book => {
     const li = document.createElement('li');
