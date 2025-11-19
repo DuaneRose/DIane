@@ -398,6 +398,7 @@ async function create_class(class_name, Class_code, user_ID){
     const jsonInit = JSON.stringify(initialize, null, 2);
     const empty_obj = {};
     const objInit = JSON.stringify(empty_obj, null, 2);
+    const custom_system = path.join(folder_name, "custom_system.txt");
 
     try {
         await fs.mkdir(folder_name, { recursive: true });
@@ -409,6 +410,7 @@ async function create_class(class_name, Class_code, user_ID){
         await fs.writeFile(db, objInit);
         await fs.writeFile(vector_space, jsonInit);
         await fs.writeFile(users, jsonInit);
+        await fs.writeFile(custom_system, '');
       } catch (err) {
         if (err.code === 'EEXIST') {
           console.log('Folder already exists.');

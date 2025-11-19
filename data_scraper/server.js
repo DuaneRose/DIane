@@ -304,10 +304,11 @@ app.post('/api/query/:folder_name/:user_id', async (req, res) => {
   }
 });
 
-app.get('/api/system_instructions', async (req, res) => {
-  const name = (req.query?.name ?? 'default');
+app.get('/api/system_instructions/:name/:folder_name', async (req, res) => {
+  const name = (req.params?.name.replace('name=', '') ?? 'default');
+  const folder_name = (req.params?.folder_name ?? 'default');
   try {
-    const r = await fetch(`http://localhost:4600/get_instruction/${encodeURIComponent(name)}`);
+    const r = await fetch(`http://localhost:4600/get_instruction/${encodeURIComponent(name)}/${encodeURIComponent(folder_name)}`);
     if (!r.ok) return res.status(r.status).send(await r.text());
     const data = await r.json();
     return res.json(data);
@@ -318,13 +319,13 @@ app.get('/api/system_instructions', async (req, res) => {
 });
 
 app.post('/api/set_custom_instruction', async (req, res) => {
-  const { name, instructions } = req.body || {};
+  const { name, instructions, folder_name } = req.body || {};
   console.log(`✏️  Setting custom instruction: ${name}`);
   try {
     const r = await fetch('http://localhost:4600/set_custom_instruction', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name, instructions })
+      body: JSON.stringify({ name, instructions, folder_name })
     });
     if (!r.ok) return res.status(r.status).send(await r.text());
     console.log('✅ Custom instruction saved');
@@ -351,7 +352,7 @@ app.post('/api/set_mode', async (req, res) => {
   const mode = req.body?.mode ?? 'default';
   console.log(`Setting mode: ${mode}`);
   try {
-    const r = await fetch(`http://localhost:4600/set_mode/${encodeURIComponent(mode)}`, {
+    const r = await fetch(`http://localhost:4600/set_mode/${encodeURIComponent(mode)}/none`, {
       method: 'POST'
     });
     if (!r.ok) return res.status(r.status).send(await r.text());

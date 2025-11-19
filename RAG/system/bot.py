@@ -78,7 +78,8 @@ def upload(file_name, folder, folder_name):
     return obj.name
 
 def ask(prompt, files, folder_name):
-
+    # right now we upload all the files when loading in the database
+    # we need to change that to only happen when we ask a question
     folder = []
     for i in range(len(files)):
         print(f"used {files[i]['file_name']} with score {files[i]['score']}")

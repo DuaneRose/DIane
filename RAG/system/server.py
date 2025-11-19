@@ -9,18 +9,19 @@ from bot import set_mode, get_mode
 
 app = FastAPI()
 
-@app.get("/get_instruction/{name}")
-async def get_instructions(name: str):
-    return get_instruction(name)
+@app.get("/get_instruction/{name}/{folder_name}")
+async def get_instructions(name: str, folder_name: str):
+    return get_instruction(name, folder_name)
 
 class CustomInstruction(BaseModel):
   name: str | None = None
   instructions: str
+  folder_name: str
 
 @app.post("/set_custom_instruction")
 async def set_custom_instruction(payload: CustomInstruction):
   try:
-    write_custom_instruction(payload.instructions)
+    write_custom_instruction(payload.instructions, payload.folder_name)
     return {"status": f"Custom instruction updated for {payload.name or 'default'}"}
   except Exception as e:
     raise HTTPException(status_code=500, detail=str(e))
@@ -30,8 +31,8 @@ async def get_mode_endpoint():
     mode = get_mode()
     return {"mode": mode}
 
-@app.post("/set_mode/{mode}")
-async def set_mode_endpoint(mode: str):
+@app.post("/set_mode/{mode}/{folder_name}")
+async def set_mode_endpoint(mode: str, folder_name: str):
     set_mode(mode)
     return {"status": f"Mode set to {mode}"}
 
