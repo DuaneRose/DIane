@@ -1,75 +1,152 @@
+/* === App shell: chat-style glass theme, no page scroll === */
+
 *,
 *::before,
 *::after { box-sizing: border-box; }
 
-html, body { height: 100%; margin: 0; }
+html, body {
+  height: 100%;
+  margin: 0;
+  overflow: hidden; /* no page scroll */
+}
 
 body {
-    min-height: 100vh;
-    display: flex;
-    gap: 0%;                 
-    padding: 1.5%;
-    background: rgb(19,20,36);
-    color: white;
-}#menu{
-    flex: 0 0 19%;     
-    padding: 1.5%;
-    border: 3px solid rgba(43,53,65,.827);
-    background: rgb(75,86,95);
-    border-right: 1.5px solid rgb(255, 255, 255);
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-}#menu_bar{
-    background-color: rgb(43, 53, 65);
-    height: 87%;
-    width: 100%;
-    padding: 7.5%;
-    padding-top: 1%;
-    flex: 1 ;
-}#window{
-    flex: 1 1 0%;               
-    min-width: 0;               
-    padding: 1.5%;
-    border: 3px solid rgba(43,53,65,.827);
-    background: rgb(75,86,95);
-    border-left: 1.5px solid rgb(255, 255, 255);
-}#back_button{
-    background-color: rgb(43, 53, 65);
-    color: white;
-    border: none;
-    font-size: 1.2em;
-    user-select: none;
-    width: 100%;
-    height: 2em;
-    margin-bottom: 1%;
-    cursor: pointer;
-}#back_button:hover{
-    transition: all 0.5s ease;
-    background-color: white;
-    color:  rgb(43, 53, 65);
-}h1{
-    text-align: center;
-}section{
-    border: 5px solid rgba(43, 53, 65, 0.827);
-    background-color: rgb(75, 86, 95);
-    height: 100%;
-    margin: 0%;
-    align-items: center;
-}.menu_button{
-    background-color: rgb(43, 53, 65);
-    color: white;
-    border: none;
-    font-size: 1.2em;
-    user-select: none;
-    width: 100%;
-    height: 2em;
-    margin-bottom: 1%;
-    cursor: pointer;
-}.menu_button:hover{
-    transition: all 0.5s ease;
-    background-color: white;
-    color:  rgb(43, 53, 65);
-}hr{
-    width: 100%;
+  min-height: 100vh;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  gap: 1.25%;                 /* subtle gutter between panes */
+  padding: 1.5%;
+  background: linear-gradient(135deg, #1a1d2e 0%, #2d3748 100%);
+  color: #fff;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+/* Left panel (menu) */
+#menu {
+  flex: 0 0 22%;              /* a bit wider for comfort */
+  height: 100%;
+  padding: 1.25%;
+  background: rgba(30, 41, 59, 0.95);
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  border-radius: 14px;
+  box-shadow: 0 14px 40px rgba(0,0,0,0.35);
+  backdrop-filter: blur(10px);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;           /* contain inner scroll */
+}
+
+/* Menu content area (scrolls if needed) */
+#menu_bar {
+  background-color: transparent;
+  flex: 1;
+  width: 100%;
+  padding: 10px;
+  overflow: auto;             /* internal scrolling only */
+  border: 1px solid rgba(148,163,184,0.15);
+  border-radius: 10px;
+}
+
+/* Main window (content) */
+#window {
+  flex: 1 1 0%;
+  min-width: 0;               /* prevents flex overflow */
+  height: 100%;
+  padding: 1.5%;
+  background: rgba(30, 41, 59, 0.95);
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  border-radius: 14px;
+  box-shadow: 0 14px 40px rgba(0,0,0,0.35);
+  backdrop-filter: blur(10px);
+  overflow: hidden;           /* contain inner section */
+}
+
+/* Inside the main window, let the section scroll if needed */
+section {
+  background: rgba(51, 65, 85, 0.9);
+  border: 1px solid rgba(148, 163, 184, 0.15);
+  border-radius: 12px;
+  height: 100%;
+  margin: 0;
+  padding: 16px;
+  overflow: auto;             /* internal scrolling only */
+}
+
+/* Headings */
+h1 {
+  text-align: center;
+  margin: 0 0 10px 0;
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: .2px;
+}
+
+/* Buttons */
+#back_button,
+.menu_button {
+  background: rgba(51, 65, 85, 0.95);
+  color: #fff;
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  font-size: 1rem;
+  font-weight: 600;
+  user-select: none;
+  width: 100%;
+  height: 44px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  border-radius: 10px;
+  transition: all .25s ease;
+  box-shadow: 0 4px 12px rgba(0,0,0,.2);
+}
+
+#back_button:hover,
+.menu_button:hover {
+  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+  border-color: rgba(96, 165, 250, 0.5);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px rgba(59,130,246,.35);
+}
+
+#back_button:active,
+.menu_button:active {
+  transform: translateY(0);
+}
+
+/* Dividers */
+hr {
+  width: 100%;
+  border: none;
+  border-top: 1px solid rgba(148, 163, 184, 0.25);
+  margin: 12px 0;
+}
+
+/* Custom scrollbar for inner areas */
+#menu_bar::-webkit-scrollbar,
+section::-webkit-scrollbar {
+  width: 8px;
+}
+#menu_bar::-webkit-scrollbar-track,
+section::-webkit-scrollbar-track {
+  background: rgba(51, 65, 85, 0.3);
+  border-radius: 4px;
+}
+#menu_bar::-webkit-scrollbar-thumb,
+section::-webkit-scrollbar-thumb {
+  background: rgba(100, 116, 139, 0.5);
+  border-radius: 4px;
+}
+#menu_bar::-webkit-scrollbar-thumb:hover,
+section::-webkit-scrollbar-thumb:hover {
+  background: rgba(100, 116, 139, 0.7);
+}
+
+/* Responsive: compress side menu on small screens */
+@media (max-width: 920px) {
+  #menu { flex-basis: 28%; }
+}
+@media (max-width: 720px) {
+  body { gap: 1%; padding: 1%; }
+  #menu { display: none; }          /* hide menu on very small screens */
+  #window { width: 100%; }
 }

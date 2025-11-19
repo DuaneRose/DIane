@@ -1,33 +1,136 @@
-body{
-    background-color: rgb(43, 53, 65);
-    color: white;
-    height: 97vh;
-    max-height: 97vh;
-}#options{
-    display: flex;
-}#description{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.25em;
-    flex: 1;
-    text-align: center;
-    margin: 1em;
-}#content{
-    display: flex;
-    flex-direction: column;
-}textarea{ 
-    height : 78vh; 
-    width: 100%; 
-    box-sizing: border-box;
-    resize: vertical;
-    background-color: rgb(223, 223, 223);
-}h1{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}#top{
-    position: sticky;
-    top: 0;
-    background-color: rgb(43, 53, 65);
+/* === Description Page (glassy modern theme) === */
+
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #1a1d2e 0%, #2d3748 100%);
+  color: #fff;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  padding: 1.5%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Sticky header */
+#top {
+  position: sticky;
+  top: 0;
+  background: rgba(30, 41, 59, 0.95);
+  border-radius: 12px;
+  border: 1px solid rgba(148, 163, 184, 0.25);
+  padding: 14px 16px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+  z-index: 5;
+}
+
+/* Heading */
+h1 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  font-size: 1.6rem;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+}
+
+/* Options bar */
+#options {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-top: 1em;
+  gap: 12px;
+}
+
+/* Description section */
+#description {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  flex: 1;
+  text-align: center;
+  margin: 1em;
+  background: rgba(51, 65, 85, 0.9);
+  border-radius: 10px;
+  border: 1px solid rgba(148, 163, 184, 0.25);
+  padding: 1em;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+}
+
+/* Scrollable content wrapper */
+#content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  width: 100%;
+  height: 66vh;
+  background: rgba(30, 41, 59, 0.92);
+  border-radius: 12px;
+  border: 1px solid rgba(148, 163, 184, 0.25);
+  padding: 16px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+  overflow-y: auto;
+  margin-top: 1.5%;
+}
+
+/* Text area filling remaining space */
+textarea {
+  flex: 1;
+  width: 100%;
+  height: 100%;
+  resize: none;
+  background: rgba(51, 65, 85, 0.9);
+  color: #fff;
+  font-size: 1rem;
+  font-family: 'Courier New', monospace;
+  padding: 1em;
+  border: 1px solid rgba(148, 163, 184, 0.3);
+  border-radius: 10px;
+  outline: none;
+  transition: all 0.3s ease;
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.3);
+  overflow-y: auto;
+}
+
+textarea:focus {
+  border-color: rgba(96, 165, 250, 0.5);
+  box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.15);
+  background-color: rgba(71, 85, 105, 0.95);
+}
+
+/* Smooth scrollbars */
+#content::-webkit-scrollbar,
+textarea::-webkit-scrollbar {
+  width: 8px;
+}
+#content::-webkit-scrollbar-track,
+textarea::-webkit-scrollbar-track {
+  background: rgba(51, 65, 85, 0.3);
+  border-radius: 4px;
+}
+#content::-webkit-scrollbar-thumb,
+textarea::-webkit-scrollbar-thumb {
+  background: rgba(100, 116, 139, 0.5);
+  border-radius: 4px;
+}
+#content::-webkit-scrollbar-thumb:hover,
+textarea::-webkit-scrollbar-thumb:hover {
+  background: rgba(100, 116, 139, 0.7);
+}
+
+/* Responsive tweaks */
+@media (max-width: 560px) {
+  h1 { font-size: 1.35rem; }
+  #description { font-size: 1rem; margin: 0.75em; }
+  textarea { font-size: 0.95rem; }
 }

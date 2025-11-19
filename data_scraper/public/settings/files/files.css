@@ -1,62 +1,169 @@
+/* === Uploader Page: glassy chat theme === */
+
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
 body{
-    background-color: rgb(43, 53, 65);
-    color: white;
-    height: 97vh;
-    max-height: 97vh;
-}.uploader { 
-    max-width: 520px; 
-    margin: 24px auto; 
-    font-family: system-ui, Arial; 
-    color: #fff; }
+  min-height: 100vh;
+  background: linear-gradient(135deg, #1a1d2e 0%, #2d3748 100%);
+  color: #fff;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  padding: 1.5%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Sticky header */
+#top{
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  background: rgba(30, 41, 59, 0.95);
+  border: 1px solid rgba(148,163,184,.25);
+  border-radius: 12px;
+  padding: 12px 16px;
+  box-shadow: 0 6px 20px rgba(0,0,0,.35);
+}
+
+h1{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 8px 0 0 0;
+  font-size: 1.6rem;
+  font-weight: 800;
+  letter-spacing: .2px;
+}
+
+/* Optional wrappers */
+#options{ display: flex; gap: 12px; }
+#description{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.15rem;
+  flex: 1;
+  text-align: center;
+  margin: 1em;
+}
+
+/* Uploader card */
+.uploader { 
+  width: min(720px, 94%); 
+  margin: 12px auto; 
+  color: #fff;
+  background: rgba(30, 41, 59, 0.95);
+  border: 1px solid rgba(148,163,184,.25);
+  border-radius: 14px;
+  padding: 20px;
+  box-shadow: 0 14px 40px rgba(0,0,0,.35);
+  backdrop-filter: blur(10px);
+}
+
+/* Dropzone */
 #dropzone {
-  border: 2px dashed #8892a6; 
+  border: 2px dashed rgba(148,163,184,.45); 
   border-radius: 12px; 
-  padding: 28px; text-align: center;
-  background: #2b3541; 
+  padding: 28px; 
+  text-align: center;
+  background: rgba(51, 65, 85, 0.9); 
   outline: none; 
   cursor: pointer;
-}#dropzone.hover {
-    border-color: #cbd5e1;
-    background: #3a4757; 
-}#dropzone:focus { 
-    box-shadow: 0 0 0 3px #4f46e5; 
-}#browse-btn { 
-    margin-top: 12px; 
-    padding: 8px 12px; 
-    border: 0; 
-    border-radius: 8px; 
-    background: #4b5563; 
-    color: #fff; 
-}#file-info { margin: 
-    12px 0; 
-    font-size: 0.95rem;
-}#submit-btn { 
-    padding: 10px 14px; 
-    border: 0; 
-    border-radius: 8px; 
-    background: #0ea5e9; 
-    color: #fff; 
-}#submit-btn[disabled] { 
-    opacity: 0.6; 
-    cursor: not-allowed; 
-}h1{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}#top{
-    position: sticky;
-    top: 0;
-    background-color: rgb(43, 53, 65);
-}#options{
-    display: flex;
-}#description{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.25em;
-    flex: 1;
-    text-align: center;
-    margin: 1em;
-}#books{
-    background-color: rgb(58, 71, 87);
+  transition: all .25s ease;
+}
+#dropzone.hover {
+  border-color: rgba(203,213,225,.9);
+  background: rgba(71, 85, 105, 0.95);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px rgba(0,0,0,.25);
+}
+#dropzone:focus { 
+  box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.35); 
+}
+
+/* Buttons */
+#browse-btn, #submit-btn {
+  margin-top: 12px; 
+  padding: 10px 14px; 
+  border: 0; 
+  border-radius: 10px; 
+  color: #fff; 
+  cursor: pointer;
+  transition: all .25s ease;
+  box-shadow: 0 4px 12px rgba(0,0,0,.25);
+}
+
+/* Secondary (browse) */
+#browse-btn { 
+  background: rgba(71, 85, 105, 0.9);
+  border: 1px solid rgba(148,163,184,.25);
+}
+#browse-btn:hover {
+  background: rgba(100, 116, 139, 0.95);
+  transform: translateY(-2px);
+}
+
+/* Primary (submit) */
+#submit-btn { 
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+}
+#submit-btn:hover {
+  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+  transform: translateY(-2px);
+}
+#submit-btn[disabled] { 
+  opacity: 0.6; 
+  cursor: not-allowed; 
+  transform: none;
+  box-shadow: none;
+}
+
+/* File info text */
+#file-info { 
+  margin: 12px 0; 
+  font-size: 0.95rem;
+  color: rgba(226,232,240,.9);
+}
+
+/* Optional book/list section */
+#books{
+  background: rgba(51, 65, 85, 0.9);
+  border: 1px solid rgba(148,163,184,.25);
+  border-radius: 12px;
+  padding: 12px;
+  box-shadow: 0 8px 18px rgba(0,0,0,.25);
+}
+
+/* Nice scrollbars (WebKit) */
+.uploader::-webkit-scrollbar,
+#books::-webkit-scrollbar {
+  width: 8px;
+}
+.uploader::-webkit-scrollbar-track,
+#books::-webkit-scrollbar-track {
+  background: rgba(51, 65, 85, 0.3);
+  border-radius: 4px;
+}
+.uploader::-webkit-scrollbar-thumb,
+#books::-webkit-scrollbar-thumb {
+  background: rgba(100, 116, 139, 0.55);
+  border-radius: 4px;
+}
+.uploader::-webkit-scrollbar-thumb:hover,
+#books::-webkit-scrollbar-thumb:hover {
+  background: rgba(100, 116, 139, 0.75);
+}
+
+/* Responsive */
+@media (max-width: 560px) {
+  .uploader { width: 96%; padding: 16px; }
+  #description { font-size: 1rem; margin: 0.75em; }
+  h1 { font-size: 1.35rem; }
 }

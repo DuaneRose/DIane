@@ -90,7 +90,7 @@ def ask(prompt, files, folder_name):
     with open(json_path) as r:
         json_text = r.read()
 
-    system_prompt = get_instruction(mode)
+    system_prompt = get_instruction(mode, folder_name)
     print("using mode ", mode)
 
     print("asking question")
