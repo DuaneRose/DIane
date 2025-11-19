@@ -28,9 +28,9 @@ def delete_upload():
         print("deleting", file.name)
         client.files.delete(name=file.name)
 
-def upload(file_name, folder):
+def upload(file_name, folder, folder_name):
     print("uploading file:", file_name, " to folder:", folder)
-    path = Path("/Users","duanegennaro","dIAne","data_base", folder, file_name)
+    path = Path("/Users","duanegennaro","dIAne","data_base",folder_name, folder, file_name)
     print("resolved path:", path.resolve())
     file_path = path.resolve()
     print("uploading")
@@ -77,14 +77,14 @@ def upload(file_name, folder):
 
     return obj.name
 
-def ask(prompt, files):
+def ask(prompt, files, folder_name):
 
     folder = []
     for i in range(len(files)):
         print(f"used {files[i]['file_name']} with score {files[i]['score']}")
         folder.append(files[i]["genai_id"])
 
-    json_path = Path("/Users","duanegennaro","dIAne","data_base") / "db.json"
+    json_path = Path("/Users","duanegennaro","dIAne","data_base",folder_name) / "db.json"
     
     with open(json_path) as r:
         json_text = r.read()

@@ -38,9 +38,9 @@ def clear_collection():
         json.dump([], f)
     print("cleared the collection")
 
-def pool_vectors(promtp, num_vectors=20):
+def pool_vectors(promtp, folder_name, num_vectors=20):
     closest = []
-    with open(Path("/Users","duanegennaro","dIAne","data_base","vector_space.json"), "r") as f:
+    with open(Path("/Users","duanegennaro","dIAne","data_base",folder_name,"vector_space.json"), "r") as f:
         vector_space = json.load(f)
 
         for element in vector_space:
@@ -99,9 +99,9 @@ def pull_files(top_hits):
         
     return files
 
-def search_vector(promtp, num_vectors=20):
+def search_vector(promtp,folder_name, num_vectors=20):
     vector = embeddings(model="bge-m3", prompt=promtp)["embedding"]
-    top_hits = pool_vectors(vector, num_vectors)
+    top_hits = pool_vectors(vector,folder_name, num_vectors)
     print("here is a list of the top", num_vectors, "hits:")
     print("--------------------------------------------------")
     for hit in top_hits:

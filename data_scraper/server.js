@@ -274,13 +274,13 @@ app.get('/lti_config.xml', async (req, res) => {
   }
 });
 
-app.post('/api/query/:user_id', async (req, res) => {
+app.post('/api/query/:folder_name/:user_id', async (req, res) => {
   const { query } = req.body;
-  const { user_id } = req.params;
+  const { folder_name, user_id } = req.params;
   console.log(`💬 Processing query: "${query}"`);
 
   try {
-    const pyRes = await fetch(`http://localhost:4600/question/${query}`);
+    const pyRes = await fetch(`http://localhost:4600/question/${encodeURIComponent(query)}/${encodeURIComponent(folder_name)}`);
     const message = await pyRes.text();
     const clean = JSON.parse(message);
 
@@ -290,11 +290,11 @@ app.post('/api/query/:user_id', async (req, res) => {
       .replace(/\*(.*?)\*/g, '<em>$1</em>')
       .replace(/`([^`]+)`/g, '<code>$1</code>');
 
-    const logs = await fs.readFile(path.join(__dirname, `../data_base/conversation/${user_id}.json`), 'utf8');
+    const logs = await fs.readFile(path.join(__dirname, `../data_base/${folder_name}/conversations/${user_id}.json`), 'utf8');
     const chat_logs = JSON.parse(logs);
     
     chat_logs.push({ question: query, answer: formatted, timestamp: new Date().toISOString() });
-    await fs.writeFile(path.join(__dirname, `../data_base/conversation/${user_id}.json`), JSON.stringify(chat_logs, null, 2));
+    await fs.writeFile(path.join(__dirname, `../data_base/${folder_name}/conversations/${user_id}.json`), JSON.stringify(chat_logs, null, 2));
 
     console.log('✅ Query processed and saved');
     res.json({ message: message, status: 'success' });
@@ -534,10 +534,10 @@ app.post('/api/security/sign_in', async (req, res) => {
   }
 });
 
-app.get("/api/chat/get_logs/:user_id", async (req, res) =>{
-  const { user_id } = req.params;
+app.get("/api/chat/get_logs/:folder_name/:user_id", async (req, res) =>{
+  const { folder_name,user_id } = req.params;
   console.log(`Fetching chat logs for user ID: ${user_id}`);
-  const logs = await fs.readFile(path.join(__dirname, `../data_base/conversation/${user_id}.json`), 'utf8');
+  const logs = await fs.readFile(path.join(__dirname, `../data_base/${folder_name}/conversations/${user_id}.json`), 'utf8');
   const chat_logs = JSON.parse(logs);
 
   return res.json({

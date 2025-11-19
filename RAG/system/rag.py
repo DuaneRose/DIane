@@ -30,9 +30,9 @@ def get_embedding(file_name, folder, ID, verifier, folder_name):
     print("getting embeddings for " + file_name)
 
     if folder != "text_books":
-        genai_id = upload(file_name, folder)
+        genai_id = upload(file_name, folder, folder_name)
 
-        text = routing(file_name, folder, genai_id)
+        text = routing(file_name, folder, genai_id, folder_name)
         if text != "File type not implemented":
             chunks = chunker(text)
             embed(chunks, file_name, folder, ID, verifier, genai_id, folder_name)
@@ -52,8 +52,8 @@ def clear():
     clear_collection()
     write_custom_instruction(" ")
     
-def pull(prompt, num_files=3):
-    top_files = search_vector(prompt)
+def pull(prompt, folder_name, num_files=3):
+    top_files = search_vector(prompt, folder_name)
 
     sorted_files = sorted(top_files, key=lambda x: x['score'], reverse=True)
     sorted_files = sorted_files[:num_files]
@@ -73,8 +73,8 @@ def get_signature(start_page, end_page, name, num):
 
     return sig_path
 
-def query(prompt):
-    files = pull(prompt)
+def query(prompt,folder_name):
+    files = pull(prompt,folder_name)
 
     num = 0
     print(len(files), " files retrieved")
@@ -83,7 +83,7 @@ def query(prompt):
             print("creating signature")
             range_start = file['page_num'] - 2
             range_end = file['page_num'] + 2
-            max = len(PdfReader("/Users/duanegennaro/dIAne/data_base/text_books/" + file['file_name']).pages)
+            max = len(PdfReader("/Users/duanegennaro/dIAne/data_base/"+ folder_name +"/text_books/" + file['file_name']).pages)
 
             if range_start < 0 and range_end > max:
                 range_start = 0
@@ -102,4 +102,4 @@ def query(prompt):
             print("signature created")
             
 
-    return ask(prompt, files)
+    return ask(prompt, files, folder_name)
