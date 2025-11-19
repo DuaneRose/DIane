@@ -45,7 +45,7 @@ def get_embedding(file_name, folder, ID, verifier, folder_name):
             print("processing page ", i)
             page = book.pages[i]
             text = page.extract_text()
-            embed([text], file_name, folder, ID, verifier, genai_id="", page_num=i)
+            embed([text], file_name, folder, ID, verifier, genai_id="",folder_name=folder_name, page_num=i)
 
 def clear():
     delete_upload()

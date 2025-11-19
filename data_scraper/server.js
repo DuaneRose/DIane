@@ -11,13 +11,14 @@ import { fileURLToPath } from 'url';
 import setData from './script/setData.js';
 import fs from 'fs/promises';
 import multer from 'multer';
+import axios from 'axios';
 import { re } from "mathjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 //const db = path.join(__dirname, '../data_base/db.json');
-const UPLOAD_DIR_BOOKS = path.join(__dirname, '../data_base/text_books');
-const UPLOAD_DIR_FILES = path.join(__dirname, '../data_base/canvas_data');
+// const UPLOAD_DIR_BOOKS = path.join(__dirname, '../data_base/text_books');
+// const UPLOAD_DIR_FILES = path.join(__dirname, '../data_base/canvas_data');
 
 const app = express();
 const PORT = process.env.PORT || 4500;
@@ -77,7 +78,7 @@ app.use('/static', express.static(
     }
   }
 ));
-app.use('/files', express.static(UPLOAD_DIR_BOOKS));
+// app.use('/files', express.static(UPLOAD_DIR_BOOKS));
 
 // Cookie partitioning for third-party iframe context
 app.use((req, res, next) => {
@@ -419,13 +420,15 @@ app.post('/api/set_honesty_policy', async (req, res) =>{
   }
 });
 
-app.post('/api/upload_book', upload.single('file'), async (req, res) => {
+app.post('/api/upload_book/:folder_name', upload.single('file'), async (req, res) => {
+  const folder_name = req.params.folder_name
   try {
     if (!req.file) return res.status(400).json({ error: 'No file uploaded' });
     if (req.file.mimetype !== 'application/pdf') {
       return res.status(400).json({ error: 'Only PDF files are allowed' });
     }
 
+    const UPLOAD_DIR_BOOKS = path.join(__dirname, `../data_base/${folder_name}/text_books`);
     console.log(`Uploading file: ${req.file.originalname}`);
     await fs.mkdir(UPLOAD_DIR_BOOKS, { recursive: true });
 
@@ -436,7 +439,7 @@ app.post('/api/upload_book', upload.single('file'), async (req, res) => {
     );
 
     try {
-      await fetch(`http://localhost:4600/embed/${filename}/text_books/${1111111}/${'none'}`);
+      await fetch(`http://localhost:4600/embed/${filename}/text_books/${1111111}/${'none'}/${folder_name}`);
       console.log(`✅ File uploaded and embedded: ${filename}`);
     } catch (error) {
       console.error('❌ Error embedding file:', error);
@@ -454,13 +457,15 @@ app.post('/api/upload_book', upload.single('file'), async (req, res) => {
   }
 });
 
-app.post('/api/upload_file', upload.single('file'), async (req, res) => {
+app.post('/api/upload_file/:folder_name', upload.single
+  ('file'), async (req, res) => {
+  const folder_name = req.params.folder_name;
   try {
     if (!req.file) return res.status(400).json({ error: 'No file uploaded' });
     if (req.file.mimetype !== 'application/pdf') {
       return res.status(400).json({ error: 'Only PDF files are allowed' });
     }
-
+    const UPLOAD_DIR_FILES = path.join(__dirname, `../data_base/${folder_name}/canvas_data`);
     console.log(`📤 Uploading file: ${req.file.originalname}`);
     await fs.mkdir(UPLOAD_DIR_FILES, { recursive: true });
 
@@ -471,10 +476,7 @@ app.post('/api/upload_file', upload.single('file'), async (req, res) => {
     );
 
     try {
-      await axios.post('http://localhost:4600/api/embed', {
-        name: filename,
-        raw_link: "N/A",
-    })
+      await fetch(`http://localhost:4600/embed/${filename}/canvas_data/${1111111}/none/${folder_name}`);
       console.log(`✅ File uploaded and embedded: ${filename}`);
     } catch (error) {
       console.error('❌ Error embedding file:', error);

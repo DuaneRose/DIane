@@ -108,7 +108,8 @@ form.addEventListener('submit', async (e) => {
     const fd = new FormData(form);
     fd.append('file', selectedFile);
 
-    const res = await fetch('/api/upload_book', {
+    const folder_name = sessionStorage.getItem("folder_name");
+    const res = await fetch(`/api/upload_book/${folder_name}`, {
       method: 'POST',
       body: fd
     });

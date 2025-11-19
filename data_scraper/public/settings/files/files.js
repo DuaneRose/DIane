@@ -105,9 +105,10 @@ form.addEventListener('submit', async (e) => {
 
   try {
     const fd = new FormData(form);
+    const folder_name = sessionStorage.getItem("folder_name");
     fd.append('file', selectedFile);
 
-    const res = await fetch('/api/upload', {
+    const res = await fetch(`/api/upload_file/${encodeURIComponent(folder_name)}`, {
       method: 'POST',
       body: fd
     });
