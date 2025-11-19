@@ -392,22 +392,25 @@ app.post('/api/set_syllabus', async (req, res) =>{
   }
 });
 
-app.get('/api/get_honesty_policy', async (req, res) =>{
+app.get('/api/get_honesty_policy/:folder_name', async (req, res) =>{
+  const folder_name = req.params.folder_name;
+  const db = path.join(__dirname, `../data_base/${folder_name}/db.json`);
+  console.log(`Fetching honesty policy for folder: ${db}`);
   const data = await fs.readFile(db, 'utf8');
   if(data === '{"data": "empty"}'){
-    let honesty_policy = await setData.get_default_honesty_policy();
+    let honesty_policy = await setData.get_default_honesty_policy(folder_name);
     res.json({message: honesty_policy});
   } else {
-    let honesty_policy = await setData.Honesty_policy();
+    let honesty_policy = await setData.Honesty_policy(folder_name);
     res.json({message: honesty_policy});
   }
 });
 
 app.post('/api/set_honesty_policy', async (req, res) =>{
-  const { honesty_policy } = req.body;
+  const { honesty_policy, folder_name } = req.body;
   console.log('Updating honesty policy');
   try {
-    await setData.change_honesty_policy(honesty_policy);
+    await setData.change_honesty_policy(honesty_policy, folder_name);
     console.log('✅ Honesty policy updated');
     res.json({ message: 'Honesty policy updated successfully' });
   } catch (err) {

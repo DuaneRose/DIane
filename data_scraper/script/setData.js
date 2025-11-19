@@ -14,7 +14,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname  = path.dirname(__filename);
 
 
-const policy = path.join(__dirname, '../../data_base/academic_honesty.txt');
+//const policy = path.join(__dirname, '../../data_base/academic_honesty.txt');
 const token = '10082~rvBhVXGEuCrMnmL9YDBeCVLLPwUKvLrYMewtLtwFyWzN4nufWXFVQFmJWYQ9JRvP';
 const canvas = 'https://sdsu.instructure.com/api/v1/courses/'
 let fileURL = [];
@@ -266,8 +266,8 @@ async function pull_files(file_name){
     }
 }
 
-async function change_honesty_policy(policy, file_name){
-    const db = path.join(__dirname, `../../data_base/${file_name}/db.json`);
+async function change_honesty_policy(policy, folder_name){
+    const db = path.join(__dirname, `../../data_base/${folder_name}/db.json`);
     console.log("changing honesty policy:\n");
     const data = await fs.readFile(db, 'utf8');
     const parsedData = JSON.parse(data);
@@ -275,7 +275,8 @@ async function change_honesty_policy(policy, file_name){
     await fs.writeFile(db, JSON.stringify(parsedData, null, 2));
 }
 
-async function get_default_honesty_policy(){
+async function get_default_honesty_policy(folder_name){
+    const policy = path.join(__dirname, `../../data_base/${folder_name}/academic_honesty.txt`);
     const data = await fs.readFile(policy, 'utf8');
     return data;
 }

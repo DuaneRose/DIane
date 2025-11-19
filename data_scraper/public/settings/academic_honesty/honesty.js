@@ -11,12 +11,13 @@ async function start_page(){
             console.log('policy is empty.');
         }else{
             try{
+                const folder_name = sessionStorage.getItem('folder_name');
                 const resp = await fetch('/api/set_honesty_policy', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify({ honesty_policy: new_policy })
+                    body: JSON.stringify({ honesty_policy: new_policy, folder_name: folder_name })
                 });
                 if (resp.ok) {
                     console.log('Academic Honesty Policy updated successfully.');
@@ -34,7 +35,9 @@ async function start_page(){
 
 async function get_p(){
     try{
-        const resp = await fetch('/api/get_honesty_policy', {
+        const folder_name = sessionStorage.getItem('folder_name');
+        console.log('Fetching honesty policy for folder:', folder_name);
+        const resp = await fetch(`/api/get_honesty_policy/${encodeURIComponent(folder_name)}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
