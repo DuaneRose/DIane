@@ -31,7 +31,7 @@ async function sign_in(){
 
     if (response.ok) {
         sessionStorage.setItem('user_id', result.user_id);
-        sessionStorage.setItem('folder_name', result.folder_name);
+        sessionStorage.setItem('database_name', result.database_name);
         sessionStorage.setItem('user_type', result.user_type);
         window.location.href = "/api/chat";
     } else {

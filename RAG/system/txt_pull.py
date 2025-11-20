@@ -69,8 +69,8 @@ def pptx_to_text(file_path):
                 full_text.append(shape.text)
     return '\n'.join(full_text)
 
-def routing(file_name, folder, genai_id, folder_name):
-    path = "../../data_base/"+ folder_name + "/" + folder + "/" + file_name
+def routing(file_name, folder, genai_id, database_name):
+    path = "../../data_base/"+ database_name + "/" + folder + "/" + file_name
     file_ext = file_name[file_name.rindex('.') + 1:].lower()
     
     #text files kinda

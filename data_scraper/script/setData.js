@@ -254,7 +254,7 @@ async function pull_files(file_name){
                 await axios.post('http://localhost:4500/api/embed', {
                     name: apiUrl[1],
                     raw_link: apiUrl[0],
-                    folder_name: file_name
+                    database_name: file_name
                 })
                 console.log(`✅  Embedded ${apiUrl[1]}`);
     
@@ -266,8 +266,8 @@ async function pull_files(file_name){
     }
 }
 
-async function change_honesty_policy(policy, folder_name){
-    const db = path.join(__dirname, `../../data_base/${folder_name}/db.json`);
+async function change_honesty_policy(policy, database_name){
+    const db = path.join(__dirname, `../../data_base/${database_name}/db.json`);
     console.log("changing honesty policy:\n");
     const data = await fs.readFile(db, 'utf8');
     const parsedData = JSON.parse(data);
@@ -275,8 +275,8 @@ async function change_honesty_policy(policy, folder_name){
     await fs.writeFile(db, JSON.stringify(parsedData, null, 2));
 }
 
-async function get_default_honesty_policy(folder_name){
-    const policy = path.join(__dirname, `../../data_base/${folder_name}/academic_honesty.txt`);
+async function get_default_honesty_policy(database_name){
+    const policy = path.join(__dirname, `../../data_base/${database_name}/academic_honesty.txt`);
     const data = await fs.readFile(policy, 'utf8');
     return data;
 }
@@ -289,16 +289,16 @@ async function Honesty_policy(file_name){
     return data_policy;
 }
 
-async function change_syllabus(syllabus, folder_name){
-    const db = path.join(__dirname, `../../data_base/${folder_name}/db.json`);
+async function change_syllabus(syllabus, database_name){
+    const db = path.join(__dirname, `../../data_base/${database_name}/db.json`);
     const data = await fs.readFile(db, 'utf8');
     const parsedData = JSON.parse(data);
     parsedData.syllabus = syllabus;
     await fs.writeFile(db, JSON.stringify(parsedData, null, 2));
 }
 
-async function syllabus(folder_name){
-    const db = path.join(__dirname, `../../data_base/${folder_name}/db.json`);
+async function syllabus(database_name){
+    const db = path.join(__dirname, `../../data_base/${database_name}/db.json`);
     const data = await fs.readFile(db, 'utf8');
     const parsed_data = JSON.parse(data);
     const syllabus = parsed_data.syllabus;
@@ -356,7 +356,7 @@ function ID_generator (size=8){
 function find_id(username, array){
     for(const users of array){
         if (users.username === username){
-            return [users.ID, users.folder_name, users.user_type];
+            return [users.ID, users.database_name, users.user_type];
         }
     }
     return "N/A"
@@ -383,26 +383,26 @@ async function fill_class(class_name, Class_code){
 
 async function create_class(class_name, Class_code, user_ID){
     const name = `${class_name.replace(/\s+/g, "_").toLowerCase()}-${Class_code}`
-    const folder_name = path.join(
+    const database_name = path.join(
         __dirname,
         "../../data_base",
         name
       );
-    const canvas_data_folder = path.join(folder_name, "canvas_data");
-    const conversation_folder = path.join(folder_name, "conversations");
-    const signatures_folder = path.join(folder_name, "signatures");
-    const text_books_folder = path.join(folder_name, "text_books");
-    const db = path.join(folder_name, "db.json");
-    const vector_space = path.join(folder_name, "vector_space.json");
-    const users = path.join(folder_name, "users.json");
+    const canvas_data_folder = path.join(database_name, "canvas_data");
+    const conversation_folder = path.join(database_name, "conversations");
+    const signatures_folder = path.join(database_name, "signatures");
+    const text_books_folder = path.join(database_name, "text_books");
+    const db = path.join(database_name, "db.json");
+    const vector_space = path.join(database_name, "vector_space.json");
+    const users = path.join(database_name, "users.json");
     const initialize = [];
     const jsonInit = JSON.stringify(initialize, null, 2);
     const empty_obj = {};
     const objInit = JSON.stringify(empty_obj, null, 2);
-    const custom_system = path.join(folder_name, "custom_system.txt");
+    const custom_system = path.join(database_name, "custom_system.txt");
 
     try {
-        await fs.mkdir(folder_name, { recursive: true });
+        await fs.mkdir(database_name, { recursive: true });
         console.log('Folder created successfully!');
         await fs.mkdir(canvas_data_folder, { recursive: true });
         await fs.mkdir(conversation_folder, { recursive: true });

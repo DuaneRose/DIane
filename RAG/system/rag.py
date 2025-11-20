@@ -26,34 +26,34 @@ def chunker(text):
     return chunks
 
 # Function to get embeddings from the PDF file and save them to a JSON file
-def get_embedding(file_name, folder, ID, verifier, folder_name):
+def get_embedding(file_name, folder, ID, verifier, database_name):
     print("getting embeddings for " + file_name)
 
     if folder != "text_books":
-        genai_id = upload(file_name, folder, folder_name)
+        genai_id = upload(file_name, folder, database_name)
 
-        text = routing(file_name, folder, genai_id, folder_name)
+        text = routing(file_name, folder, genai_id, database_name)
         if text != "File type not implemented":
             chunks = chunker(text)
-            embed(chunks, file_name, folder, ID, verifier, genai_id, folder_name)
+            embed(chunks, file_name, folder, ID, verifier, genai_id, database_name)
         else:
             print("File type not implemented: " + file_name)
     else:
-        book = PdfReader("/Users/duanegennaro/dIAne/data_base/" + folder_name + "/text_books/" + file_name)
+        book = PdfReader("/Users/duanegennaro/dIAne/data_base/" + database_name + "/text_books/" + file_name)
         num_pages = len(book.pages)
         for i in range(num_pages):
             print("processing page ", i)
             page = book.pages[i]
             text = page.extract_text()
-            embed([text], file_name, folder, ID, verifier, genai_id="",folder_name=folder_name, page_num=i)
+            embed([text], file_name, folder, ID, verifier, genai_id="",database_name=database_name, page_num=i)
 
 def clear():
     delete_upload()
     clear_collection()
     write_custom_instruction(" ")
     
-def pull(prompt, folder_name, num_files=3):
-    top_files = search_vector(prompt, folder_name)
+def pull(prompt, database_name, num_files=3):
+    top_files = search_vector(prompt, database_name)
 
     sorted_files = sorted(top_files, key=lambda x: x['score'], reverse=True)
     sorted_files = sorted_files[:num_files]
@@ -73,8 +73,8 @@ def get_signature(start_page, end_page, name, num):
 
     return sig_path
 
-def query(prompt,folder_name):
-    files = pull(prompt,folder_name)
+def query(prompt,database_name):
+    files = pull(prompt,database_name)
 
     num = 0
     print(len(files), " files retrieved")
@@ -83,7 +83,7 @@ def query(prompt,folder_name):
             print("creating signature")
             range_start = file['page_num'] - 2
             range_end = file['page_num'] + 2
-            max = len(PdfReader("/Users/duanegennaro/dIAne/data_base/"+ folder_name +"/text_books/" + file['file_name']).pages)
+            max = len(PdfReader("/Users/duanegennaro/dIAne/data_base/"+ database_name +"/text_books/" + file['file_name']).pages)
 
             if range_start < 0 and range_end > max:
                 range_start = 0
@@ -102,4 +102,4 @@ def query(prompt,folder_name):
             print("signature created")
             
 
-    return ask(prompt, files, folder_name)
+    return ask(prompt, files, database_name)

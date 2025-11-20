@@ -11,14 +11,14 @@ async function start_page(){
             console.log('syllabus is empty.');
         }else{
             try{
-                const folder_name = sessionStorage.getItem('folder_name');
-                console.log('Updating syllabus for folder:', folder_name);
+                const database_name = sessionStorage.getItem('database_name');
+                console.log('Updating syllabus for folder:', database_name);
                 const resp = await fetch('/api/set_syllabus', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify({ syllabus: new_syllabus, folder_name: folder_name })
+                    body: JSON.stringify({ syllabus: new_syllabus, database_name: database_name })
                 });
                 if (resp.ok) {
                     console.log('syllabus updated successfully.');
@@ -36,9 +36,9 @@ async function start_page(){
 
 async function get_s(){
     try{
-        const folder_name = sessionStorage.getItem('folder_name');
-        console.log('Fetching syllabus for folder:', folder_name);
-        const resp = await fetch(`/api/get_syllabus/${encodeURIComponent(folder_name)}`, {
+        const database_name = sessionStorage.getItem('database_name');
+        console.log('Fetching syllabus for folder:', database_name);
+        const resp = await fetch(`/api/get_syllabus/${encodeURIComponent(database_name)}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'

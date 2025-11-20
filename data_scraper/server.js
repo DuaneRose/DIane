@@ -202,13 +202,13 @@ app.post('/api/embed', async (req, res) =>{
   const raw_link = req.body.raw_link;
   const ID = raw_link.substr(raw_link.indexOf("files/") + 6, (raw_link.indexOf("/download") - (raw_link.indexOf("files/") + 6)));
   const verifier = raw_link.substr(raw_link.indexOf("verifier=") + 9);
-  const folder_name = req.body.folder_name;
+  const database_name = req.body.database_name;
 
   console.log(`Embedding Canvas file: ${file}`);
   res.json({ message: `File ${file} is being embedded`, status: 'success' });
   
   try {
-    await fetch(`http://localhost:4600/embed/${file}/canvas_data/${ID}/${verifier}/${folder_name}`);
+    await fetch(`http://localhost:4600/embed/${file}/canvas_data/${ID}/${verifier}/${database_name}`);
     console.log(`✅ File embedded: ${file}`);
   } catch (error) {
     console.error('❌ Error embedding file:', error);
@@ -276,13 +276,13 @@ app.get('/lti_config.xml', async (req, res) => {
   }
 });
 
-app.post('/api/query/:folder_name/:user_id', async (req, res) => {
+app.post('/api/query/:database_name/:user_id', async (req, res) => {
   const { query } = req.body;
-  const { folder_name, user_id } = req.params;
+  const { database_name, user_id } = req.params;
   console.log(`💬 Processing query: "${query}"`);
 
   try {
-    const pyRes = await fetch(`http://localhost:4600/question/${encodeURIComponent(query)}/${encodeURIComponent(folder_name)}`);
+    const pyRes = await fetch(`http://localhost:4600/question/${encodeURIComponent(query)}/${encodeURIComponent(database_name)}`);
     const message = await pyRes.text();
     const clean = JSON.parse(message);
 
@@ -292,11 +292,11 @@ app.post('/api/query/:folder_name/:user_id', async (req, res) => {
       .replace(/\*(.*?)\*/g, '<em>$1</em>')
       .replace(/`([^`]+)`/g, '<code>$1</code>');
 
-    const logs = await fs.readFile(path.join(__dirname, `../data_base/${folder_name}/conversations/${user_id}.json`), 'utf8');
+    const logs = await fs.readFile(path.join(__dirname, `../data_base/${database_name}/conversations/${user_id}.json`), 'utf8');
     const chat_logs = JSON.parse(logs);
     
     chat_logs.push({ question: query, answer: formatted, timestamp: new Date().toISOString() });
-    await fs.writeFile(path.join(__dirname, `../data_base/${folder_name}/conversations/${user_id}.json`), JSON.stringify(chat_logs, null, 2));
+    await fs.writeFile(path.join(__dirname, `../data_base/${database_name}/conversations/${user_id}.json`), JSON.stringify(chat_logs, null, 2));
 
     console.log('✅ Query processed and saved');
     res.json({ message: message, status: 'success' });
@@ -306,11 +306,11 @@ app.post('/api/query/:folder_name/:user_id', async (req, res) => {
   }
 });
 
-app.get('/api/system_instructions/:name/:folder_name', async (req, res) => {
+app.get('/api/system_instructions/:name/:database_name', async (req, res) => {
   const name = (req.params?.name.replace('name=', '') ?? 'default');
-  const folder_name = (req.params?.folder_name ?? 'default');
+  const database_name = (req.params?.database_name ?? 'default');
   try {
-    const r = await fetch(`http://localhost:4600/get_instruction/${encodeURIComponent(name)}/${encodeURIComponent(folder_name)}`);
+    const r = await fetch(`http://localhost:4600/get_instruction/${encodeURIComponent(name)}/${encodeURIComponent(database_name)}`);
     if (!r.ok) return res.status(r.status).send(await r.text());
     const data = await r.json();
     return res.json(data);
@@ -321,13 +321,13 @@ app.get('/api/system_instructions/:name/:folder_name', async (req, res) => {
 });
 
 app.post('/api/set_custom_instruction', async (req, res) => {
-  const { name, instructions, folder_name } = req.body || {};
+  const { name, instructions, database_name } = req.body || {};
   console.log(`✏️  Setting custom instruction: ${name}`);
   try {
     const r = await fetch('http://localhost:4600/set_custom_instruction', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name, instructions, folder_name })
+      body: JSON.stringify({ name, instructions, database_name })
     });
     if (!r.ok) return res.status(r.status).send(await r.text());
     console.log('✅ Custom instruction saved');
@@ -366,25 +366,25 @@ app.post('/api/set_mode', async (req, res) => {
   }
 });
 
-app.get('/api/get_syllabus/:folder_name', async (req, res) =>{
-  const folder_name = req.params.folder_name;
-  const db = path.join(__dirname, `../data_base/${folder_name}/db.json`);
+app.get('/api/get_syllabus/:database_name', async (req, res) =>{
+  const database_name = req.params.database_name;
+  const db = path.join(__dirname, `../data_base/${database_name}/db.json`);
   console.log(`Fetching syllabus for folder: ${db}`);
   const data = await fs.readFile(db, 'utf8');
   if(data === '{"data": "empty"}'){
     res.json({message: "no class enrolled in"});
   } else {
-    const syllabus = await setData.syllabus(folder_name);
+    const syllabus = await setData.syllabus(database_name);
     res.json({message: syllabus});
   }
 });
 
 app.post('/api/set_syllabus', async (req, res) =>{
-  const { syllabus, folder_name } = req.body || {};
-  console.log(`✏️  Setting syllabus for folder: ${req.body.folder_name}`);
+  const { syllabus, database_name } = req.body || {};
+  console.log(`✏️  Setting syllabus for folder: ${req.body.database_name}`);
   console.log('Updating syllabus');
   try {
-    await setData.change_syllabus(syllabus, folder_name);
+    await setData.change_syllabus(syllabus, database_name);
     console.log('✅ Syllabus updated');
     res.json({ message: 'Syllabus updated successfully' });
   } catch (err) {
@@ -393,25 +393,25 @@ app.post('/api/set_syllabus', async (req, res) =>{
   }
 });
 
-app.get('/api/get_honesty_policy/:folder_name', async (req, res) =>{
-  const folder_name = req.params.folder_name;
-  const db = path.join(__dirname, `../data_base/${folder_name}/db.json`);
+app.get('/api/get_honesty_policy/:database_name', async (req, res) =>{
+  const database_name = req.params.database_name;
+  const db = path.join(__dirname, `../data_base/${database_name}/db.json`);
   console.log(`Fetching honesty policy for folder: ${db}`);
   const data = await fs.readFile(db, 'utf8');
   if(data === '{"data": "empty"}'){
-    let honesty_policy = await setData.get_default_honesty_policy(folder_name);
+    let honesty_policy = await setData.get_default_honesty_policy(database_name);
     res.json({message: honesty_policy});
   } else {
-    let honesty_policy = await setData.Honesty_policy(folder_name);
+    let honesty_policy = await setData.Honesty_policy(database_name);
     res.json({message: honesty_policy});
   }
 });
 
 app.post('/api/set_honesty_policy', async (req, res) =>{
-  const { honesty_policy, folder_name } = req.body;
+  const { honesty_policy, database_name } = req.body;
   console.log('Updating honesty policy');
   try {
-    await setData.change_honesty_policy(honesty_policy, folder_name);
+    await setData.change_honesty_policy(honesty_policy, database_name);
     console.log('✅ Honesty policy updated');
     res.json({ message: 'Honesty policy updated successfully' });
   } catch (err) {
@@ -420,15 +420,15 @@ app.post('/api/set_honesty_policy', async (req, res) =>{
   }
 });
 
-app.post('/api/upload_book/:folder_name', upload.single('file'), async (req, res) => {
-  const folder_name = req.params.folder_name
+app.post('/api/upload_book/:database_name', upload.single('file'), async (req, res) => {
+  const database_name = req.params.database_name
   try {
     if (!req.file) return res.status(400).json({ error: 'No file uploaded' });
     if (req.file.mimetype !== 'application/pdf') {
       return res.status(400).json({ error: 'Only PDF files are allowed' });
     }
 
-    const UPLOAD_DIR_BOOKS = path.join(__dirname, `../data_base/${folder_name}/text_books`);
+    const UPLOAD_DIR_BOOKS = path.join(__dirname, `../data_base/${database_name}/text_books`);
     console.log(`Uploading file: ${req.file.originalname}`);
     await fs.mkdir(UPLOAD_DIR_BOOKS, { recursive: true });
 
@@ -439,7 +439,7 @@ app.post('/api/upload_book/:folder_name', upload.single('file'), async (req, res
     );
 
     try {
-      await fetch(`http://localhost:4600/embed/${filename}/text_books/${1111111}/${'none'}/${folder_name}`);
+      await fetch(`http://localhost:4600/embed/${filename}/text_books/${1111111}/${'none'}/${database_name}`);
       console.log(`✅ File uploaded and embedded: ${filename}`);
     } catch (error) {
       console.error('❌ Error embedding file:', error);
@@ -457,15 +457,15 @@ app.post('/api/upload_book/:folder_name', upload.single('file'), async (req, res
   }
 });
 
-app.post('/api/upload_file/:folder_name', upload.single
+app.post('/api/upload_file/:database_name', upload.single
   ('file'), async (req, res) => {
-  const folder_name = req.params.folder_name;
+  const database_name = req.params.database_name;
   try {
     if (!req.file) return res.status(400).json({ error: 'No file uploaded' });
     if (req.file.mimetype !== 'application/pdf') {
       return res.status(400).json({ error: 'Only PDF files are allowed' });
     }
-    const UPLOAD_DIR_FILES = path.join(__dirname, `../data_base/${folder_name}/canvas_data`);
+    const UPLOAD_DIR_FILES = path.join(__dirname, `../data_base/${database_name}/canvas_data`);
     console.log(`📤 Uploading file: ${req.file.originalname}`);
     await fs.mkdir(UPLOAD_DIR_FILES, { recursive: true });
 
@@ -476,7 +476,7 @@ app.post('/api/upload_file/:folder_name', upload.single
     );
 
     try {
-      await fetch(`http://localhost:4600/embed/${filename}/canvas_data/${1111111}/none/${folder_name}`);
+      await fetch(`http://localhost:4600/embed/${filename}/canvas_data/${1111111}/none/${database_name}`);
       console.log(`✅ File uploaded and embedded: ${filename}`);
     } catch (error) {
       console.error('❌ Error embedding file:', error);
@@ -495,7 +495,7 @@ app.post('/api/upload_file/:folder_name', upload.single
 });
 
 app.post('/api/security/sign_up', async (req, res) => {
-  const { username, password, user_type, folder_name } = req.body;
+  const { username, password, user_type, database_name } = req.body;
 
   try {
     const usersData = await fs.readFile(path.join(__dirname, '../data_base/users.json'), 'utf8');
@@ -508,8 +508,8 @@ app.post('/api/security/sign_up', async (req, res) => {
 
     console.log(`Registering new user: ${username}`);
     const ID = setData.ID_generator(8);
-    const conversation = path.join(__dirname, `../data_base/${folder_name}/conversations/${ID}.json`);
-    users.push({ username, password, 'ID': ID, user_type, folder_name});
+    const conversation = path.join(__dirname, `../data_base/${database_name}/conversations/${ID}.json`);
+    users.push({ username, password, 'ID': ID, user_type, database_name});
 
     await fs.writeFile(conversation, JSON.stringify([], null, 2));
     await fs.writeFile(path.join(__dirname, '../data_base/users.json'), JSON.stringify(users, null, 2));
@@ -534,7 +534,7 @@ app.post('/api/security/sign_in', async (req, res) => {
     if (user) {
       const data = setData.find_id(username, users);
       console.log(`✅ User signed in: ${username}`);
-      return res.status(200).json({ message: 'Sign in successful.', user_id: data[0], folder_name: data[1], user_type: data[2] });
+      return res.status(200).json({ message: 'Sign in successful.', user_id: data[0], database_name: data[1], user_type: data[2] });
     } else {
       console.log(`⚠️  Sign-in failed for username: ${username}`);
       return res.status(401).json({ message: 'Invalid username or password.' });
@@ -545,10 +545,10 @@ app.post('/api/security/sign_in', async (req, res) => {
   }
 });
 
-app.get("/api/chat/get_logs/:folder_name/:user_id", async (req, res) =>{
-  const { folder_name,user_id } = req.params;
+app.get("/api/chat/get_logs/:database_name/:user_id", async (req, res) =>{
+  const { database_name,user_id } = req.params;
   console.log(`Fetching chat logs for user ID: ${user_id}`);
-  const logs = await fs.readFile(path.join(__dirname, `../data_base/${folder_name}/conversations/${user_id}.json`), 'utf8');
+  const logs = await fs.readFile(path.join(__dirname, `../data_base/${database_name}/conversations/${user_id}.json`), 'utf8');
   const chat_logs = JSON.parse(logs);
 
   return res.json({
@@ -557,9 +557,9 @@ app.get("/api/chat/get_logs/:folder_name/:user_id", async (req, res) =>{
   });
 });
 
-app.get("/api/book_list/:folder_name", async (req, res) =>{
-  const folder_name = req.params.folder_name;
-  const folder = path.join(__dirname, `../data_base/${folder_name}/text_books`);
+app.get("/api/book_list/:database_name", async (req, res) =>{
+  const database_name = req.params.database_name;
+  const folder = path.join(__dirname, `../data_base/${database_name}/text_books`);
   console.log(folder)
   const list = [];
 
@@ -588,9 +588,9 @@ app.get("/api/book_list/:folder_name", async (req, res) =>{
   }
 })
 
-app.get("/api/file_list/:folder_name", async (req, res) =>{
-  const folder_name = req.params.folder_name;
-  const folder = path.join(__dirname, `../data_base/${folder_name}/canvas_data`);
+app.get("/api/file_list/:database_name", async (req, res) =>{
+  const database_name = req.params.database_name;
+  const folder = path.join(__dirname, `../data_base/${database_name}/canvas_data`);
 const list = [];
 
 console.log('Fetching files list from:', folder);
@@ -623,7 +623,7 @@ app.post('/api/create_class', async (req, res) => {
   try {
     const name = await setData.initialize_class(canvas_code);
     console.log('✅ Class created successfully');
-    res.json({ folder_name: name });
+    res.json({ database_name: name });
   } catch (err) {
     console.error('❌ Error creating class:', err);
     res.status(500).json({ error: 'Failed to create class' });

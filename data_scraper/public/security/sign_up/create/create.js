@@ -51,15 +51,15 @@ async function sign_up(){
         body: JSON.stringify({ canvas_code: code })
     })
 
-    const folder_name = await res.json()
-    console.log(folder_name)
+    const database_name = await res.json()
+    console.log(database_name)
 
     const response = await fetch("/api/security/sign_up", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
         },
-        body: JSON.stringify({ username: name, password: pass, user_type: "adimin", folder_name: folder_name.folder_name})
+        body: JSON.stringify({ username: name, password: pass, user_type: "adimin", database_name: database_name.database_name})
     });
 
     const result = await response.json();

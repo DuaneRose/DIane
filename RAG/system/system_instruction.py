@@ -1,13 +1,13 @@
 from pathlib import Path
 
-def get_instruction(name, folder_name):
+def get_instruction(name, database_name):
     print(name)
     if name == "default":
         print("Using default system instruction.")
         return get_default_instruction()
     elif name == "custom":
         print("Using custom system instruction.")
-        return get_custom_instruction(folder_name)
+        return get_custom_instruction(database_name)
     elif name == "guided":
         print("Using guided system instruction.")
         return get_guided_instruction()
@@ -21,8 +21,8 @@ def get_guided_instruction():
     with open(Path("/Users","duanegennaro","dIAne","RAG","system", "system_instruction", "guided.txt"), "r") as file:
         return file.read()
     
-def get_custom_instruction(folder_name):
-    with open(Path("/Users","duanegennaro","dIAne","data_base",folder_name, "custom_system.txt"), "r") as file:
+def get_custom_instruction(database_name):
+    with open(Path("/Users","duanegennaro","dIAne","data_base",database_name, "custom_system.txt"), "r") as file:
         return file.read()
     
 def get_direct_instruction():
@@ -42,7 +42,7 @@ def get_all_instructions():
         "direct": get_direct_instruction()
     }
 
-def write_custom_instruction(content, folder_name):
-    with open(Path("/Users","duanegennaro","dIAne","data_base",folder_name, "custom_system.txt"), "w") as file:
+def write_custom_instruction(content, database_name):
+    with open(Path("/Users","duanegennaro","dIAne","data_base",database_name, "custom_system.txt"), "w") as file:
         file.write(content)
     print("Custom system instruction updated.")

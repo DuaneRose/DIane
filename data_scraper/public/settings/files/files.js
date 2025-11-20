@@ -37,8 +37,8 @@ function setFile(file) {
 async function show_files(){
   console.log('Fetching existing book list...');
   const lib = document.getElementById('books');
-  const folder_name = sessionStorage.getItem('folder_name');
-  const res = await fetch(`/api/file_list/${encodeURIComponent(folder_name)}`);
+  const database_name = sessionStorage.getItem('database_name');
+  const res = await fetch(`/api/file_list/${encodeURIComponent(database_name)}`);
   const data = await res.json();
   data.files.forEach(book => {
     const li = document.createElement('li');
@@ -105,10 +105,10 @@ form.addEventListener('submit', async (e) => {
 
   try {
     const fd = new FormData(form);
-    const folder_name = sessionStorage.getItem("folder_name");
+    const database_name = sessionStorage.getItem("database_name");
     fd.append('file', selectedFile);
 
-    const res = await fetch(`/api/upload_file/${encodeURIComponent(folder_name)}`, {
+    const res = await fetch(`/api/upload_file/${encodeURIComponent(database_name)}`, {
       method: 'POST',
       body: fd
     });

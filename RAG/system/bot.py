@@ -28,9 +28,9 @@ def delete_upload():
         print("deleting", file.name)
         client.files.delete(name=file.name)
 
-def upload(file_name, folder, folder_name):
+def upload(file_name, folder, database_name):
     print("uploading file:", file_name, " to folder:", folder)
-    path = Path("/Users","duanegennaro","dIAne","data_base",folder_name, folder, file_name)
+    path = Path("/Users","duanegennaro","dIAne","data_base",database_name, folder, file_name)
     print("resolved path:", path.resolve())
     file_path = path.resolve()
     print("uploading")
@@ -77,7 +77,7 @@ def upload(file_name, folder, folder_name):
 
     return obj.name
 
-def ask(prompt, files, folder_name):
+def ask(prompt, files, database_name):
     # right now we upload all the files when loading in the database
     # we need to change that to only happen when we ask a question
     folder = []
@@ -85,12 +85,12 @@ def ask(prompt, files, folder_name):
         print(f"used {files[i]['file_name']} with score {files[i]['score']}")
         folder.append(files[i]["genai_id"])
 
-    json_path = Path("/Users","duanegennaro","dIAne","data_base",folder_name) / "db.json"
+    json_path = Path("/Users","duanegennaro","dIAne","data_base",database_name) / "db.json"
     
     with open(json_path) as r:
         json_text = r.read()
 
-    system_prompt = get_instruction(mode, folder_name)
+    system_prompt = get_instruction(mode, database_name)
     print("using mode ", mode)
 
     print("asking question")

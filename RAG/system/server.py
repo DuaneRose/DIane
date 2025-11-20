@@ -9,19 +9,19 @@ from bot import set_mode, get_mode
 
 app = FastAPI()
 
-@app.get("/get_instruction/{name}/{folder_name}")
-async def get_instructions(name: str, folder_name: str):
-    return get_instruction(name, folder_name)
+@app.get("/get_instruction/{name}/{database_name}")
+async def get_instructions(name: str, database_name: str):
+    return get_instruction(name, database_name)
 
 class CustomInstruction(BaseModel):
   name: str | None = None
   instructions: str
-  folder_name: str
+  database_name: str
 
 @app.post("/set_custom_instruction")
 async def set_custom_instruction(payload: CustomInstruction):
   try:
-    write_custom_instruction(payload.instructions, payload.folder_name)
+    write_custom_instruction(payload.instructions, payload.database_name)
     return {"status": f"Custom instruction updated for {payload.name or 'default'}"}
   except Exception as e:
     raise HTTPException(status_code=500, detail=str(e))
@@ -31,19 +31,19 @@ async def get_mode_endpoint():
     mode = get_mode()
     return {"mode": mode}
 
-@app.post("/set_mode/{mode}/{folder_name}")
-async def set_mode_endpoint(mode: str, folder_name: str):
+@app.post("/set_mode/{mode}/{database_name}")
+async def set_mode_endpoint(mode: str, database_name: str):
     set_mode(mode)
     return {"status": f"Mode set to {mode}"}
 
-@app.get("/question/{message}/{folder_name}")
-async def ping(message: str, folder_name: str):
-    return query(message, folder_name)
+@app.get("/question/{message}/{database_name}")
+async def ping(message: str, database_name: str):
+    return query(message, database_name)
 
-@app.get("/embed/{file_name}/{folder}/{ID}/{verifier}/{folder_name}")
-async def embed(file_name: str,folder: str, ID: int, verifier: str, folder_name: str):
+@app.get("/embed/{file_name}/{folder}/{ID}/{verifier}/{database_name}")
+async def embed(file_name: str,folder: str, ID: int, verifier: str, database_name: str):
     print("got file name to back end: ", file_name, " folder:", folder)
-    get_embedding(file_name, folder, ID, verifier, folder_name)
+    get_embedding(file_name, folder, ID, verifier, database_name)
     return {"status": "Embedding started for file", "file_name": file_name}
 
 @app.get("/reset")

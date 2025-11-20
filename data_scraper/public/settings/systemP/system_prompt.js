@@ -61,8 +61,8 @@ async function system_prompt(name = "default") {
     let data = '';
     try {
         const qs = new URLSearchParams({ name }).toString();
-        const folder_name = sessionStorage.getItem('folder_name');
-        const response = await fetch(`/api/system_instructions/${encodeURIComponent(qs)}/${encodeURIComponent(folder_name)}`);
+        const database_name = sessionStorage.getItem('database_name');
+        const response = await fetch(`/api/system_instructions/${encodeURIComponent(qs)}/${encodeURIComponent(database_name)}`);
         if (!response.ok) throw new Error(`HTTP ${response.status}`);
         data = await response.json();
     } catch (error) {
@@ -89,14 +89,14 @@ async function save_prompt(data) {
         alert('No changes to save.');
         return;
     }else{
-        const folder_name = sessionStorage.getItem('folder_name');
+        const database_name = sessionStorage.getItem('database_name');
         try {
             const response = await fetch('/api/set_custom_instruction', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ name: location, instructions: newPrompt, folder_name: folder_name})
+                body: JSON.stringify({ name: location, instructions: newPrompt, database_name: database_name})
             });
             if (!response.ok) throw new Error(`HTTP ${response.status}`);
         } catch (error) {
