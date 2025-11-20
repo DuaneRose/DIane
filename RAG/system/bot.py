@@ -106,9 +106,9 @@ def ask(prompt, files, database_name):
     )
 
     for file in files:
+        cleanup(file['genai_id'])
+        file['genai_id'] = None
         if file['folder'] == 'text_books':
-            cleanup(file['genai_id'])
-
             if os.path.exists(file['to_detelete']):
                 os.remove(file['to_detelete'])
                 print("removed", file['to_detelete'])
@@ -129,3 +129,4 @@ def ai_assist(genai_id):
     )
 
     return response.text
+

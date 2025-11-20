@@ -32,10 +32,10 @@ def get_embedding(file_name, folder, ID, verifier, database_name):
     if folder != "text_books":
         genai_id = upload(file_name, folder, database_name)
 
-        text = routing(file_name, folder, genai_id, database_name)
+        text = routing(file_name, folder, database_name)
         if text != "File type not implemented":
             chunks = chunker(text)
-            embed(chunks, file_name, folder, ID, verifier, genai_id, database_name)
+            embed(chunks, file_name, folder, ID, verifier, database_name)
         else:
             print("File type not implemented: " + file_name)
     else:
@@ -59,15 +59,15 @@ def pull(prompt, database_name, num_files=3):
     sorted_files = sorted_files[:num_files]
     return sorted_files        
 
-def get_signature(start_page, end_page, name, num):
+def get_signature(start_page, end_page, name, num, database_name):
     print("getting signature for ", name)
-    book = PdfReader("/Users/duanegennaro/dIAne/data_base/text_books/" + name)
+    book = PdfReader("/Users/duanegennaro/dIAne/data_base/"+ database_name +"/text_books/" + name)
     sig = PdfWriter()
     for i in range(start_page, end_page):
         if i < len(book.pages):
             sig.add_page(book.pages[i])
 
-    sig_path = "/Users/duanegennaro/dIAne/data_base/signatures/" + name[:-4] + "(" + str(num) + ")" + "_sig.pdf"
+    sig_path = "/Users/duanegennaro/dIAne/data_base/"+ database_name +"/signatures/" + name[:-4] + "(" + str(num) + ")" + "_sig.pdf"
     with open(sig_path, "wb") as f:
         sig.write(f)
 
@@ -94,12 +94,15 @@ def query(prompt,database_name):
             elif range_end >  max:
                 range_end = max
                 range_start -= 2
-            print("page range: ", range_start," --->", range_end)
-            path = get_signature(range_start, range_end, file['file_name'], num)
+            print("page range: ", range_start," ---> ", range_end)
+            path = get_signature(range_start, range_end, file['file_name'], num, database_name)
             file['to_detelete'] = path
             file['genai_id'] = upload(path, 'text_books')
             num += 1
             print("signature created")
+        else:
+            file['genai_id'] = upload(file['file_name'], file['folder'], -1, database_name)
+            print("uploaded ", file['file_name'])
             
 
     return ask(prompt, files, database_name)

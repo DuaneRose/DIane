@@ -4,7 +4,7 @@ import json
 from pathlib import Path
 import numpy as np
 
-def embed(chunks, file_name, folder, ID, verifier, genai_id,database_name, page_num = -1):
+def embed(chunks, file_name, folder, ID, verifier, database_name, page_num = -1):
     print("embedding the chunks")
 
     vector_path = Path("/Users","duanegennaro","dIAne","data_base",database_name ,"vector_space.json")
@@ -25,7 +25,7 @@ def embed(chunks, file_name, folder, ID, verifier, genai_id,database_name, page_
                 "file_ID": ID,
                 "verifier": verifier,
                 "similarity": 0.0,
-                "genai_id": genai_id,
+                "genai_id": "none",
                 "page_num": page_num
             }
             vector_space.append(data)
@@ -65,7 +65,7 @@ def pool_vectors(promtp, database_name, num_vectors=20):
     print("found", len(closest), "vectors")
     return closest
 
-def pull_files(top_hits):
+def pull_files(top_hits, database_name):
     files = []
     doc = []
 
@@ -87,7 +87,8 @@ def pull_files(top_hits):
             "hits":1,
             "genai_id": genai_id,
             "page_num": page,
-            "folder": folder
+            "folder": folder,
+            "database_name": database_name
         })
             doc.append(file_name)
         else:
@@ -108,4 +109,4 @@ def search_vector(promtp,database_name, num_vectors=20):
         print(hit["file_name"], "score:", hit["similarity"])
 
     print("--------------------------------------------------")
-    return pull_files(top_hits)
+    return pull_files(top_hits, database_name)

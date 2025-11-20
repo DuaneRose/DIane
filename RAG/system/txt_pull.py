@@ -5,7 +5,7 @@ import pandas as pd
 from pptx import Presentation
 import subprocess
 from docx import Document
-from bot import ai_assist
+from bot import ai_assist, upload, cleanup
 
 def not_implemented(file_path):
     return "File type not implemented" + file_path
@@ -69,7 +69,7 @@ def pptx_to_text(file_path):
                 full_text.append(shape.text)
     return '\n'.join(full_text)
 
-def routing(file_name, folder, genai_id, database_name):
+def routing(file_name, folder, database_name):
     path = "../../data_base/"+ database_name + "/" + folder + "/" + file_name
     file_ext = file_name[file_name.rindex('.') + 1:].lower()
     
@@ -95,8 +95,10 @@ def routing(file_name, folder, genai_id, database_name):
     elif file_ext == "ppt":
         return ppt_to_text(path)
 
+    genai_id = upload(file_name, folder, database_name)
+
     #exle files 
-    elif file_ext == "xlsx":
+    if file_ext == "xlsx":
         return ai_assist(genai_id)
     elif file_ext == "xls":
         return ai_assist(genai_id)
@@ -118,4 +120,6 @@ def routing(file_name, folder, genai_id, database_name):
         return ai_assist(genai_id)
     elif file_ext == "avi":
         return ai_assist(genai_id)
+    
+    cleanup(genai_id)
     
