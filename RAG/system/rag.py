@@ -4,6 +4,7 @@ from txt_pull import routing
 from embedding import embed, clear_collection, search_vector
 from system_instruction import write_custom_instruction
 from pypdf import PdfReader, PdfWriter
+# from PyPDF2 import PdfReader
 import math
 
 # Function to chunk text into three parts: two halves and the middle
@@ -45,7 +46,9 @@ def get_embedding(file_name, folder, ID, verifier, database_name):
             print("processing page ", i)
             page = book.pages[i]
             text = page.extract_text()
-            embed([text], file_name, folder, ID, verifier, genai_id="",database_name=database_name, page_num=i)
+            if text is None:
+                continue
+            embed([text], file_name, folder, ID, verifier,database_name=database_name, page_num=i)
 
 def clear():
     delete_upload()

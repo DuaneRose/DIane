@@ -19,9 +19,9 @@ const token = '10082~rvBhVXGEuCrMnmL9YDBeCVLLPwUKvLrYMewtLtwFyWzN4nufWXFVQFmJWYQ
 const canvas = 'https://sdsu.instructure.com/api/v1/courses/'
 let fileURL = [];
 
-export async function run(ID, file_name){
+export async function run(ID, database_name){
     try {
-        await create_db(ID, file_name);
+        await create_db(ID, database_name);
         console.log('Both operations completed successfully');
     } catch (error) {
         console.error('Error in run:', error);
@@ -29,11 +29,11 @@ export async function run(ID, file_name){
     console.log("double checking that we have all the files");
     await check_folders(ID);
     console.log("pulling files");
-    await pull_files(file_name);
+    await pull_files(database_name);
 }
 
-async function create_db(courseID, file_name){
-    const db = path.join(__dirname, `../../data_base/${file_name}/db.json`);
+async function create_db(courseID, database_name){
+    const db = path.join(__dirname, `../../data_base/${database_name}/db.json`);
     const data = {
         "assignments": await assignments(courseID),
         "modules": await modules(courseID),
@@ -225,7 +225,7 @@ async function check_folders(courseID){
     }
 }
 
-async function pull_files(file_name){
+async function pull_files(database_name){
     console.log(fileURL.length);
     let num = 1;
     for (const apiUrl of fileURL) {
@@ -247,14 +247,14 @@ async function pull_files(file_name){
                     throw new Error(`Expected binary but got ${ct}`);
                 }
             
-                const target = path.join(__dirname, `../../data_base/${file_name}/canvas_data`, apiUrl[1]);
+                const target = path.join(__dirname, `../../data_base/${database_name}/canvas_data`, apiUrl[1]);
                 await fs.writeFile(target, fileRes.data);
                 console.log(`${num}.) ✅  Saved ${apiUrl[1]}`);
     
                 await axios.post('http://localhost:4500/api/embed', {
                     name: apiUrl[1],
                     raw_link: apiUrl[0],
-                    database_name: file_name
+                    database_name: database_name
                 })
                 console.log(`✅  Embedded ${apiUrl[1]}`);
     
@@ -275,14 +275,14 @@ async function change_honesty_policy(policy, database_name){
     await fs.writeFile(db, JSON.stringify(parsedData, null, 2));
 }
 
-async function get_default_honesty_policy(database_name){
-    const policy = path.join(__dirname, `../../data_base/${database_name}/academic_honesty.txt`);
+async function get_default_honesty_policy(){
+    const policy = path.join(__dirname, `../../data_base/academic_honesty.txt`);
     const data = await fs.readFile(policy, 'utf8');
     return data;
 }
 
-async function Honesty_policy(file_name){
-    const db = path.join(__dirname, `../../data_base/${file_name}/db.json`);
+async function Honesty_policy(database_name){
+    const db = path.join(__dirname, `../../data_base/${database_name}/db.json`);
     const data = await fs.readFile(db, 'utf8');
     const parsed_data = JSON.parse(data);
     const data_policy = parsed_data.academic_honesty_policy;
@@ -362,7 +362,7 @@ function find_id(username, array){
     return "N/A"
 }
 
-async function initialize_class(canvas_ID, user_ID) {
+async function initialize_class(canvas_ID) {
     const {data} = await axios.get(`${canvas}${canvas_ID}`,
         {
             headers: {'Authorization': `Bearer ${token}`}
@@ -372,7 +372,7 @@ async function initialize_class(canvas_ID, user_ID) {
     const class_name = data.name;
     
     const code = ID_generator(10);
-    const name = await create_class(class_name, code, user_ID);
+    const name = await create_class(class_name, code);
     await fill_class(name, canvas_ID);
     return name;
 }
@@ -381,7 +381,7 @@ async function fill_class(class_name, Class_code){
     await run(Class_code, class_name);
 }
 
-async function create_class(class_name, Class_code, user_ID){
+async function create_class(class_name, Class_code){
     const name = `${class_name.replace(/\s+/g, "_").toLowerCase()}-${Class_code}`
     const database_name = path.join(
         __dirname,
