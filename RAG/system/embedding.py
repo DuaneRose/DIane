@@ -13,10 +13,8 @@ def embed(chunks, file_name, folder, ID, verifier, database_name, page_num = -1)
 
         print(len(vector_space))
 
-        for chunk in chunks:
-            if chunk.strip() == "":
-                continue
-            vector = embeddings(model="bge-m3", prompt=chunk)["embedding"]
+        if len(chunks) == 1:
+            vector = embeddings(model="bge-m3", prompt=chunks[0])["embedding"]
             data = {
                 "file_name": file_name,
                 "folder": folder,
@@ -29,6 +27,25 @@ def embed(chunks, file_name, folder, ID, verifier, database_name, page_num = -1)
                 "page_num": page_num
             }
             vector_space.append(data)
+        else:
+            for chunk in chunks:
+                if chunk.strip() == "":
+                    continue
+                print("this is the thing we are working on\n_____________________\n", chunk)
+                vector = embeddings(model="bge-m3", prompt=chunk)["embedding"]
+                data = {
+                    "file_name": file_name,
+                    "folder": folder,
+                    "text": "",
+                    "vector": vector,
+                    "file_ID": ID,
+                    "verifier": verifier,
+                    "similarity": 0.0,
+                    "genai_id": "none",
+                    "page_num": page_num
+                }
+                vector_space.append(data)
+
         print("embedding is done, and the chunks are saved to the database")
     with open(vector_path, "w") as f:
         json.dump(vector_space, f)

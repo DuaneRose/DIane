@@ -104,7 +104,7 @@ def query(prompt,database_name):
             num += 1
             print("signature created")
         else:
-            file['genai_id'] = upload(file['file_name'], file['folder'], -1, database_name)
+            file['genai_id'] = upload(file['file_name'], file['folder'], database_name)
             print("uploaded ", file['file_name'])
             
 
