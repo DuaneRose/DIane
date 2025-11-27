@@ -31,8 +31,6 @@ def get_embedding(file_name, folder, ID, verifier, database_name):
     print("getting embeddings for " + file_name)
 
     if folder != "text_books":
-        genai_id = upload(file_name, folder, database_name)
-
         text = routing(file_name, folder, database_name)
         if text != "File type not implemented":
             chunks = chunker(text)
@@ -48,7 +46,8 @@ def get_embedding(file_name, folder, ID, verifier, database_name):
             text = page.extract_text()
             if text is None:
                 continue
-            embed([text], file_name, folder, ID, verifier,database_name=database_name, page_num=i)
+            chunks = chunker(text)
+            embed(chunks, file_name, folder, ID, verifier,database_name, page_num=i)
 
 def clear():
     delete_upload()
@@ -58,9 +57,14 @@ def clear():
 def pull(prompt, database_name, num_files=3):
     top_files = search_vector(prompt, database_name)
 
-    sorted_files = sorted(top_files, key=lambda x: x['score'], reverse=True)
+    average(top_files)
+    sorted_files = sorted(top_files, key=lambda x: x['average'], reverse=True)
     sorted_files = sorted_files[:num_files]
     return sorted_files        
+
+def average(vectors):
+    for vector in vectors:
+        vector["average"] = vector["score"] / vector["hits"]
 
 def get_signature(start_page, end_page, name, num, database_name):
     print("getting signature for ", name)
@@ -77,7 +81,7 @@ def get_signature(start_page, end_page, name, num, database_name):
     return sig_path
 
 def query(prompt,database_name):
-    files = pull(prompt,database_name)
+    files = pull(prompt, database_name)
 
     num = 0
     print(len(files), " files retrieved")
@@ -91,16 +95,21 @@ def query(prompt,database_name):
             if range_start < 0 and range_end > max:
                 range_start = 0
                 range_end = max
-            elif range_start < 0:
+            elif range_start < 0 and range_end + 2 <= max:
                 range_start = 0
                 range_end += 2
-            elif range_end >  max:
+            elif range_end > max and range_start - 2 >= 0:
                 range_end = max
                 range_start -= 2
+            elif range_start < 0:
+                range_start = 0
+            elif range_end > max:
+                range_end = max
+
             print("page range: ", range_start," ---> ", range_end)
             path = get_signature(range_start, range_end, file['file_name'], num, database_name)
             file['to_detelete'] = path
-            file['genai_id'] = upload(path, 'text_books')
+            file['genai_id'] = upload(path, 'text_books', database_name)
             num += 1
             print("signature created")
         else:

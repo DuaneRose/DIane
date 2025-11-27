@@ -439,7 +439,7 @@ app.post('/api/upload_book/:database_name', upload.single('file'), async (req, r
     );
 
     try {
-      await fetch(`http://localhost:4600/embed/${filename}/text_books/${1111111}/${'none'}/${database_name}`);
+      await fetch(`http://localhost:4600/embed/${filename}/text_books/${1111111}/none/${database_name}`);
       console.log(`✅ File uploaded and embedded: ${filename}`);
     } catch (error) {
       console.error('❌ Error embedding file:', error);

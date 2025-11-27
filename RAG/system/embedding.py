@@ -73,16 +73,16 @@ def pool_vectors(promtp, database_name, num_vectors=20):
                     if closest[i]["similarity"] < cosine_similarity:
                         closest.insert(i, element)
                         break
-                if len(closest) < num_vectors:
-                    closest.append(element)
 
-                if len(closest) > num_vectors:
+                if element not in closest and len(closest) < num_vectors:
+                    closest.append(element)
+                elif len(closest) > num_vectors:
                     closest = closest[:num_vectors]
 
     print("found", len(closest), "vectors")
     return closest
 
-def pull_files(top_hits, database_name):
+def organize_files(top_hits, database_name):
     files = []
     doc = []
 
@@ -114,7 +114,7 @@ def pull_files(top_hits, database_name):
                     files[i]["score"] += score
                     files[i]["hits"] += 1
                     break
-        
+    
     return files
 
 def search_vector(promtp,database_name, num_vectors=20):
@@ -126,4 +126,4 @@ def search_vector(promtp,database_name, num_vectors=20):
         print(hit["file_name"], "score:", hit["similarity"])
 
     print("--------------------------------------------------")
-    return pull_files(top_hits, database_name)
+    return organize_files(top_hits, database_name)

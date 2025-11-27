@@ -3,5 +3,15 @@
     "question": "what is this class about ?",
     "answer": "This class, CS210, focuses on data structures and algorithms, using an object-oriented programming language, specifically C++. You will learn about various data structures like arrays, linked lists, stacks, queues, binary search trees, balanced trees, and hash tables, as well as an introduction to graphs. A key component of the course is analyzing and measuring the complexities of algorithms and writing generic, reusable C++ code.<br><br><strong>Key details:</strong><br><em>   <strong>Focus Areas:</strong> Data structures (arrays, linked lists, stacks, queues, binary search trees, balanced trees, hash tables, graphs) and algorithm analysis.<br></em>   <strong>Programming Language:</strong> C++ (using CLion).<br>*   <strong>Learning Outcomes:</strong> Analyze algorithm complexities, write generic C++ code, understand OOP concepts (inheritance, interfaces, polymorphism, abstract data types), and apply design principles to software construction.<br><br><strong>Source:</strong> Syllabus → 'COURSE CATALOG DESCRIPTION', 'GOALS FOR THIS COURSE'",
     "timestamp": "2025-11-20T02:41:22.837Z"
+  },
+  {
+    "question": "what is the best time to go to sleep to maximize my health ?",
+    "answer": "As your Course TA, I can only provide information related to {COURSE_NAME} ({TERM}). I do not have information on general health topics like sleep schedules. For health-related questions, I recommend consulting a medical professional or a reputable health resource.",
+    "timestamp": "2025-11-27T02:11:04.108Z"
+  },
+  {
+    "question": "what is the best time to go to sleep to maximize my health ?",
+    "answer": "That's an interesting question, but it falls outside the scope of this course, which focuses on data structures and algorithms in C++.<br><br>For health-related inquiries, I recommend consulting reliable external sources such as medical websites or health professionals.",
+    "timestamp": "2025-11-27T02:12:13.899Z"
   }
 ]
