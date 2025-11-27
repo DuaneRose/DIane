@@ -169,7 +169,7 @@ function loading(){
     const messageContainer = document.getElementById('message_window');
     const messageElement = document.createElement('p');
     messageElement.classList.add('loading');
-    messageElement.textContent = 'Loading...';
+    messageElement.textContent = 'Loading';
     messageContainer.appendChild(messageElement);
     messageContainer.scrollTop = messageContainer.scrollHeight; 
     messageElement.scrollIntoView({ behavior: 'smooth', block: 'end' });

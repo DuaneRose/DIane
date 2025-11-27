@@ -13,5 +13,40 @@
     "question": "what is the best time to go to sleep to maximize my health ?",
     "answer": "That's an interesting question, but it falls outside the scope of this course, which focuses on data structures and algorithms in C++.<br><br>For health-related inquiries, I recommend consulting reliable external sources such as medical websites or health professionals.",
     "timestamp": "2025-11-27T02:12:13.899Z"
+  },
+  {
+    "question": "can you give me a schedule for this course please?",
+    "answer": "Here is a schedule for the course, including key dates and recurring events:<br><br><strong>Class Times:</strong><br><em>   <strong>Monday & Wednesday:</strong> 4:00 - 5:15 PM PT @ HT183<br><br><strong>TA Office Hours (Alex):</strong><br></em>   <strong>Monday:</strong> 4:00 - 6:00 PM PT (In Person - Location to be updated)<br><em>   <strong>Wednesday/Friday:</strong> 4:00 - 7:00 PM PT (Zoom - https://SDSU.zoom.us/j/4480082162)<br><br><strong>Important Dates:</strong><br></em>   <strong>ZyBooks Subscription Start:</strong> Aug 12, 2024<br><em>   <strong>Midterm 1:</strong> Monday, September 30th<br></em>   <strong>Midterm 2:</strong> Wednesday, November 6th<br><em>   <strong>ZyBooks Subscription Cutoff:</strong> December 4, 2024<br></em>   <strong>Final Exam:</strong> Monday, December 16th, 3:30 - 5:30 PM PT<br><br><strong>Assignment Deadlines:</strong><br><em>   <strong>Assignment 2:</strong> Friday, September 13, 11:59 pm PT<br></em>   <strong>Assignment 3:</strong> Sunday, September 29, 11:59 pm PT<br><em>   <strong>Programming Assignment 1:</strong> Wednesday, October 2, 11:59 pm PT<br></em>   <strong>Assignment 4:</strong> Monday, October 14, 11:59 pm PT<br><em>   <strong>Assignment 5:</strong> Saturday, October 26, 11:59 pm PT<br></em>   <strong>Assignment 6:</strong> Thursday, November 7, 11:59 pm PT<br><em>   <strong>Programming Assignment 2:</strong> Sunday, November 10, 11:59 pm PT<br></em>   <strong>Programming Assignment 3:</strong> Tuesday, December 10, 11:59 pm PT<br><br><strong>Details / Steps:</strong><br>This schedule compiles information from the course syllabus and the assignment due dates. All assignment due times are converted from UTC to Pacific Time (PT). Note that due times are typically the end of the day before the date listed in UTC.<br><br><strong>Sources:</strong><br><em>   Syllabus → CLASS TIMES, IMPORTANT DATES, TEXTBOOK, GRADING, LATE COURSEWORK, EXAMS, TA OFFICE HOURS<br></em>   Assignments JSON data (<code>due_at</code> fields)",
+    "timestamp": "2025-11-27T02:24:25.762Z"
+  },
+  {
+    "question": "when is the class over?",
+    "answer": "The Monday and Wednesday class at HT183 is over at 5:15 PM {COURSE_TIMEZONE}.<br><br><strong>Details / Steps</strong><br>The syllabus lists the class times as:<br><em>   Monday & Wednesday: 4:00 - 5:15 PM @ HT183<br><br><strong>Sources</strong><br></em>   Syllabus → CLASS TIMES",
+    "timestamp": "2025-11-27T02:33:33.979Z"
+  },
+  {
+    "question": "what is the class about ?",
+    "answer": "This class, CS210, focuses on <strong>Data Structures</strong>.<br><br>It covers the representation and operations of fundamental data structures such as arrays, linked lists, stacks, queues, and recursion. The course also delves into binary search trees, balanced trees (like AVL trees), hash tables, dynamic storage management, and introduces graphs. The course uses C++ as the programming language, with a strong emphasis on object-oriented programming principles.<br><br>Upon completion, students will be able to:<br><em>   Analyze and measure algorithm complexities.<br></em>   Write generic and reusable C++ code.<br><em>   Understand inheritance, interfaces, polymorphism, and abstract data types in C++.<br></em>   Apply design and development principles to construct software systems of varying complexity.<br><br>Sources:<br><em>   Syllabus → COURSE CATALOG DESCRIPTION<br></em>   Syllabus → GOALS FOR THIS COURSE",
+    "timestamp": "2025-11-27T02:33:57.912Z"
+  },
+  {
+    "question": "what should i study before this class ?",
+    "answer": "To best prepare for this class, you should focus on developing a strong foundation in C++ programming and understanding basic algorithm analysis concepts.<br><br><strong>Details / Steps:</strong><br>1.  <strong>C++ Programming:</strong> The course uses C++ exclusively, so familiarity with its syntax, object-oriented features (classes, objects, inheritance, polymorphism), and standard libraries is crucial. The course description mentions \"an object-oriented programming language will be used,\" and the \"C++ Resources\" module is available.<br>2.  <strong>Basic Algorithm Analysis:</strong> The first content module is \"Analysis of Algorithms,\" and a course goal is to \"Analyze and measure complexities of algorithms.\" Reviewing concepts like Big-O notation, time complexity, and space complexity would be beneficial.<br>3.  <strong>Fundamental Data Structures:</strong> The course catalog description lists several data structures (arrays, linked lists, stacks, queues). While these will be covered, having a preliminary understanding of how they work conceptually can give you a head start.<br><br><strong>Sources:</strong><br><em>   Syllabus → COURSE CATALOG DESCRIPTION<br></em>   Syllabus → PROGRAMMING LANGUAGE USED<br><em>   Syllabus → GOALS FOR THIS COURSE<br></em>   Modules → \"C++ Resources\"<br><em>   Modules → \"Analysis of Algorithms\"<br></em>   Modules → \"Linked Lists\", \"Stacks & Queues\"",
+    "timestamp": "2025-11-27T02:34:59.180Z"
+  },
+  {
+    "question": "what should i take after this course ?",
+    "answer": "I cannot provide specific course recommendations for what you should take after this course, as that falls outside the scope of my role as a Course TA for CS210.<br><br>For academic advising and future course planning, please consult with your academic advisor or the Computer Science department.",
+    "timestamp": "2025-11-27T02:35:23.284Z"
+  },
+  {
+    "question": "what is the scope of this class",
+    "answer": "The scope of this class covers representations and operations on fundamental data structures, including arrays, linked lists, stacks, queues, and recursion. It also delves into binary search trees, balanced trees, hash tables, dynamic storage management, and introduces graphs. The course uses an object-oriented programming language, specifically C++, throughout.<br><br>Upon completing the course, students are expected to be able to analyze algorithm complexities, write generic and reusable C++ code, understand object-oriented programming concepts like inheritance, interfaces, polymorphism, and abstract data types, and apply software design principles.<br><br>Sources:<br><em>   Syllabus → COURSE CATALOG DESCRIPTION<br></em>   Syllabus → GOALS FOR THIS COURSE",
+    "timestamp": "2025-11-27T02:35:50.371Z"
+  },
+  {
+    "question": "who teaches this course?",
+    "answer": "This course is taught by Manju.<br><br><strong>Source:</strong> Syllabus → \"Classroom Knowledge hub\" and \"TEXTBOOK\" section mentioning \"SDSUCS210MuralidharanFall2024\" which implies Manju Muralidharan.",
+    "timestamp": "2025-11-27T02:36:17.093Z"
   }
 ]
