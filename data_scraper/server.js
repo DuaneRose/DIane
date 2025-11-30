@@ -2,7 +2,6 @@
 //bundle exec script/delayed_job start bundle 
 // exec rails server
 
-import cors from "cors";
 import express from 'express';
 import session from 'express-session';
 import pkg from 'ims-lti';
@@ -11,8 +10,8 @@ import { fileURLToPath } from 'url';
 import setData from './script/setData.js';
 import fs from 'fs/promises';
 import multer from 'multer';
-import axios from 'axios';
-import { re } from "mathjs";
+import dotenv from "dotenv";
+dotenv.config();
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);

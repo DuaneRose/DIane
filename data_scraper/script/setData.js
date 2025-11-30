@@ -15,7 +15,7 @@ const __dirname  = path.dirname(__filename);
 
 
 //const policy = path.join(__dirname, '../../data_base/academic_honesty.txt');
-const token = '10082~rvBhVXGEuCrMnmL9YDBeCVLLPwUKvLrYMewtLtwFyWzN4nufWXFVQFmJWYQ9JRvP';
+const token = process.env.CANVAS_API_KEY;
 const canvas = 'https://sdsu.instructure.com/api/v1/courses/'
 let fileURL = [];
 
