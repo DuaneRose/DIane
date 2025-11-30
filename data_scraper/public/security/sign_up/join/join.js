@@ -1,6 +1,7 @@
 const name_input = document.getElementById("username");
 const pass_input = document.getElementById("password");
 const confirm_pass_input = document.getElementById("password_double");
+const join_code = document.getElementById("join_code");
 
 const submit_button = document.getElementById("send_button");
 const back = document.getElementById("back");
@@ -32,13 +33,17 @@ async function sign_up(){
         error_message.innerText = "Passwords do not match.";
         return;
     }
+    if (join_code.value.length === 0) {
+        error_message.innerText = "Join code cannot be empty.";
+        return;
+    }
 
-    const response = await fetch("/api/security/sign_up", {
+    const response = await fetch("/api/security/studnet_sign_up", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
         },
-        body: JSON.stringify({ username: name, password: pass, user_type: "student"})
+        body: JSON.stringify({ username: name, password: pass, user_type: "student", join_code: join_code.value })
     });
 
     const result = await response.json();

@@ -488,7 +488,7 @@ app.post('/api/upload_file/:database_name', upload.single
   }
 });
 
-app.post('/api/security/sign_up', async (req, res) => {
+app.post('/api/security/admin_sign_up', async (req, res) => {
   const { username, password, user_type, database_name } = req.body;
 
   try {
@@ -505,6 +505,44 @@ app.post('/api/security/sign_up', async (req, res) => {
     const conversation = path.join(__dirname, `../data_base/${database_name}/conversations/${ID}.json`);
     users.push({ username, password, 'ID': ID, user_type, database_name, join_code: '' });
 
+    await fs.writeFile(conversation, JSON.stringify([], null, 2));
+    await fs.writeFile(path.join(__dirname, '../data_base/users.json'), JSON.stringify(users, null, 2));
+
+    console.log('✅ User registered successfully');
+    res.status(201).json({ message: 'User registered successfully.', user_id: ID });
+  } catch (error) {
+    console.error('❌ Error during sign up:', error);
+    res.status(500).json({ message: 'Internal server error.' });
+  }
+});
+
+app.post('/api/security/studnet_sign_up', async (req, res) => {
+  const { username, password, user_type, join_code } = req.body;
+
+  try {
+    const usersData = await fs.readFile(path.join(__dirname, '../data_base/users.json'), 'utf8');
+    const users = JSON.parse(usersData);
+
+    if (users.find(user => user.username === username)) {
+      console.log(`Sign-up failed: username "${username}" already exists`);
+      return res.status(409).json({ message: 'Username already exists.' });
+    }
+
+    const admin_user = users.find(user => user.join_code === join_code);
+    if (!admin_user || admin_user.user_type !== 'admin' || join_code === '' || join_code === 'N/A') {
+      console.log(`Sign-up failed: invalid join code "${join_code}"`);
+      return res.status(400).json({ message: 'Invalid join code.' });
+    }
+
+    console.log(`Registering new user: ${username}`);
+    const ID = setData.ID_generator(8);
+    const conversation = path.join(__dirname, `../data_base/${admin_user.database_name}/conversations/${ID}.json`);
+    users.push({ username, password, 'ID': ID, user_type, database_name: admin_user.database_name, join_code: 'N/A' });
+    const class_users = await fs.readFile(path.join(__dirname, `../data_base/${admin_user.database_name}/class_users.json`), 'utf8');
+    const class_users_json = JSON.parse(class_users);
+    class_users_json.push({ username, ID });
+
+    await fs.writeFile(path.join(__dirname, `../data_base/${admin_user.database_name}/class_users.json`), JSON.stringify(class_users_json, null, 2));
     await fs.writeFile(conversation, JSON.stringify([], null, 2));
     await fs.writeFile(path.join(__dirname, '../data_base/users.json'), JSON.stringify(users, null, 2));
 
@@ -690,6 +728,29 @@ app.get('/api/get_join_code/:user_ID', async (req, res) => {
     }
   } catch (error) {
     console.error('❌ Error fetching join code:', error);
+    res.status(500).json({ message: 'Internal server error.' });
+  }
+});
+
+app.get('/api/security/get_user_type/:user_ID', async (req, res) => {
+  const user_ID = req.params.user_ID;
+  console.log(`Fetching user type for user ID: ${user_ID}`);
+
+  try {
+    const usersData = await fs.readFile(path.join(__dirname, '../data_base/users.json'), 'utf8');
+    const users = JSON.parse(usersData);
+
+    const user = users.find(user => user.ID === user_ID);
+    
+    if (user) {
+      console.log(`✅ User type retrieved for user ID: ${user_ID}`);
+      return res.status(200).json({ user_type: user.user_type });
+    } else {
+      console.log(`⚠️ No user found with ID: ${user_ID}`);
+      return res.status(404).json({ message: 'User not found.' });
+    }
+  } catch (error) {
+    console.error('❌ Error fetching user type:', error);
     res.status(500).json({ message: 'Internal server error.' });
   }
 });

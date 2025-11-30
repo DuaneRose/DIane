@@ -394,7 +394,7 @@ async function create_class(class_name, Class_code){
     const text_books_folder = path.join(database_name, "text_books");
     const db = path.join(database_name, "db.json");
     const vector_space = path.join(database_name, "vector_space.json");
-    const users = path.join(database_name, "users.json");
+    const users = path.join(database_name, "class_users.json");
     const initialize = [];
     const jsonInit = JSON.stringify(initialize, null, 2);
     const empty_obj = {};

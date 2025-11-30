@@ -54,12 +54,12 @@ async function sign_up(){
     const database_name = await res.json()
     console.log(database_name)
 
-    const response = await fetch("/api/security/sign_up", {
+    const response = await fetch("/api/security/admin_sign_up", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
         },
-        body: JSON.stringify({ username: name, password: pass, user_type: "adimin", database_name: database_name.database_name})
+        body: JSON.stringify({ username: name, password: pass, user_type: "admin", database_name: database_name.database_name})
     });
 
     const result = await response.json();

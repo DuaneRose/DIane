@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', start_page)
+document.addEventListener('DOMContentLoaded', await start_page)
 
 document.getElementById('back_button').onclick = async () => {
     window.location.href = '/api/chat';
@@ -26,23 +26,35 @@ const menu_options= [
     }
 ]
 
-function start_page(){
-    create_menu();
+async function start_page(){
+    create_menu(await user_type());
 }
 
-function create_menu(){
+async function user_type(){
+    const user_id = sessionStorage.getItem("user_id");
+    const res =  await fetch(`/api/security/get_user_type/${encodeURIComponent(user_id)}`);
+    const data = await res.json();
+    return data.user_type;
+}
+
+function create_menu(user_type){
     console.log("menu options function")
     const bar = document.getElementById("menu_bar")
     for (let i = 0; i < menu_options.length; i++) {
-        const option = menu_options[i];
-        const button = document.createElement("p");
-        button.innerText = option.option;
-        button.className = "menu_button";
-        button.onclick = function() {
-            handle_menu_option(option.option);
-        };
-        bar.appendChild(button);
-        bar.appendChild(document.createElement("hr"));
+        if (menu_options[i].authorized_roles !== user_type){
+            console.log(`Skipping option: ${menu_options[i].option} for user type: ${user_type}`);
+            continue;
+        }else{
+            const option = menu_options[i];
+            const button = document.createElement("p");
+            button.innerText = option.option;
+            button.className = "menu_button";
+            button.onclick = function() {
+                handle_menu_option(option.option);
+            };
+            bar.appendChild(button);
+            bar.appendChild(document.createElement("hr"));
+        }
     }
     bar.lastChild.remove();
 }
