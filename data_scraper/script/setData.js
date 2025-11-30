@@ -5,14 +5,14 @@ import { fileURLToPath } from 'url';
 import { htmlToText } from 'html-to-text';
 import isEqual from 'lodash.isequal';
 import { re } from 'mathjs';
-// import { create } from 'lodash';
-// import { re } from 'mathjs';
-// import { error } from 'console';
-// import { get } from 'lodash';
+import dotenv from "dotenv";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname  = path.dirname(__filename);
 
+dotenv.config({
+    path: path.join(__dirname, "..", "..", ".env"), 
+});
 
 //const policy = path.join(__dirname, '../../data_base/academic_honesty.txt');
 const token = process.env.CANVAS_API_KEY;
@@ -340,9 +340,8 @@ function ID_generator (size=8){
     const caps = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
     const lower = "abcdefghijklmnopqrstuvwxyz"
     const num = "1234567890"
-    const unique = "!@#$&*+~?<>.,;:{}[]()-_=|"
 
-    const chars = caps + lower + num + unique
+    const chars = caps + lower + num
     const max = chars.length
 
     for(let i = 0; i < size; i ++){

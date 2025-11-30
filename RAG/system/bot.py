@@ -6,8 +6,10 @@ from google import genai
 from google.genai.types import GenerateContentConfig
 import subprocess, os, time
 from system_instruction import get_instruction
+from dotenv import load_dotenv
+load_dotenv() 
 
-key = "AIzaSyBgb92VxN3u3lPojEX29BfyExBEO95pxYw"
+key = os.getenv("GEMINI_API_KEY")
 client = genai.Client(api_key=key)
 vector_space = "../vectorSpace/embeddings(DS).json"
 chat_model = "gemini-2.5-flash"
@@ -96,7 +98,6 @@ def ask(prompt, files, database_name, user_id):
     with open(conversation_path) as c:
         prompt += "\n\nHere is our previous conversation:\n" + c.read()
 
-    print(prompt)
     system_prompt = get_instruction(mode, database_name)
     print("using mode ", mode)
 

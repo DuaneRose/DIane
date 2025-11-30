@@ -4,7 +4,8 @@
     "password": "1234567890",
     "ID": "2kDZgCSD",
     "user_type": "adimin",
-    "database_name": "cs210-03:data_structures-5uqAHjoVjh"
+    "database_name": "cs210-03:data_structures-5uqAHjoVjh",
+    "join_code": "N0z2226X"
   },
   {
     "username": "gennaro51",
@@ -12,13 +13,5 @@
     "ID": ":|L3V4Pi",
     "user_type": "adimin",
     "database_name": "cs210-03:data_structures-<cOCIVEA6_"
-  },
-  {
-    "username": "jaeli",
-    "password": "1234567890",
-    "ID": "s?H(d)*5",
-    "user_type": "adimin",
-    "database_name": "cs460-03:algorithms-[*o&JDLQ&=",
-    "join_code": ""
   }
 ]

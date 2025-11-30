@@ -10,8 +10,6 @@ import { fileURLToPath } from 'url';
 import setData from './script/setData.js';
 import fs from 'fs/promises';
 import multer from 'multer';
-import dotenv from "dotenv";
-dotenv.config();
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -634,26 +632,14 @@ app.get('/api/valid_canvas_code/:canvas_code', async (req, res) => {
   res.json({ valid: isValid });
 });
 
-app.post('/api/launch_join_code/:database_name/:join_code/:user_ID', async (req, res) => {
+app.post('/api/launch_join_code/:join_code/:user_ID', async (req, res) => {
   const join_code = req.params.join_code;
-  const database_name = req.params.database_name;
   const user_ID = req.params.user_ID;
 
   console.log(`Launching join code: ${join_code}`);
 
   try {
-    const mapPath = path.join(__dirname, "../data_base/codeMap.json");
     const usersPath = path.join(__dirname, "../data_base/users.json");
-  
-    // 1. Read map
-    let reconstructedMap = new Map();
-    try {
-      const data = await fs.readFile(mapPath, "utf8");
-      const parsedArray = JSON.parse(data);
-      reconstructedMap = new Map(parsedArray);
-    } catch (err) {
-      console.log("⚠️ No existing codeMap.json, starting with empty map.");
-    }
   
     // 2. Read users
     let users = [];
@@ -664,26 +650,16 @@ app.post('/api/launch_join_code/:database_name/:join_code/:user_ID', async (req,
       console.log("⚠️ No existing users.json, starting with empty users array.");
     }
   
-    // 3. Insert / update entry in map
-    reconstructedMap.set(join_code, database_name);
-  
-    // 4. Update user
     const join_user = users.find(user => user.ID === user_ID);
     if (!join_user) {
       console.log(`⚠️ No user found with ID ${user_ID}`);
-      // optionally return error here instead of silently continuing
-      // return res.status(404).json({ error: "User not found" });
+      return res.status(404).json({ error: "User not found" });
     } else {
       join_user.join_code = join_code;
     }
   
-    // 5. Save updated map + users
-    const mapAsArray = Array.from(reconstructedMap.entries());
-    const jsonString = JSON.stringify(mapAsArray, null, 2);
-    await fs.writeFile(mapPath, jsonString);
     await fs.writeFile(usersPath, JSON.stringify(users, null, 2));
   
-    console.log(`Map data saved to ${mapPath}`);
     console.log("✅ Join code processed successfully");
   
     return res.json({ message: "Join code processed successfully" });
@@ -693,57 +669,6 @@ app.post('/api/launch_join_code/:database_name/:join_code/:user_ID', async (req,
     return res.status(500).json({ error: "Failed to process join code" });
   }
   
-});
-
-app.delete('/api/delete_join_code/:join_code', async (req, res) => {
-  const join_code = req.params.join_code;
-  console.log(`Deleting join code: ${join_code}`);
-
-  const mapPath = path.join(__dirname, "../data_base/codeMap.json");
-  const usersPath = path.join(__dirname, "../data_base/users.json");
-
-  try {
-    let reconstructedMap = new Map();
-    try {
-      const mapData = await fs.readFile(mapPath, "utf8");
-      reconstructedMap = new Map(JSON.parse(mapData));
-    } catch (err) {
-      console.log("⚠️ codeMap.json missing or invalid — starting empty.");
-    }
-
-    let users = [];
-    try {
-      const usersData = await fs.readFile(usersPath, "utf8");
-      users = JSON.parse(usersData);
-    } catch (err) {
-      console.log("⚠️ users.json missing or invalid — starting empty.");
-    }
-
-    if (!reconstructedMap.has(join_code)) {
-      console.log("⚠️ Join code not found in map");
-      return res.status(404).json({ error: "Join code not found" });
-    }
-
-    reconstructedMap.delete(join_code);
-
-    const join_user = users.find(u => u.join_code === join_code);
-
-    if (join_user) {
-      join_user.join_code = "";
-    } else {
-      console.log("⚠️ No user has this join_code — skipping user update");
-    }
-
-    await fs.writeFile(mapPath, JSON.stringify([...reconstructedMap], null, 2));
-    await fs.writeFile(usersPath, JSON.stringify(users, null, 2));
-
-    console.log("✅ Join code deleted successfully");
-    return res.json({ message: "Join code deleted successfully" });
-
-  } catch (err) {
-    console.error("❌ Error processing join code:", err);
-    return res.status(500).json({ error: "Failed to process join code" });
-  }
 });
 
 app.get('/api/get_join_code/:user_ID', async (req, res) => {
@@ -768,7 +693,6 @@ app.get('/api/get_join_code/:user_ID', async (req, res) => {
     res.status(500).json({ message: 'Internal server error.' });
   }
 });
-
 
 app.listen(PORT, () => {
   console.log(`\nServer running on port ${PORT}`);
