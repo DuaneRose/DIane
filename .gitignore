@@ -2,6 +2,7 @@
 .env
 *.env
 .env.local
+data_base/
 
 # Node modules (if using Node)
 node_modules/
