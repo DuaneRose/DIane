@@ -84,7 +84,7 @@ CANVAS_API_KEY=your_canvas_key
 GEMINI_API_KEY=your_ai_key
 SESSION_SECRET=your_session_secret
 
-3. Add .env to .gitignore to keep keys secret.
+3. Add .env to .gitignore to keep keys secret. also add data_base/users/json and place an emtpy array ex: []
 
 4. Install dependencies:
 
