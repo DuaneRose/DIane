@@ -1,0 +1,507 @@
+{
+  "assignments": [
+    {
+      "name": "Paper-based #1",
+      "id": 1747783,
+      "description": "<p><a id=\"18095469\" class=\"instructure_file_link instructure_scribd_file inline_disabled\" title=\"Link\" href=\"https://sdsu.instructure.com/courses/187810/files/18095469?verifier=wBWkwSzcAdbzHWXVjccfW5Sjj5WZRanups3IgGOp&amp;wrap=1\" target=\"_blank\" data-canvas-previewable=\"true\" data-api-endpoint=\"https://sdsu.instructure.com/api/v1/courses/187810/files/18095469\" data-api-returntype=\"File\">Paper-HW#1.pdf</a></p>\n<p><a class=\"instructure_file_link instructure_scribd_file inline_disabled\" title=\"Paper-HW#1-solution.pdf\" href=\"https://sdsu.instructure.com/courses/187810/files/18359134?verifier=8ZHw9QTiHMtXWJSSIKuEVsDK0zajJ35E52dgw2bH&amp;wrap=1\" target=\"_blank\" data-api-endpoint=\"https://sdsu.instructure.com/api/v1/courses/187810/files/18359134\" data-api-returntype=\"File\">Paper-HW#1-solution.pdf</a></p>\n<p>&nbsp;</p>",
+      "points_possible": 135,
+      "grading_type": "points",
+      "submission_types": [
+        "external_tool"
+      ],
+      "due_at": "2025-09-22T06:59:00Z",
+      "has_submitted_submissions": false,
+      "published": true,
+      "visible_to_everyone": true
+    },
+    {
+      "name": "Paper-based #2",
+      "id": 1771646,
+      "description": "<p><a class=\"instructure_file_link instructure_scribd_file inline_disabled\" title=\"Paper-HW#2.pdf\" href=\"https://sdsu.instructure.com/courses/187810/files/18618484?verifier=skTPPFJUWP0IAFyCyks24Fgvm8rKKCYLH1fHAAm7&amp;wrap=1\" target=\"_blank\" data-canvas-previewable=\"false\" data-api-endpoint=\"https://sdsu.instructure.com/api/v1/courses/187810/files/18618484\" data-api-returntype=\"File\">Paper-HW#2.pdf</a></p>\n<p>&nbsp;</p>\n<p><a id=\"18897970\" class=\"instructure_file_link instructure_scribd_file inline_disabled\" title=\"Link\" href=\"https://sdsu.instructure.com/courses/187810/files/18897970?verifier=hK5t0v4Rrx5lWAyZJpKPrzMuEaFfz0tEcOZqx05O&amp;wrap=1\" target=\"_blank\" data-canvas-previewable=\"true\" data-api-endpoint=\"https://sdsu.instructure.com/api/v1/courses/187810/files/18897970\" data-api-returntype=\"File\">Paper-HW#2-solution.pdf</a></p>",
+      "points_possible": 175,
+      "grading_type": "points",
+      "submission_types": [
+        "external_tool"
+      ],
+      "due_at": "2025-10-27T06:59:00Z",
+      "has_submitted_submissions": false,
+      "published": true,
+      "visible_to_everyone": true
+    },
+    {
+      "name": "Paper-based #3",
+      "id": 1794669,
+      "description": "<p><a id=\"19108237\" class=\"instructure_file_link instructure_scribd_file inline_disabled\" title=\"Link\" href=\"https://sdsu.instructure.com/courses/187810/files/19108237?verifier=UKITy3dHpYvm8Yiq3GlG6L2W6eOuuEJib4o7V3VB&amp;wrap=1\" target=\"_blank\" data-canvas-previewable=\"true\" data-api-endpoint=\"https://sdsu.instructure.com/api/v1/courses/187810/files/19108237\" data-api-returntype=\"File\">Paper-HW#3.pdf</a></p>",
+      "points_possible": 130,
+      "grading_type": "points",
+      "submission_types": [
+        "online_text_entry"
+      ],
+      "due_at": "2025-12-14T07:59:59Z",
+      "has_submitted_submissions": false,
+      "published": true,
+      "visible_to_everyone": true
+    },
+    {
+      "name": "Coding #1",
+      "id": 1752865,
+      "description": "<p><a id=\"18196161\" class=\"instructure_file_link instructure_scribd_file inline_disabled\" title=\"Link\" href=\"https://sdsu.instructure.com/courses/187810/files/18196161?verifier=OGldwHiiFQEATKsmFhBWYlJNkGbNQG1CqlD88FGQ&amp;wrap=1\" target=\"_blank\" data-canvas-previewable=\"true\" data-api-endpoint=\"https://sdsu.instructure.com/api/v1/courses/187810/files/18196161\" data-api-returntype=\"File\">Coding-HW#1.pdf</a></p>\n<p><a id=\"18196160\" class=\"instructure_file_link inline_disabled\" title=\"Link\" href=\"https://sdsu.instructure.com/courses/187810/files/18196160?verifier=tSQVJL1mF0ityVAh6tOj3qdWOyNJrziIkn0gMuuI&amp;wrap=1\" target=\"_blank\" data-api-endpoint=\"https://sdsu.instructure.com/api/v1/courses/187810/files/18196160\" data-api-returntype=\"File\">template_H1.py</a></p>",
+      "points_possible": 130,
+      "grading_type": "points",
+      "submission_types": [
+        "external_tool"
+      ],
+      "due_at": "2025-09-29T06:59:00Z",
+      "has_submitted_submissions": false,
+      "published": true,
+      "visible_to_everyone": true
+    },
+    {
+      "name": "Coding #2",
+      "id": 1776329,
+      "description": "<p><a id=\"18723603\" class=\"instructure_file_link instructure_scribd_file inline_disabled\" title=\"Link\" href=\"https://sdsu.instructure.com/courses/187810/files/18723603?verifier=4oYwCNNxNaBvopRv7m5fhkoXRP4HfIp8UUZ2xQt7&amp;wrap=1\" target=\"_blank\" data-canvas-previewable=\"true\" data-api-endpoint=\"https://sdsu.instructure.com/api/v1/courses/187810/files/18723603\" data-api-returntype=\"File\">Coding-HW#2.pdf</a></p>\n<p>&nbsp;</p>\n<p><a id=\"18723605\" class=\"instructure_file_link inline_disabled\" title=\"Link\" href=\"https://sdsu.instructure.com/courses/187810/files/18723605?verifier=6AuY2otUwtZf3cd0nZJaj5hHC1sJUfrEHQbvI7QB&amp;wrap=1\" target=\"_blank\" data-api-endpoint=\"https://sdsu.instructure.com/api/v1/courses/187810/files/18723605\" data-api-returntype=\"File\">template_H2.py</a></p>",
+      "points_possible": 195,
+      "grading_type": "points",
+      "submission_types": [
+        "external_tool"
+      ],
+      "due_at": "2025-11-04T07:59:00Z",
+      "has_submitted_submissions": false,
+      "published": true,
+      "visible_to_everyone": true
+    },
+    {
+      "name": "Coding #3",
+      "id": 1794672,
+      "description": "<p><a id=\"19108241\" class=\"instructure_file_link instructure_scribd_file inline_disabled\" title=\"Link\" href=\"https://sdsu.instructure.com/courses/187810/files/19108241?verifier=SfuZ4JkcYDxFRantyOutjoi1dMAUwa3ufYbU3cAr&amp;wrap=1\" target=\"_blank\" data-canvas-previewable=\"true\" data-api-endpoint=\"https://sdsu.instructure.com/api/v1/courses/187810/files/19108241\" data-api-returntype=\"File\">Coding-HW#3.pdf</a></p>\n<p><a id=\"19108243\" class=\"instructure_file_link inline_disabled\" title=\"Link\" href=\"https://sdsu.instructure.com/courses/187810/files/19108243?verifier=QY630iBZvVZMEFkmg4ukC4BaqBa9MuavFcPaGQrr&amp;wrap=1\" target=\"_blank\" data-api-endpoint=\"https://sdsu.instructure.com/api/v1/courses/187810/files/19108243\" data-api-returntype=\"File\">template_H3.py</a></p>",
+      "points_possible": 130,
+      "grading_type": "points",
+      "submission_types": [
+        "online_text_entry"
+      ],
+      "due_at": "2025-12-21T07:59:00Z",
+      "has_submitted_submissions": false,
+      "published": true,
+      "visible_to_everyone": true
+    },
+    {
+      "name": "Quiz #1",
+      "id": 1753969,
+      "description": "",
+      "points_possible": 10,
+      "grading_type": "points",
+      "submission_types": [
+        "online_quiz"
+      ],
+      "due_at": "2025-09-19T06:59:59Z",
+      "has_submitted_submissions": true,
+      "published": true,
+      "visible_to_everyone": true
+    },
+    {
+      "name": "Quiz #2",
+      "id": 1768555,
+      "description": "",
+      "points_possible": 10,
+      "grading_type": "points",
+      "submission_types": [
+        "online_quiz"
+      ],
+      "due_at": "2025-10-07T23:50:00Z",
+      "has_submitted_submissions": true,
+      "published": true,
+      "visible_to_everyone": true
+    },
+    {
+      "name": "Quiz #3",
+      "id": 1753963,
+      "description": "",
+      "points_possible": 10,
+      "grading_type": "points",
+      "submission_types": [
+        "online_quiz"
+      ],
+      "due_at": "2025-10-17T06:59:00Z",
+      "has_submitted_submissions": true,
+      "published": true,
+      "visible_to_everyone": true
+    },
+    {
+      "name": "Quiz #4",
+      "id": 1779286,
+      "description": "",
+      "points_possible": 12,
+      "grading_type": "points",
+      "submission_types": [
+        "online_quiz"
+      ],
+      "due_at": "2025-10-24T06:59:59Z",
+      "has_submitted_submissions": true,
+      "published": true,
+      "visible_to_everyone": true
+    }
+  ],
+  "modules": [
+    {
+      "id": 719661,
+      "position": 1,
+      "name": "Syllabus",
+      "unlock_at": null,
+      "require_sequential_progress": false,
+      "requirement_type": "all",
+      "publish_final_grade": false,
+      "prerequisite_module_ids": [],
+      "state": "completed",
+      "completed_at": "2025-08-25T23:13:44Z",
+      "items_count": 1,
+      "items": [
+        {
+          "id": 5214127,
+          "position": 1,
+          "title": "Syllabus_CS460_Fall2025.pdf",
+          "indent": 0,
+          "quiz_lti": false,
+          "type": "File",
+          "module_id": 719661,
+          "html_url": "https://sdsu.instructure.com/courses/187810/modules/items/5214127",
+          "content_id": 17823553,
+          "url": "https://sdsu.instructure.com/api/v1/courses/187810/files/17823553"
+        }
+      ]
+    },
+    {
+      "id": 719665,
+      "position": 2,
+      "name": "Lecture slides",
+      "unlock_at": null,
+      "require_sequential_progress": false,
+      "requirement_type": "all",
+      "publish_final_grade": false,
+      "prerequisite_module_ids": [],
+      "state": "completed",
+      "completed_at": "2025-08-28T22:30:30Z",
+      "items_count": 21,
+      "items": [
+        {
+          "id": 5214901,
+          "position": 1,
+          "title": "01_Introduction_2025Fall.pdf",
+          "indent": 0,
+          "quiz_lti": false,
+          "type": "File",
+          "module_id": 719665,
+          "html_url": "https://sdsu.instructure.com/courses/187810/modules/items/5214901",
+          "content_id": 17824091,
+          "url": "https://sdsu.instructure.com/api/v1/courses/187810/files/17824091"
+        },
+        {
+          "id": 5214904,
+          "position": 2,
+          "title": "02_Getting_started_1_2025Fall.pdf",
+          "indent": 0,
+          "quiz_lti": false,
+          "type": "File",
+          "module_id": 719665,
+          "html_url": "https://sdsu.instructure.com/courses/187810/modules/items/5214904",
+          "content_id": 17986395,
+          "url": "https://sdsu.instructure.com/api/v1/courses/187810/files/17986395"
+        },
+        {
+          "id": 5214905,
+          "position": 3,
+          "title": "02_Getting_started_2_2025Fall.pdf",
+          "indent": 0,
+          "quiz_lti": false,
+          "type": "File",
+          "module_id": 719665,
+          "html_url": "https://sdsu.instructure.com/courses/187810/modules/items/5214905",
+          "content_id": 17824093,
+          "url": "https://sdsu.instructure.com/api/v1/courses/187810/files/17824093"
+        },
+        {
+          "id": 5214903,
+          "position": 4,
+          "title": "03_Growth_of_functions_2025Fall.pdf",
+          "indent": 0,
+          "quiz_lti": false,
+          "type": "File",
+          "module_id": 719665,
+          "html_url": "https://sdsu.instructure.com/courses/187810/modules/items/5214903",
+          "content_id": 17824094,
+          "url": "https://sdsu.instructure.com/api/v1/courses/187810/files/17824094"
+        },
+        {
+          "id": 5214902,
+          "position": 5,
+          "title": "04_Divide_and_conquer_1_2025Fall.pdf",
+          "indent": 0,
+          "quiz_lti": false,
+          "type": "File",
+          "module_id": 719665,
+          "html_url": "https://sdsu.instructure.com/courses/187810/modules/items/5214902",
+          "content_id": 17824095,
+          "url": "https://sdsu.instructure.com/api/v1/courses/187810/files/17824095"
+        },
+        {
+          "id": 5214906,
+          "position": 6,
+          "title": "04_Divide_and_conquer_2_2025Fall.pdf",
+          "indent": 0,
+          "quiz_lti": false,
+          "type": "File",
+          "module_id": 719665,
+          "html_url": "https://sdsu.instructure.com/courses/187810/modules/items/5214906",
+          "content_id": 17824096,
+          "url": "https://sdsu.instructure.com/api/v1/courses/187810/files/17824096"
+        },
+        {
+          "id": 5214908,
+          "position": 7,
+          "title": "04_Divide_and_conquer_3_2025Fall.pdf",
+          "indent": 0,
+          "quiz_lti": false,
+          "type": "File",
+          "module_id": 719665,
+          "html_url": "https://sdsu.instructure.com/courses/187810/modules/items/5214908",
+          "content_id": 17824097,
+          "url": "https://sdsu.instructure.com/api/v1/courses/187810/files/17824097"
+        },
+        {
+          "id": 5214910,
+          "position": 8,
+          "title": "04_Divide_and_conquer_4_2025Fall.pdf",
+          "indent": 0,
+          "quiz_lti": false,
+          "type": "File",
+          "module_id": 719665,
+          "html_url": "https://sdsu.instructure.com/courses/187810/modules/items/5214910",
+          "content_id": 17824085,
+          "url": "https://sdsu.instructure.com/api/v1/courses/187810/files/17824085"
+        },
+        {
+          "id": 5214909,
+          "position": 9,
+          "title": "05_Sorting_1_2025Fall.pdf",
+          "indent": 0,
+          "quiz_lti": false,
+          "type": "File",
+          "module_id": 719665,
+          "html_url": "https://sdsu.instructure.com/courses/187810/modules/items/5214909",
+          "content_id": 17824098,
+          "url": "https://sdsu.instructure.com/api/v1/courses/187810/files/17824098"
+        },
+        {
+          "id": 5214915,
+          "position": 10,
+          "title": "05_Sorting_2_2025Fall.pdf",
+          "indent": 0,
+          "quiz_lti": false,
+          "type": "File",
+          "module_id": 719665,
+          "html_url": "https://sdsu.instructure.com/courses/187810/modules/items/5214915",
+          "content_id": 17824099,
+          "url": "https://sdsu.instructure.com/api/v1/courses/187810/files/17824099"
+        }
+      ]
+    },
+    {
+      "id": 719666,
+      "position": 3,
+      "name": "Supplementary materials",
+      "unlock_at": null,
+      "require_sequential_progress": false,
+      "requirement_type": "all",
+      "publish_final_grade": false,
+      "prerequisite_module_ids": [],
+      "state": "completed",
+      "completed_at": "2025-08-28T22:30:30Z",
+      "items_count": 18,
+      "items": [
+        {
+          "id": 5215011,
+          "position": 1,
+          "title": "Mathematical_background.pdf",
+          "indent": 0,
+          "quiz_lti": false,
+          "type": "File",
+          "module_id": 719666,
+          "html_url": "https://sdsu.instructure.com/courses/187810/modules/items/5215011",
+          "content_id": 17824123,
+          "url": "https://sdsu.instructure.com/api/v1/courses/187810/files/17824123"
+        },
+        {
+          "id": 5327442,
+          "position": 2,
+          "title": "merge_sort_example.pptx",
+          "indent": 0,
+          "quiz_lti": false,
+          "type": "File",
+          "module_id": 719666,
+          "html_url": "https://sdsu.instructure.com/courses/187810/modules/items/5327442",
+          "content_id": 18077478,
+          "url": "https://sdsu.instructure.com/api/v1/courses/187810/files/18077478"
+        },
+        {
+          "id": 5327441,
+          "position": 3,
+          "title": "Example_01.pdf",
+          "indent": 0,
+          "quiz_lti": false,
+          "type": "File",
+          "module_id": 719666,
+          "html_url": "https://sdsu.instructure.com/courses/187810/modules/items/5327441",
+          "content_id": 18077477,
+          "url": "https://sdsu.instructure.com/api/v1/courses/187810/files/18077477"
+        },
+        {
+          "id": 5341761,
+          "position": 4,
+          "title": "Example_02.pdf",
+          "indent": 0,
+          "quiz_lti": false,
+          "type": "File",
+          "module_id": 719666,
+          "html_url": "https://sdsu.instructure.com/courses/187810/modules/items/5341761",
+          "content_id": 18171114,
+          "url": "https://sdsu.instructure.com/api/v1/courses/187810/files/18171114"
+        },
+        {
+          "id": 5351657,
+          "position": 5,
+          "title": "Example_03.pdf",
+          "indent": 0,
+          "quiz_lti": false,
+          "type": "File",
+          "module_id": 719666,
+          "html_url": "https://sdsu.instructure.com/courses/187810/modules/items/5351657",
+          "content_id": 18241453,
+          "url": "https://sdsu.instructure.com/api/v1/courses/187810/files/18241453"
+        },
+        {
+          "id": 5351658,
+          "position": 6,
+          "title": "Example_04.pptx",
+          "indent": 0,
+          "quiz_lti": false,
+          "type": "File",
+          "module_id": 719666,
+          "html_url": "https://sdsu.instructure.com/courses/187810/modules/items/5351658",
+          "content_id": 18241454,
+          "url": "https://sdsu.instructure.com/api/v1/courses/187810/files/18241454"
+        },
+        {
+          "id": 5355512,
+          "position": 7,
+          "title": "Example_05.pdf",
+          "indent": 0,
+          "quiz_lti": false,
+          "type": "File",
+          "module_id": 719666,
+          "html_url": "https://sdsu.instructure.com/courses/187810/modules/items/5355512",
+          "content_id": 18276718,
+          "url": "https://sdsu.instructure.com/api/v1/courses/187810/files/18276718"
+        },
+        {
+          "id": 5377651,
+          "position": 8,
+          "title": "Example_07.pdf",
+          "indent": 0,
+          "quiz_lti": false,
+          "type": "File",
+          "module_id": 719666,
+          "html_url": "https://sdsu.instructure.com/courses/187810/modules/items/5377651",
+          "content_id": 18447367,
+          "url": "https://sdsu.instructure.com/api/v1/courses/187810/files/18447367"
+        },
+        {
+          "id": 5363591,
+          "position": 9,
+          "title": "Midterm1_Review_2025Fall.pdf",
+          "indent": 0,
+          "quiz_lti": false,
+          "type": "File",
+          "module_id": 719666,
+          "html_url": "https://sdsu.instructure.com/courses/187810/modules/items/5363591",
+          "content_id": 18338337,
+          "url": "https://sdsu.instructure.com/api/v1/courses/187810/files/18338337"
+        },
+        {
+          "id": 5365042,
+          "position": 10,
+          "title": "Midterm1_Review(solution)_2025Fall.pdf",
+          "indent": 1,
+          "quiz_lti": false,
+          "type": "File",
+          "module_id": 719666,
+          "html_url": "https://sdsu.instructure.com/courses/187810/modules/items/5365042",
+          "content_id": 18352962,
+          "url": "https://sdsu.instructure.com/api/v1/courses/187810/files/18352962"
+        }
+      ]
+    }
+  ],
+  "syllabus": "",
+  "announcements": [
+    {
+      "title": "No class in Thanksgiving week and coding exam on Dec. 2nd",
+      "message": "Dear all,\n\n \n\nAs mentioned in class, there will be no class during Thanksgiving week. Due to a conference trip, the schedule for the first week\nof December will be as follows:\n\n \n\nDecember 2nd: As noted several times in class, we will hold an in-class coding exam via Gradescope. Please bring your laptop. You\nwill write and submit your code on Gradescope, just as you have done for coding assignments. No external resources (papers or the\ninternet) may be used. Except downloading and submitting the template files. You can get maximum 2% of extra credit by this exam\nand no make-up.\n\n \n\nDecember 4th: A recorded lecture will be uploaded to Canvas for you to review independently.\n\n \n\nIf you have any questions, please feel free to contact me. Thank you, and I wish you a pleasant Thanksgiving.\n\n \n\nBest,\n\nHyunjong"
+    },
+    {
+      "title": "Paper-based assignment #3 and coding assignment #3",
+      "message": "Dear all,\n\n \n\nThe last assignments are opened on Canvas. The due date of the paper-based #3 is Dec. 13th (Sat. 11:59PM) and the due date of the\ncoding assignment #3 is Dec. 20th (Sat. 11:59PM). Please let me know if you have any questions. Good luck!\n\n \n\nBest,\n\nHyunjong"
+    },
+    {
+      "title": "Midterm #2",
+      "message": "DEAR ALL,\n\nAs announced, the second midterm will be held on Tuesday, 11/04, during class (3:30–4:45 pm). Midterm review will be on next\nThursday (10/30), and the class on Tuesday (10/28) will be a regular class.\n\n * Review questions (without solutions) will be posted Tuesday (10/28) with solution of paper-based assignment #2.\n\nFor the exam, you may bring one cheat sheet (both sides), either handwritten or printed. No electronic devices (including\ncalculators) are allowed. Please let me know if you have any questions. Thank you!\n\nBest,\n\nHyunjong"
+    },
+    {
+      "title": "Midterm #2 date survey",
+      "message": "Dear all,\n\nAs mentioned in class, I’ve posted a short survey regarding the date for Midterm #2. It was originally scheduled for Thursday,\nOctober 30, but since that’s Halloween, I’d like to get your preference between:\n\n * Thursday, October 30, or\n\n * Tuesday, November 4.\n\nPlease take a moment to complete the survey and share your preference by Tomorrow (10/22), so I can notify it on Thursday class.\nEven if we do a test on November 4th, the class on October 30 will be as a regular. Thank you for your time.\n\n \n\nBest,\n\nHyunjong\n\n \n\n "
+    },
+    {
+      "title": "Coding assignment #2",
+      "message": "Dear all,\n\nThe coding assignment #2 is now available on Canvas. The due date is 11/3 (Monday) 11:59PM. The template file and pdf files are\nposted, the Gradescope for the submission is not ready, but it will be ready next week. Please let me know if you have any\nquestions. Good luck!\n\nBest,\n\nHyunjong"
+    },
+    {
+      "title": "Paper-based assignment #2 is available",
+      "message": "Dear all,\n\nThe paper-based assignment #2 is now available on Canvas. The due date is 10/26 (Sunday) 11:59PM. Please let me know if you have\nany questions. Good luck!\n\nBest,\n\nHyunjong"
+    },
+    {
+      "title": "[CS 460] Office hour on 9/23",
+      "message": "Dear all,\n\nThe office hour will be 1:30pm to 2:30pm only for today due to a schedule conflict. I'm so sorry for the late notice.\n\nBest,\n\nHyunjong"
+    },
+    {
+      "title": "Midterm #1",
+      "message": "Dear all,\n\nAs announced, the first midterm will be held on Thursday, 9/25, during class (3:30–4:45 pm).\n\n * Review questions (without solutions) are already posted on Canvas under Modules → Supplementary Materials.\n * Solutions will be posted after class tomorrow.\n * Solutions for Paper-based Homework #1 will also be available tomorrow.\n\nHope this helps for you to prepare the midterm. For the exam, you may bring one cheat sheet (both sides), either handwritten or\nprinted. No electronic devices (including calculators) are allowed. See you all tomorrow!\n\nBest,\n\nHyunjong\n\n "
+    },
+    {
+      "title": "[Quiz #1] Due 9/18 11:59PM",
+      "message": "Dear all,\n\n \n\nQuiz 1 has been released on Canvas. Please note that it is not a pop-up quiz, but it does have a strict deadline of 9/18 at 11:59\nPM.\n\n * The quiz contains two problems.\n\n * There is no time limit once you start.\n\n * Submissions are made directly on Canvas.\n\n * As stated in the syllabus, no make-up quizzes will be provided.\n\nIf you have any questions, feel free to reach out. Good luck!\n\n \n\nBest,\n\nHyunjong"
+    },
+    {
+      "title": "Coding assignment #1",
+      "message": "Dear all,\n\nThe first coding assignment is now available on Canvas. The due date is 9/28 (Sunday) 11:59PM. The template file and pdf files are\nposted, the Gradescope for the submission is not ready, but it will be ready next week. Please let me know if you have any\nquestions. Good luck!\n\nBest,\n\nHyunjong"
+    },
+    {
+      "title": "Forwarded: eLeetCoder club",
+      "message": "eLeetCoders invites you to a specialized career fair prep workshop with professionals from LPL Financial! This event is a great\nopportunity for students to connect with recruiters and learn directly from experienced software engineers.\nJoin us to gain valuable insights and practical tips on:\n\n- Mastering behavioral interview questions with a live, interactive mock interview and group practice sessions.\n- Effectively approaching recruiters at career fairs.\n- Getting a head start on the skills you need to land your dream role.\n\n\nThis event is hosted by eLeetCoders, in collaboration with ACM, SDSU Career Services, and featuring LPL Financial. It's the\nperfect chance to prepare for the upcoming STEM Career Fair and build the skills you need to succeed!\nlplfinancial-eleetcoders.png\n[https://sdsu.instructure.com/courses/187810/files/18128214/preview?verifier=01Z2dxHoLHJzKwwUUGELLXHBVtcH0rxluwaXbTMn]\neleetcoders-25.png\n[https://sdsu.instructure.com/courses/187810/files/18128218/preview?verifier=FalIYNRJ5TAemQpImW1dGLZmLYHCWPlpnzTXk5DL]"
+    },
+    {
+      "title": "[Reminder] [IMPORTANT] Check-in survey due tonight, 11:59 PM (PT)",
+      "message": "DEAR ALL,\n\nThis is a friendly reminder of check-in survey, which of the due date is tonight. Please complete this survey to avoid any\nissues. \n\n\"To remain in compliance with federal regulations, San Diego State University must determine if a student maintained eligibility\nfor Title IV Financial Aid. Financial Aid eligibility is determined based on a student's attendance or participation in an\nacademically related activity in the class.\"\n\nBest,\n\nHyunjong\n\n "
+    },
+    {
+      "title": "Paper-based assignment #1 is available on Canvas",
+      "message": "Dear all,\n\nThe first paper-based assignment is now available on Canvas. The due date is 9/21 (Sunday) 11:59PM. Please follow the submission\nguidelines on page 9 of our lecture slide, i.e., 01_Introduction_2025Fall.pdf. Please let me know if you have any questions. Good\nluck!\n\nBest,\n\nHyunjong\n\n "
+    },
+    {
+      "title": "[IMPORTANT] Check-in survey due Sept 8, 11:59 PM (PT)",
+      "message": "Dear all,\n\nAs announced in class, completing the check-in survey (in Quizzes section) is required. Please submit it by Monday, September 8 at\n11:59 PM (PT). Thank you!\n\nBest,\nHyunjong\n\n "
+    },
+    {
+      "title": "Welcome to CS 460 - Algorithms",
+      "message": "Hello everyone,\n\n \n\nWelcome to CS460: Algorithms! I hope all you had a great Summer. I'm Hyunjong Choi, the instructor of the course. This course\nfocuses on the design and analysis of efficient algorithms and data structures. We’ll develop formal reasoning about correctness\nand complexity, and cover topics such as asymptotic analysis, divide and conquer, greedy methods, dynamic programming, graph\nalgorithms (BFS/DFS, MST, shortest paths).\n\n \n\nThe class will be Tue/Thu 15:30 - 16:45 at SH 109 (Storm Hall), and we start the first class on 8/26 (Tue). You do not need to\nprepare anything for the first class. Hope to see you all on next Tuesday. Have a great weekend!\n\n \n\nBest,\n\nHyunjong"
+    }
+  ],
+  "academic_honesty_policy": "At [College Name], generative AI and similar tools may support learning, but they must be used responsibly, transparently, and only as allowed by the course. Unless a syllabus or instructor explicitly permits AI for a task, you must assume it is not allowed. When AI use is permitted, you are required to disclose it clearly (naming the tool and date/version), describe how it was used (e.g., brainstorming, outlining, grammar only), and give proper attribution to any AI-generated language, code, images, data, or citations you include. Your submission must remain your own work: you are responsible for verifying accuracy, correcting errors and hallucinations, and meeting the assignment’s learning objectives without outsourcing the intellectual work the course intends to assess.\n\nCertain uses are always prohibited unless explicitly authorized: generating or editing graded answers wholesale; producing code or solutions for individual (non-collaborative) assignments; fabricating sources, quotes, data, or citations; and concealing or misrepresenting AI assistance. Instructors may require drafts, version histories, or brief oral explanations to confirm authorship; automated AI detectors alone will not be used as sole evidence, but may prompt further review. Violations of this policy constitute academic misconduct and may result in penalties ranging from resubmission or reduced/zero credit to course failure and, for repeated or severe cases, institutional sanctions. When in doubt, ask your instructor before using AI. Responsible, disclosed, and limited use of AI can enhance learning; undisclosed or unauthorized use undermines it."
+}

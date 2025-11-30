@@ -36,9 +36,9 @@ async def set_mode_endpoint(mode: str, database_name: str):
     set_mode(mode)
     return {"status": f"Mode set to {mode}"}
 
-@app.get("/question/{message}/{database_name}")
-async def ping(message: str, database_name: str):
-    return query(message, database_name)
+@app.get("/question/{message}/{database_name}/{user_id}")
+async def ping(message: str, database_name: str,user_id: str):
+    return query(message, database_name, user_id)
 
 @app.get("/embed/{file_name}/{folder}/{ID}/{verifier}/{database_name}")
 async def embed(file_name: str,folder: str, ID: int, verifier: str, database_name: str):

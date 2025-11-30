@@ -13,13 +13,16 @@ const menu_options= [
         "authorized_roles": "admin"
     },{"option": "Honesty Policy",
         "html_page": "/static/settings/academic_honesty/honesty.html",
-        "authorized_roles": "user"
+        "authorized_roles": "admin"
     },{"option": "Syllabus",
         "html_page": "/static/settings/syllabus/syllabus.html",
-        "authorized_roles": "user"
+        "authorized_roles": "admin"
     },{"option": "Files",
         "html_page": "/static/settings/files/files.html",
-        "authorized_roles": "user"
+        "authorized_roles": "admin"
+    },{"option": "Join Code",
+        "html_page": "/static/settings/join_code/join_code.html",
+        "authorized_roles": "admin"
     }
 ]
 

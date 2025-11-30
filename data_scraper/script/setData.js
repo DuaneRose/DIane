@@ -264,6 +264,7 @@ async function pull_files(database_name){
             num++;
         }
     }
+    console.log("Finished pulling all files");
 }
 
 async function change_honesty_policy(policy, database_name){

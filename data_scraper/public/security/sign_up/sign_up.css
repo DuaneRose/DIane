@@ -73,10 +73,7 @@ html, body {
   }
   
   /* Inputs */
-  .input,
-  input[type="text"],
-  input[type="email"],
-  input[type="password"] {
+  .input{
     background-color: rgba(71, 85, 105, 0.6);
     border: 1px solid rgba(148, 163, 184, 0.2);
     color: #fff;
@@ -90,19 +87,20 @@ html, body {
     align-items: center;
   }
   
-  .input:focus,
-  input[type="text"]:focus,
-  input[type="email"]:focus,
-  input[type="password"]:focus {
+  .input:focus{
     outline: none;
     background-color: rgba(71, 85, 105, 0.8);
     border-color: rgba(96, 165, 250, 0.5);
     box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.1);
   }
   
-  .input::placeholder,
-  input::placeholder {
-    color: rgba(203, 213, 225, 0.5);
+  .input:hover {
+    transition: all 0.3s ease;
+    background: linear-gradient(135deg, #c95b6f 0%, #c45a68 100%);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+    cursor: pointer;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(59, 130, 246, 0.4);
   }
   
   /* Button row */

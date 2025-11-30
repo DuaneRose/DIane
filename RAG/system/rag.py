@@ -80,7 +80,7 @@ def get_signature(start_page, end_page, name, num, database_name):
 
     return sig_path
 
-def query(prompt,database_name):
+def query(prompt,database_name,user_id):
     files = pull(prompt, database_name)
 
     num = 0
@@ -117,4 +117,4 @@ def query(prompt,database_name):
             print("uploaded ", file['file_name'])
             
 
-    return ask(prompt, files, database_name)
+    return ask(prompt, files, database_name, user_id)

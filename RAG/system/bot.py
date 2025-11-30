@@ -7,12 +7,14 @@ from google.genai.types import GenerateContentConfig
 import subprocess, os, time
 from system_instruction import get_instruction
 
-key = "AIzaSyBmMUZq-6XSgNx9LsrzNHzLk5wD8mR9phw"
+key = "AIzaSyBgb92VxN3u3lPojEX29BfyExBEO95pxYw"
 client = genai.Client(api_key=key)
 vector_space = "../vectorSpace/embeddings(DS).json"
 chat_model = "gemini-2.5-flash"
 system_prompt = "be you for now, you are a helpful assistant"
 mode = "default"
+dirname = os.path.dirname(__file__)
+
 
 def get_mode():
     global mode
@@ -77,7 +79,7 @@ def upload(file_name, folder, database_name):
 
     return obj.name
 
-def ask(prompt, files, database_name):
+def ask(prompt, files, database_name, user_id):
     # right now we upload all the files when loading in the database
     # we need to change that to only happen when we ask a question
     folder = []
@@ -86,24 +88,35 @@ def ask(prompt, files, database_name):
         folder.append(files[i]["genai_id"])
 
     json_path = Path("/Users","duanegennaro","dIAne","data_base",database_name) / "db.json"
+    conversation_path = Path(dirname, "..", ".." ,"data_base",database_name, "conversations") / f"{user_id}.json"
     
     with open(json_path) as r:
         json_text = r.read()
 
+    with open(conversation_path) as c:
+        prompt += "\n\nHere is our previous conversation:\n" + c.read()
+
+    print(prompt)
     system_prompt = get_instruction(mode, database_name)
     print("using mode ", mode)
 
     print("asking question")
-    response = client.models.generate_content(
-        model=chat_model,
-        contents=[
-            json_text, folder,
-            prompt
-    ],
-    config=GenerateContentConfig(
-        system_instruction=system_prompt
-    ),
-    )
+    try:
+        response = client.models.generate_content(
+            model=chat_model,
+            contents=[
+                json_text, folder,
+                prompt
+        ],
+        config=GenerateContentConfig(
+            system_instruction=system_prompt
+        ),
+        )
+    except Exception as e:
+        print("error on the api side of things can't ask the question:\n"
+        "===========================================================", e,
+        "\n===========================================================")
+        return "error on the api side of things can't ask the question"
 
     for file in files:
         cleanup(file['genai_id'])
