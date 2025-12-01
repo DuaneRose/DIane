@@ -226,18 +226,9 @@ app.post('/lti/launch', (req, res) => {
     req.session.context_id = provider.body.context_id;
 
     console.log(`✅ LTI launch successful - User: ${provider.body.user_id}`);
-    
-    const htmlPath = path.join(__dirname, 'public', 'security', 'sign_in', 'sign_in.html');
-    fs.readFile(htmlPath, 'utf8').then(html => {
-      const modifiedHtml = html
-        .replace(/href="\/static\//g, `href="${res.locals.baseUrl}/static/`)
-        .replace(/src="\/static\//g, `src="${res.locals.baseUrl}/static/`);
-      
-      res.send(modifiedHtml);
-    }).catch(err => {
-      console.error('❌ Error reading HTML:', err);
-      res.status(500).send('Error loading page');
-    });
+
+    // 🔥 Let the normal route handle the HTML + assets
+    return res.redirect(303, '/api/sign_in');
   });
 });
 
@@ -575,6 +566,30 @@ app.post('/api/security/sign_in', async (req, res) => {
     console.error('❌ Error during sign in:', error);
     res.status(500).json({ message: 'Internal server error.' });
   }
+});
+
+app.post('/api/security/quick_sign_in/', async (req, res) => {
+  const { user_id } = req.body;
+
+  try {
+    const usersData = await fs.readFile(path.join(__dirname, '../data_base/users.json'), 'utf8');
+    const users = JSON.parse(usersData);
+
+    const user = users.find(user => user.ID === user_id);
+    
+    if (user) {
+      const data = setData.find_id(user.username, users);
+      console.log(`✅ User quick signed in: ${user.username}`);
+      return res.status(200).json({ message: 'Sign in successful.', user_id: data[0], database_name: data[1], user_type: data[2] });
+    } else {
+      console.log(`⚠️  Quick sign-in failed for user ID: ${user_id}`);
+      return res.status(401).json({ message: 'Invalid user ID.' });
+    }
+  } catch (error) {
+    console.error('❌ Error during quick sign in:', error);
+    res.status(500).json({ message: 'Internal server error.' });
+  }
+
 });
 
 app.get("/api/chat/get_logs/:database_name/:user_id", async (req, res) =>{

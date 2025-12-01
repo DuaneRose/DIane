@@ -8,7 +8,7 @@
   http://www.imsglobal.org/profile/cc/ccv1p0/imslticc_v1p0.xsd">
   <blti:title>Office Hours</blti:title>
   <blti:description>My local LTI tool</blti:description>
-  <blti:launch_url>https://fca2d84feeff.ngrok-free.app/lti/launch</blti:launch_url>
+  <blti:launch_url>https://73f29db154c9.ngrok-free.app/lti/launch</blti:launch_url>
 
   <blti:extensions platform="canvas.instructure.com">
     <lticm:property name="tool_id">office_hours_tool</lticm:property>
@@ -24,5 +24,3 @@
     </lticm:options>
   </blti:extensions>
 </cartridge_basiclti_link>
-
-

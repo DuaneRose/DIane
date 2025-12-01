@@ -3,6 +3,7 @@ const sign_out = document.getElementById('sign-out');
 
 sign_out.addEventListener("click", (e) => {
     e.preventDefault();
+    sessionStorage.clear();
     window.location.href = "/api/sign_in";
 });
 

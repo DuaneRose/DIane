@@ -1,11 +1,29 @@
-// import session = require("express-session");
-
 const name_input = document.getElementById("username");
 const pass_input = document.getElementById("password");
 
 const submit_button = document.getElementById("send_button");
 const sign_up = document.getElementById("sign-up");
 const error_message = document.getElementById("error");
+
+document.addEventListener("DOMContentLoaded", async (e) =>{
+    const ID = sessionStorage.getItem('user_id');
+    if(ID){
+        const res = await fetch(`/api/security/quick_sign_in/`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ user_id: ID })
+        });
+        const response = await res.json();
+        if (res.ok) {
+            sessionStorage.setItem('user_id', response.user_id);
+            sessionStorage.setItem('database_name', response.database_name);
+            sessionStorage.setItem('user_type', response.user_type);
+            window.location.href = "/api/chat";
+        }
+    }
+});
 
 submit_button.addEventListener("click", async (e) => {
     e.preventDefault();
