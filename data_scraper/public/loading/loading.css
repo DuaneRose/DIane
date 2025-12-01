@@ -1,0 +1,218 @@
+/* ================================
+   Base Layout (matches chat style)
+   ================================ */
+
+   html,
+   body {
+     margin: 0;
+     padding: 0;
+     width: 100%;
+     height: 100%;
+   }
+   
+   body {
+     background: linear-gradient(135deg, #1a1d2e 0%, #2d3748 100%);
+     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+       "Helvetica Neue", Arial, sans-serif;
+   
+     display: flex;
+     justify-content: center;
+     align-items: center;
+   
+     overflow: hidden;
+   }
+   
+   /* ================================
+      Main Loading Container
+      ================================ */
+   
+   #stage {
+     width: 96vw;
+     height: 60vh;
+   
+     background-color: rgba(30, 41, 59, 0.95);
+     border-radius: 16px;
+     padding: 24px;
+     box-sizing: border-box;
+   
+     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
+     backdrop-filter: blur(10px);
+   
+     display: flex;
+     justify-content: center;
+     align-items: center;
+   }
+   
+   .loading-content {
+     max-width: 540px;
+     width: 100%;
+     text-align: center;
+   }
+   
+   /* ================================
+      Header / Title
+      ================================ */
+   
+   .loading-header {
+     margin-bottom: 28px;
+   }
+   
+   .loading-pill {
+     display: inline-flex;
+     align-items: center;
+     gap: 8px;
+     padding: 6px 14px;
+   
+     border-radius: 999px;
+     background-color: rgba(51, 65, 85, 0.9);
+     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+     margin-bottom: 14px;
+   }
+   
+   .pill-dot {
+     width: 10px;
+     height: 10px;
+     border-radius: 999px;
+     background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+     box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.3);
+   }
+   
+   .pill-text {
+     font-size: 0.8rem;
+     font-weight: 600;
+     letter-spacing: 0.08em;
+     text-transform: uppercase;
+     color: #e5e7eb;
+   }
+   
+   .loading-title {
+     font-size: 1.6rem;
+     font-weight: 700;
+     color: #e5e7eb;
+     margin-bottom: 6px;
+   }
+   
+   .loading-subtitle {
+     font-size: 0.95rem;
+     line-height: 1.5;
+     color: #cbd5f5;
+     opacity: 0.9;
+   }
+   
+   /* ================================
+      Center Spinner + Text
+      ================================ */
+   
+   .loading-center {
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     gap: 14px;
+     margin: 10px 0 18px;
+   }
+   
+   .spinner-ring {
+     width: 52px;
+     height: 52px;
+     border-radius: 999px;
+     border: 3px solid rgba(148, 163, 184, 0.4);
+     border-top-color: #3b82f6;
+     border-right-color: #2563eb;
+     animation: spin 0.8s linear infinite;
+   }
+   
+   .spinner-segment {
+     width: 100%;
+     height: 100%;
+     border-radius: inherit;
+   }
+   
+   /* Existing-style loading text */
+   .loading {
+     display: inline-flex;
+     align-items: center;
+     font-size: 1.2rem;
+     font-weight: 500;
+     color: rgba(203, 213, 225, 0.9);
+     letter-spacing: 0.5px;
+     margin-left: 2px;
+     animation: loadingPulse 1.4s ease-in-out infinite;
+   }
+   
+   .loading::after {
+     content: " ";
+     animation: loadingDots 1.4s steps(4, end) infinite;
+   }
+   
+   /* ================================
+      Hint Text
+      ================================ */
+   
+   .loading-hint {
+     font-size: 0.8rem;
+     color: rgba(148, 163, 184, 0.9);
+     text-align: center;
+     margin-top: 8px;
+   }
+   
+   /* ================================
+      Animations
+      ================================ */
+   
+   @keyframes spin {
+     to {
+       transform: rotate(360deg);
+     }
+   }
+   
+   @keyframes loadingPulse {
+     0% {
+       opacity: 0.4;
+     }
+     50% {
+       opacity: 1;
+     }
+     100% {
+       opacity: 0.4;
+     }
+   }
+   
+   @keyframes loadingDots {
+     0% {
+       content: " ";
+     }
+     25% {
+       content: " .";
+     }
+     50% {
+       content: " ..";
+     }
+     75% {
+       content: " ...";
+     }
+     100% {
+       content: " ";
+     }
+   }
+   
+   /* ================================
+      Responsive
+      ================================ */
+   
+   @media (max-width: 768px) {
+     #stage {
+       width: 96vw;
+       height: auto;
+       min-height: 60vh;
+       padding: 18px;
+     }
+   
+     .loading-title {
+       font-size: 1.35rem;
+     }
+   
+     .loading-subtitle {
+       font-size: 0.9rem;
+     }
+   }
+   

@@ -83,3 +83,4 @@ back.addEventListener("click", (e) => {
     e.preventDefault();
     window.location.href = "/api/sign_up";
 });
+  

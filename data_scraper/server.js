@@ -151,6 +151,10 @@ app.get('/api/join', async (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'security','sign_up', 'join', 'join.html'));
 });
 
+app.get('/api/loading', async (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'loading', 'loading.html'));
+});
+
 app.get('/api/chat', async (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'chat_page', 'chat.html'));
 });
