@@ -163,6 +163,10 @@ app.get('/api/settings', async (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'settings', 'settings.html'));
 });
 
+app.get('/api/static/loading/loading.html', async (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'loading', 'loading.html'));
+});
+
 app.post('/api/get_data', async (req, res) =>{
   ID = req.body.query;
   console.log(`Fetching Canvas data for course ID: ${ID}`);
@@ -594,6 +598,26 @@ app.post('/api/security/quick_sign_in/', async (req, res) => {
     res.status(500).json({ message: 'Internal server error.' });
   }
 
+});
+
+app.get('/api/security/is_valid_username/:username', async (req, res) => {
+  const username = req.params.username;
+
+  try {
+    const usersData = await fs.readFile(path.join(__dirname, '../data_base/users.json'), 'utf8');
+    const users = JSON.parse(usersData);
+
+    if (users.find(user => user.username === username)) {
+      console.log(`Username check: "${username}" already exists`);
+      return res.status(200).json({ valid: false });
+    } else {
+      console.log(`Username check: "${username}" is available`);
+      return res.status(200).json({ valid: true });
+    }
+  } catch (error) {
+    console.error('❌ Error checking username validity:', error);
+    res.status(500).json({ message: 'Internal server error.' });
+  }
 });
 
 app.get("/api/chat/get_logs/:database_name/:user_id", async (req, res) =>{

@@ -35,6 +35,13 @@ async function sign_up(){
         return;
     }
 
+    const valid_name = await fetch(`/api/security/is_valid_username/${encodeURIComponent(name)}`);
+    const name_data = await valid_name.json();
+    if (!valid_name.ok || !name_data.valid) {
+        error_message.innerText = "Username is already taken.";
+        return;
+    }
+
     const validate_res = await fetch(`/api/valid_canvas_code/code=${code}`);
     const validate_data = await validate_res.json();
     console.log(validate_data.valid)
@@ -43,6 +50,7 @@ async function sign_up(){
         return;
     }
 
+    load();
     const res = await fetch("/api/create_class",{
         method: "POST",
         headers: {
@@ -83,4 +91,17 @@ back.addEventListener("click", (e) => {
     e.preventDefault();
     window.location.href = "/api/sign_up";
 });
+
+function load(){
+    const el = document.getElementById("stage");
+
+    const iframe = document.createElement("iframe");
+    iframe.src = "static/loading/loading.html";
+    iframe.title = "Embedded page";
+    iframe.style.width = "100%";
+    iframe.style.height = "100%";
+    iframe.style.border = "0";
+
+    el.replaceChildren(iframe);
+}
   

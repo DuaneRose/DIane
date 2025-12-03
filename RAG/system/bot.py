@@ -138,7 +138,7 @@ def cleanup(genai_id):
 def ai_assist(genai_id):
     response = client.models.generate_content(
         
-        model="gemini-1.5-flash",
+        model=chat_model,
         contents=["Please convert this file to text:\n\n",client.files.get(name=genai_id)]
     )
 

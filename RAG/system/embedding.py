@@ -13,21 +13,7 @@ def embed(chunks, file_name, folder, ID, verifier, database_name, page_num = -1)
 
         print(len(vector_space))
 
-        if len(chunks) == 1:
-            vector = embeddings(model="bge-m3", prompt=chunks[0])["embedding"]
-            data = {
-                "file_name": file_name,
-                "folder": folder,
-                "text": "",
-                "vector": vector,
-                "file_ID": ID,
-                "verifier": verifier,
-                "similarity": 0.0,
-                "genai_id": "none",
-                "page_num": page_num
-            }
-            vector_space.append(data)
-        else:
+        try:
             for chunk in chunks:
                 if chunk.strip() == "":
                     continue
@@ -46,9 +32,19 @@ def embed(chunks, file_name, folder, ID, verifier, database_name, page_num = -1)
                 }
                 vector_space.append(data)
 
-        print("embedding is done, and the chunks are saved to the database")
-    with open(vector_path, "w") as f:
-        json.dump(vector_space, f)
+            print("embedding is done, and the chunks are saved to the database")
+        except Exception as e:
+            print("there was an error embedding the chunks:",
+                  "\n______________________________________________\n",
+                    chunk,
+                    "\n______________________________________________\n",)
+            print("<<< ERROR EMBEDDING CHUNK >>>")
+            print("Chunk length:", len(chunk))
+            print("Exception type:", type(e))
+            print("Exception repr:", repr(e))
+
+        with open(vector_path, "w") as f:
+            json.dump(vector_space, f)
 
 def clear_collection():
     with open(Path("/Users","duanegennaro","dIAne","data_base","vector_space.json"), "w") as f:
